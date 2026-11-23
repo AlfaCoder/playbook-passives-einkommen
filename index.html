@@ -30,6 +30,7 @@
 {"@context":"https://schema.org","@type":"WebPage","name":"Playbook Passives Einkommen","headline":"Passives Einkommen: Was 95 YouTube-Videos wirklich sagen","description":"95 YouTube-Videos und 530 Suchtreffer kritisch ausgewertet: was bei passivem Einkommen funktioniert, was es kostet und wo die Videos übertreiben.","url":"https://playbook-passives-einkommen.de/","inLanguage":"de-DE","image":"https://playbook-passives-einkommen.de/og.png","dateModified":"2026-11-23","author":{"@type":"Person","name":"Dave Foksa"},"publisher":{"@type":"Person","name":"Dave Foksa"}}
 </script>
 <link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="/assets/toc.css">
 <style>
 /* Layout: Kontobuch-Ästhetik. Schmale Lesespalte, Modelle als Karteikarten-Raster, Zahlen in Mono wie in einer Bilanz. */
 :root{
@@ -1077,10 +1078,10 @@ document.getElementById("sources").innerHTML =
   Object.entries(S).map(([id,s])=>`<a class="item" href="${yt(id)}" target="_blank" rel="noopener"><span class="st done">ausgewertet</span><span class="t">${esc(s[1])}</span><span class="m">${esc(s[0])}${s[2]?" · "+esc(s[2]):""}</span></a>`).join("") +
   PENDING.map(p=>`<a class="item" href="${yt(p[0])}" target="_blank" rel="noopener"><span class="st wait">ausstehend</span><span class="t">${esc(p[2])}</span><span class="m">${esc(p[1])}</span></a>`).join("");
 
-document.querySelectorAll("nav.top .tocpanel a").forEach(x=>x.addEventListener("click",()=>x.closest("details").removeAttribute("open")));
 load();
 chipsEl.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.cat===activeCat));
 renderModels(); renderPlan(); calc(); konsum(); idea();
 </script>
+<script src="/assets/toc.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,38 @@
+/* Mitscrollendes Inhaltsverzeichnis: Fortschrittsbalken, aktueller Abschnitt im Menü, Seitenleiste auf breiten Bildschirmen. */
+nav.top{position:sticky}
+nav.top .readbar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--accent);transition:width .1s linear;pointer-events:none}
+
+/* Inhalt-Menü (Unterseiten bekommen es per Skript) */
+nav.top details.toc{flex:none;position:static}
+nav.top details.toc summary{list-style:none;cursor:pointer;color:var(--ink);font-size:.85rem;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid var(--line);white-space:nowrap;max-width:46vw;overflow:hidden;text-overflow:ellipsis}
+nav.top details.toc summary::-webkit-details-marker{display:none}
+nav.top details.toc summary::after{content:" ▾"}
+nav.top details.toc summary .lbl{color:var(--muted)}
+nav.top details.toc[open] summary,nav.top details.toc summary:hover{background:var(--sunk)}
+nav.top .tocpanel{position:fixed;z-index:20;display:grid;min-width:240px;max-height:70vh;overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:6px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+nav.top .tocpanel a{border-radius:6px;padding:8px 10px;color:var(--muted);text-decoration:none;font-size:.9rem;white-space:normal}
+nav.top .tocpanel a:hover{background:var(--sunk);color:var(--ink)}
+nav.top .tocpanel a.on{color:var(--accent);font-weight:600;background:var(--accent-soft)}
+
+/* Seitenleiste */
+.sidetoc{display:none}
+@media (min-width:1240px){
+  .sidetoc{display:block;position:fixed;z-index:4;width:210px;max-height:calc(100vh - 120px);overflow:auto;padding:4px 0 4px 14px;border-left:2px solid var(--line)}
+  .sidetoc b{display:block;font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+  .sidetoc a{display:block;position:relative;color:var(--muted);text-decoration:none;font-size:.86rem;line-height:1.35;padding:5px 0}
+  .sidetoc a:hover{color:var(--ink)}
+  .sidetoc a.on{color:var(--accent);font-weight:600}
+  .sidetoc a.on::before{content:"";position:absolute;left:-16px;top:4px;bottom:4px;width:2px;background:var(--accent)}
+  /* Wo die Seitenleiste sichtbar ist, braucht es das Inhalt-Menü nicht */
+  nav.top details.toc.auto{display:none}
+}
+
+/* Handy: nur den aktuellen Abschnitt zeigen */
+@media (max-width:640px){nav.top details.toc summary .lbl.pre{display:none}nav.top details.toc summary{max-width:52vw}}
+
+/* Nach-oben-Knopf */
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:15;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--accent);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.18);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s,transform .2s}
+.totop.show{opacity:1;transform:none;pointer-events:auto}
+.totop:hover{background:var(--accent);color:var(--surface);border-color:var(--accent)}
+.totop:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.totop{transition:none}}

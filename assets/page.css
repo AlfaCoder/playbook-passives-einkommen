@@ -113,6 +113,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px}
 @media (max-width:640px){
   nav.top .wrap>*{order:3}
   nav.top a.brand{order:0}
-  nav.top a.cta{order:1;margin-left:0}
+  nav.top details.toc{order:1}
+  nav.top a.cta{order:2;margin-left:0}
   nav.top::after{content:"";position:absolute;top:0;bottom:0;right:0;width:32px;pointer-events:none;background:linear-gradient(to right,transparent,var(--bg))}
 }

@@ -106,6 +106,8 @@ def head(title, desc, url, og_img, extra_ld=None, robots=None):
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/fonts.css">
 <link rel="stylesheet" href="/assets/page.css">
+<link rel="stylesheet" href="/assets/toc.css">
+<script src="/assets/toc.js" defer></script>
 {ld_html}</head>
 <body>
 '''
