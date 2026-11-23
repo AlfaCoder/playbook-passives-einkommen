@@ -73,7 +73,13 @@ nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:co
 nav.top .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
 nav.top a{flex:none;text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:500;padding:6px 10px;border-radius:999px;white-space:nowrap}
 nav.top a:hover{background:var(--sunk);color:var(--ink)}
-nav.top a.brand{color:var(--ink);font-family:var(--f-display);font-weight:800}
+nav.top a.brand{display:flex;align-items:center;gap:9px;color:var(--ink);padding:4px 12px 4px 4px;text-decoration:none}
+nav.top a.brand:hover{background:transparent}
+nav.top a.brand .logo{flex:none;display:block;border-radius:8px;box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent)}
+nav.top a.brand .bt{display:grid;line-height:1.05}
+nav.top a.brand .bt b{font-family:var(--f-display);font-weight:800;font-size:1.02rem;letter-spacing:-.01em}
+nav.top a.brand .bt small{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:2px}
+@media (max-width:520px){nav.top a.brand .bt small{display:none}nav.top a.brand{padding-right:6px}}
 
 /* Hero */
 .hero{padding-block:56px 24px;display:grid;gap:22px}
@@ -251,7 +257,7 @@ nav.top a.navcta:hover{background:var(--accent);color:var(--surface);opacity:.9}
 <body>
 
 <nav class="top" aria-label="Abschnitte"><div class="wrap">
-  <a class="brand" href="#start">Playbook</a>
+  <a class="brand" href="#start" aria-label="Playbook Passives Einkommen, zum Anfang"><svg class="logo" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0E6A4E"/><path d="M16 44h8V32h-8z" fill="#fff" opacity=".55"/><path d="M28 44h8V24h-8z" fill="#fff" opacity=".8"/><path d="M40 44h8V16h-8z" fill="#fff"/></svg><span class="bt"><b>Playbook</b><small>Passives Einkommen</small></span></a>
   <a class="navcta" href="/arbeitsheft/">Gratis-Arbeitsheft</a>
   <a href="#modelle">Modelle</a>
   <a href="#werkzeuge">Rechner</a>

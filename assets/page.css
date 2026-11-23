@@ -28,7 +28,13 @@ nav.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 9
 nav.top .wrap{display:flex;gap:4px;align-items:center;overflow-x:auto;padding:10px 0;scrollbar-width:none}
 nav.top a{flex:none;text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:500;padding:6px 10px;border-radius:999px;white-space:nowrap}
 nav.top a:hover,nav.top a[aria-current="page"]{background:var(--sunk);color:var(--ink)}
-nav.top a.brand{color:var(--ink);font-family:var(--f-display);font-weight:800}
+nav.top a.brand{display:flex;align-items:center;gap:9px;color:var(--ink);padding:4px 12px 4px 4px;text-decoration:none}
+nav.top a.brand:hover{background:transparent}
+nav.top a.brand .logo{flex:none;display:block;border-radius:8px;box-shadow:0 0 0 1px color-mix(in srgb,var(--accent) 35%,transparent)}
+nav.top a.brand .bt{display:grid;line-height:1.05}
+nav.top a.brand .bt b{font-family:var(--f-display);font-weight:800;font-size:1.02rem;letter-spacing:-.01em}
+nav.top a.brand .bt small{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-top:2px}
+@media (max-width:520px){nav.top a.brand .bt small{display:none}nav.top a.brand{padding-right:6px}}
 nav.top a.cta{background:var(--accent);color:var(--accent-ink);margin-left:auto}
 nav.top a.cta:hover{background:var(--accent);color:var(--accent-ink);opacity:.9}
 

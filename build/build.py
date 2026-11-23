@@ -57,7 +57,7 @@ NAV = [("/themen/", "Themen"), ("/rechner-kapital-passives-einkommen/", "Rechner
 
 def nav(current):
     items = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h == current else ""}>{t}</a>' for h, t in NAV)
-    return f'<nav class="top" aria-label="Navigation"><div class="wrap"><a class="brand" href="/">Playbook</a>{items}<a class="cta" href="/arbeitsheft/">Gratis-Arbeitsheft</a></div></nav>'
+    return f'<nav class="top" aria-label="Navigation"><div class="wrap"><a class="brand" href="/" aria-label="Playbook Passives Einkommen, Startseite"><svg class=\"logo\" viewBox=\"0 0 64 64\" width=\"30\" height=\"30\" aria-hidden=\"true\"><rect width=\"64\" height=\"64\" rx=\"14\" fill=\"#0E6A4E\"/><path d=\"M16 44h8V32h-8z\" fill=\"#fff\" opacity=\".55\"/><path d=\"M28 44h8V24h-8z\" fill=\"#fff\" opacity=\".8\"/><path d=\"M40 44h8V16h-8z\" fill=\"#fff\"/></svg><span class=\"bt\"><b>Playbook</b><small>Passives Einkommen</small></span></a>{items}<a class="cta" href="/arbeitsheft/">Gratis-Arbeitsheft</a></div></nav>'
 
 FOOTER = ('<footer class="read">Zusammenfassung und Einordnung öffentlich zugänglicher YouTube-Videos. Keine Anlage-, Steuer- oder Rechtsberatung. '
           'Zahlen der Creator sind nicht unabhängig geprüft.'
