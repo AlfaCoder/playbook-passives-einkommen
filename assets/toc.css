@@ -31,7 +31,7 @@ nav.top .tocpanel a.on{color:var(--accent);font-weight:600;background:var(--acce
 @media (max-width:640px){nav.top details.toc summary .lbl.pre{display:none}nav.top details.toc summary{max-width:52vw}}
 
 /* Nach-oben-Knopf */
-.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:15;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--accent);display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.18);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s,transform .2s}
+.totop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:15;width:46px;height:46px;border-radius:50%;border:2px solid var(--accent);background:var(--surface);color:var(--accent);display:grid;place-items:center;cursor:pointer;box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent),0 6px 18px rgba(0,0,0,.35);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .2s,transform .2s}
 .totop.show{opacity:1;transform:none;pointer-events:auto}
 .totop:hover{background:var(--accent);color:var(--surface);border-color:var(--accent)}
 .totop:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
