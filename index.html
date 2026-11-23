@@ -114,6 +114,19 @@ nav.top a.brand .bt small{font-family:var(--f-mono);font-size:.62rem;letter-spac
 .rung p{color:var(--muted);max-width:70ch}
 .rung ul{margin:4px 0 0;padding-left:18px;color:var(--ink);font-size:.95rem;max-width:70ch}
 .rung .goal{font-size:.85rem;font-family:var(--f-mono);color:var(--ink);background:var(--accent-soft);border-radius:6px;padding:4px 8px;justify-self:start}
+.ladder-dots{display:none}
+@media (max-width:720px){
+  .ladder{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;border-left:0;
+    margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:4px max(16px,env(safe-area-inset-left,0px)) 6px;scroll-padding-inline:max(16px,env(safe-area-inset-left,0px))}
+  .ladder::-webkit-scrollbar{display:none}
+  .ladder:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .rung,.rung[style]{flex:0 0 86%;scroll-snap-align:start;align-content:start;padding:16px!important;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:var(--r,10px)}
+  .rung::before{display:none}
+  .ladder-dots{display:flex;justify-content:center;gap:4px;margin-top:10px}
+  .ladder-dots button{width:28px;height:28px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center}
+  .ladder-dots button::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--line);transition:width .2s,background .2s}
+  .ladder-dots button[aria-current="true"]::after{width:20px;border-radius:4px;background:var(--accent)}
+}
 
 /* Filters */
 .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}
@@ -318,7 +331,7 @@ nav.top a.navcta:hover{background:var(--accent);color:var(--surface);opacity:.9}
     <h2>Der Stufenplan: erst Fundament, dann Asset, dann Kapital</h2>
     <p>Die ehrlichsten Erfolgsgeschichten folgen derselben Abfolge. Wer Stufe 0 und 1 überspringt, landet bei den teuren Fehlern weiter unten.</p>
   </div>
-  <div class="ladder">
+  <div class="ladder" role="region" aria-label="Stufenplan, seitlich wischen" tabindex="0">
     <div class="rung"><span class="step">Stufe 0 · Fundament</span><h3>Ausgaben kennen, Puffer anlegen, Sparplan starten</h3>
       <p>Niedrige Ausgaben sind der stärkste Hebel: Sie erhöhen die Sparrate und senken gleichzeitig, wie viel passives Einkommen du überhaupt brauchst.</p>
       <ul><li>3 Monate Ausgaben auswerten, Fixkosten senken</li><li>Notgroschen (3–6 Monatsausgaben) auf Tagesgeld</li><li>Teure Schulden tilgen</li><li>ETF-Sparplan einrichten, auch mit 25 € im Monat</li></ul>
@@ -338,6 +351,7 @@ nav.top a.navcta:hover{background:var(--accent);color:var(--surface);opacity:.9}
     <div class="rung" style="padding-bottom:0"><span class="step">Stufe 4 · Stapeln</span><h3>Den nächsten Stream erst, wenn der erste trägt</h3>
       <p>Mehrere Quellen gleichzeitig aufzubauen war der häufigste Fehler der erfahrenen Creator. Einer nach dem anderen, und der stärkste bekommt die meiste Pflege.</p></div>
   </div>
+  <div class="ladder-dots" aria-label="Stufe wählen"></div>
   <figure class="viz" data-viz="fruehstart" data-rate="300" data-ret="6" data-title="Warum Stufe 3 früh starten sollte: 300 € im Monat bis 67" data-sub="Derselbe Sparplan, nur zehn Jahre früher oder später begonnen. Der Zinseszins macht den Unterschied."></figure>
 </section>
 
@@ -1087,6 +1101,16 @@ document.getElementById("sources").innerHTML =
 load();
 chipsEl.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.cat===activeCat));
 renderModels(); renderPlan(); calc(); konsum(); idea();
+</script>
+<script>
+(()=>{const L=document.querySelector('.ladder'),D=document.querySelector('.ladder-dots');if(!L||!D)return;
+const R=[...L.querySelectorAll('.rung')];
+R.forEach((r,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Stufe '+i);
+b.onclick=()=>L.scrollTo({left:r.offsetLeft-L.offsetLeft-parseFloat(getComputedStyle(L).paddingLeft),behavior:'smooth'});D.appendChild(b)});
+const B=[...D.children];let cur=-1;
+const upd=()=>{const x=L.scrollLeft,max=L.scrollWidth-L.clientWidth;let k=max>0&&x>=max-4?R.length-1:Math.round(x/(R[1]?R[1].offsetLeft-R[0].offsetLeft:1));
+k=Math.max(0,Math.min(R.length-1,k));if(k!==cur){cur=k;B.forEach((b,i)=>b.setAttribute('aria-current',i===k))}};
+L.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd()})();
 </script>
 <script src="/assets/toc.js" defer></script>
 <script src="/assets/charts.js" defer></script>
