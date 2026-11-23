@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Playbook Passives Einkommen</title>
+<meta name="description" content="Was 95 YouTube-Videos über passives Einkommen wirklich sagen: Modelle, Selbsttests mit echten Zahlen, Rechner, Warnsignale und ein 90-Tage-Plan.">
+<meta property="og:title" content="Playbook Passives Einkommen">
+<meta property="og:description" content="95 YouTube-Videos und 530 Suchtreffer kritisch ausgewertet: was funktioniert, was es kostet und wo die Videos übertreiben.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0E6A4E">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fonts.css">
+<style>
+/* Layout: Kontobuch-Ästhetik. Schmale Lesespalte, Modelle als Karteikarten-Raster, Zahlen in Mono wie in einer Bilanz. */
+:root{
+  --bg:#F3F5F2; --surface:#FFFFFF; --sunk:#E9EEEA; --ink:#13201A; --muted:#56665D; --line:#D3DBD5;
+  --accent:#0E6A4E; --accent-soft:#D7EBE2; --promise:#B9C3BD;
+  --ok:#2E7D3A; --warn:#A8550C; --warn-soft:#FBEBDC; --bad:#B3261E; --bad-soft:#F8E1DF;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1411; --surface:#16201B; --sunk:#1C2822; --ink:#E4ECE7; --muted:#9BACA2; --line:#2B3831;
+  --accent:#4CC497; --accent-soft:#1D3A2F; --promise:#3E4D45;
+  --ok:#6BCB77; --warn:#F0A34A; --warn-soft:#3A2A18; --bad:#FF7A6E; --bad-soft:#3A1E1C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1411; --surface:#16201B; --sunk:#1C2822; --ink:#E4ECE7; --muted:#9BACA2; --line:#2B3831;
+  --accent:#4CC497; --accent-soft:#1D3A2F; --promise:#3E4D45;
+  --ok:#6BCB77; --warn:#F0A34A; --warn-soft:#3A2A18; --bad:#FF7A6E; --bad-soft:#3A1E1C; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto}
+.read{max-width:68ch}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
+h2{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+section{padding-block:56px 8px;scroll-margin-top:64px}
+.sec-head{display:grid;gap:10px;margin-bottom:28px}
+.sec-head p{color:var(--muted);max-width:68ch}
+
+/* Nav */
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+nav.top .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+nav.top a{flex:none;text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:500;padding:6px 10px;border-radius:999px;white-space:nowrap}
+nav.top a:hover{background:var(--sunk);color:var(--ink)}
+nav.top a.brand{color:var(--ink);font-family:var(--f-display);font-weight:800}
+
+/* Hero */
+.hero{padding-block:56px 24px;display:grid;gap:22px}
+.hero h1{font-size:clamp(2.3rem,6.4vw,4.4rem);font-weight:800;letter-spacing:-.025em;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{font-size:1.15rem;max-width:62ch;color:var(--ink)}
+.ledger{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:2px solid var(--ink);border-bottom:1px solid var(--line);margin-top:8px}
+.ledger div{padding:14px 14px 14px 0;display:grid;gap:2px}
+.ledger div + div{padding-left:14px;border-left:1px solid var(--line)}
+.ledger b{font-family:var(--f-mono);font-size:1.6rem;font-weight:500;font-variant-numeric:tabular-nums}
+.ledger span{font-size:.82rem;color:var(--muted)}
+.note{font-size:.88rem;color:var(--muted);border-left:3px solid var(--line);padding-left:12px;max-width:72ch}
+
+/* Laws */
+.laws{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.law{background:var(--surface);padding:20px;display:grid;gap:8px;align-content:start}
+.law .tag{font-family:var(--f-mono);font-size:.72rem;color:var(--accent)}
+.law p{color:var(--muted);font-size:.95rem}
+.cite{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.cite a{font-size:.72rem;font-family:var(--f-mono);text-decoration:none;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+.cite a:hover{color:var(--accent);border-color:var(--accent)}
+
+/* Ladder */
+.ladder{display:grid;gap:0;border-left:2px solid var(--accent);margin-left:10px}
+.rung{position:relative;padding:0 0 28px 28px;display:grid;gap:6px}
+.rung::before{content:"";position:absolute;left:-8px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+.rung .step{font-family:var(--f-mono);font-size:.75rem;color:var(--accent);letter-spacing:.06em;text-transform:uppercase}
+.rung p{color:var(--muted);max-width:70ch}
+.rung ul{margin:4px 0 0;padding-left:18px;color:var(--ink);font-size:.95rem;max-width:70ch}
+.rung .goal{font-size:.85rem;font-family:var(--f-mono);color:var(--ink);background:var(--accent-soft);border-radius:6px;padding:4px 8px;justify-self:start}
+
+/* Filters */
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:.85rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.controls label{font-size:.85rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+select,input[type=number],input[type=text]{font:inherit;font-size:.9rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:5px 8px}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:.8rem;color:var(--muted);margin-bottom:14px}
+.legend i{display:inline-block;width:18px;height:8px;border-radius:2px;vertical-align:middle;margin-right:6px}
+
+/* Model cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;min-width:0}
+.card .top{padding:16px 16px 12px;display:grid;gap:10px}
+.card .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.cat{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.verdict{font-size:.72rem;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.v-good{background:var(--accent-soft);color:var(--accent)}
+.v-mixed{background:var(--warn-soft);color:var(--warn)}
+.v-bad{background:var(--bad-soft);color:var(--bad)}
+.card p.kurz{font-size:.92rem;color:var(--muted)}
+.meter{display:grid;gap:4px}
+.meter .lbl{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+.bar{position:relative;height:10px;background:var(--sunk);border-radius:3px;overflow:visible}
+.bar .real{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:3px}
+.bar .prom{position:absolute;top:-3px;bottom:-3px;width:3px;background:var(--muted);border-radius:1px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.facts div{padding:10px 12px;display:grid;gap:2px;min-width:0}
+.facts div+div{border-left:1px solid var(--line)}
+.facts span{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.facts b{font-size:.82rem;font-weight:500}
+.dots{letter-spacing:2px;font-family:var(--f-mono)}
+.card details{border-top:1px solid var(--line)}
+.card summary{cursor:pointer;padding:10px 16px;font-size:.85rem;font-weight:600;color:var(--accent);list-style:none}
+.card summary::-webkit-details-marker{display:none}
+.card summary::after{content:" +"}
+.card details[open] summary::after{content:" –"}
+.detail{padding:0 16px 16px;display:grid;gap:12px;font-size:.9rem}
+.detail h4{margin:0;font-size:.72rem;font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.detail ol,.detail ul{margin:4px 0 0;padding-left:18px;display:grid;gap:3px}
+.detail .warn li{color:var(--ink)}
+.detail .warn li::marker{color:var(--warn)}
+.empty{padding:24px;border:1px dashed var(--line);border-radius:var(--r);color:var(--muted);text-align:center}
+
+/* Contradictions & trash */
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.72rem;font-family:var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+td.num{white-space:nowrap}
+.trash{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.trash div{border:1px solid var(--line);border-left:4px solid var(--bad);background:var(--surface);border-radius:6px;padding:12px 14px;display:grid;gap:4px}
+.trash b{font-weight:600}
+.trash span{font-size:.88rem;color:var(--muted)}
+
+/* Tools */
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px}
+.tool{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:14px;align-content:start;min-width:0}
+.field{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;font-size:.9rem}
+.field input[type=number]{width:120px;text-align:right}
+.field input[type=range]{width:140px;accent-color:var(--accent)}
+.out{border-top:2px solid var(--ink);padding-top:12px;display:grid;gap:8px}
+.out .line{display:flex;justify-content:space-between;gap:12px;align-items:baseline;font-size:.9rem}
+.out .line b{font-family:var(--f-mono);font-size:1.15rem;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
+.out .big b{font-size:1.5rem;color:var(--accent)}
+.small{font-size:.8rem;color:var(--muted)}
+.yn{display:flex;gap:6px}
+.yn button{font:inherit;font-size:.8rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:3px 10px;cursor:pointer}
+.yn button[aria-pressed="true"].y{background:var(--bad);border-color:var(--bad);color:#fff}
+.yn button[aria-pressed="true"].n{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.result{border-radius:8px;padding:12px 14px;font-size:.92rem}
+.r-good{background:var(--accent-soft)} .r-mixed{background:var(--warn-soft)} .r-bad{background:var(--bad-soft)}
+.result b{font-family:var(--f-display);font-size:1.1rem;display:block}
+
+/* Reality & flags */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.flags{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.flags li{padding:10px 0;border-bottom:1px solid var(--line);display:grid;gap:2px}
+.flags b{font-weight:600}
+.flags span{font-size:.88rem;color:var(--muted)}
+.mistakes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.mistake{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:6px;align-content:start}
+.mistake .who{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.mistake p{font-size:.9rem;color:var(--muted)}
+
+/* Checklist */
+.plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.phase{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:10px;align-content:start}
+.phase h3{font-size:1rem}
+.phase label{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:.9rem;align-items:start;cursor:pointer}
+.phase input{margin-top:4px;accent-color:var(--accent);width:16px;height:16px}
+.phase label:has(input:checked) span{color:var(--muted);text-decoration:line-through}
+.progress{display:flex;align-items:center;gap:12px;margin-bottom:16px;font-size:.9rem}
+.progress .bar{flex:1;max-width:360px}
+
+/* DE box */
+.de{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:14px}
+.de dl{display:grid;grid-template-columns:minmax(140px,220px) 1fr;gap:10px 20px;margin:0}
+.de dt{font-weight:600;font-size:.9rem}
+.de dd{margin:0;font-size:.9rem;color:var(--muted)}
+@media (max-width:560px){.de dl{grid-template-columns:1fr}.de dd{margin-bottom:6px}}
+
+/* Sources */
+.src{display:grid;gap:0;border-top:1px solid var(--line)}
+.src a.item{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:10px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.src a.item:hover .t{color:var(--accent)}
+.src .st{font-family:var(--f-mono);font-size:.7rem;padding:2px 6px;border-radius:4px;align-self:start;margin-top:3px;white-space:nowrap}
+.st.done{background:var(--accent-soft);color:var(--accent)}
+.st.wait{background:var(--sunk);color:var(--muted)}
+.src .t{font-weight:500;font-size:.92rem;min-width:0;overflow-wrap:anywhere}
+.src .m{grid-column:2;font-size:.78rem;color:var(--muted)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Abschnitte"><div class="wrap">
+  <a class="brand" href="#start">Playbook</a>
+  <a href="#gesetze">Leitprinzipien</a>
+  <a href="#leiter">Stufenplan</a>
+  <a href="#modelle">Modelle</a>
+  <a href="#werkzeuge">Rechner &amp; Check</a>
+  <a href="#realitaet">Realitätscheck</a>
+  <a href="#gegenprobe">Gegenprobe</a>
+  <a href="#plan">90-Tage-Plan</a>
+  <a href="#deutschland">Deutschland</a>
+  <a href="#quellen">Quellen</a>
+</div></nav>
+
+<main class="wrap">
+
+<header class="hero" id="start">
+  <span class="eyebrow">Destillat aus 95 YouTube-Videos und 530 Suchtreffern · Stand November 2026</span>
+  <h1>Passives Einkommen ist <em>vorab erarbeitetes</em> Einkommen.</h1>
+  <p class="lede">Fast alle Quellen sagen dasselbe, auch die, die Kurse verkaufen: Arbeitsfreies Geld gibt es kaum. Was es gibt, sind Einnahmen, die nicht mehr an deine Stunden gekoppelt sind. Dafür arbeitest du vorher, über Monate oder Jahre. Dieses Playbook sortiert, was dabei funktioniert, was es kostet und wo die Videos übertreiben.</p>
+  <div class="ledger">
+    <div><b>95</b><span>Videos ausgewertet</span></div>
+    <div><b>~33 h</b><span>Videomaterial</span></div>
+    <div><b>69</b><span>Kanäle (DE, EN, IN)</span></div>
+    <div><b>22</b><span>Modelle bewertet</span></div>
+    <div><b>10</b><span>Leitprinzipien</span></div>
+  </div>
+  <p class="note">Das ist eine Zusammenfassung und Einordnung der Videos, keine Anlage-, Steuer- oder Rechtsberatung. Zahlen stammen von den Creatorn selbst und sind nicht geprüft. Wo jemand am Thema mitverdient (Kurs, Coaching, Sponsor), steht das bei der Quelle.</p>
+</header>
+
+<section id="gesetze">
+  <div class="sec-head">
+    <span class="eyebrow">Konsens über die Quellen</span>
+    <h2>Zehn Leitprinzipien, auf die sich fast alle einigen</h2>
+    <p>Diese Punkte tauchen in deutschen, englischen und indischen Videos unabhängig voneinander auf. Die Kürzel verlinken auf die Videos.</p>
+  </div>
+  <div class="laws" id="laws"></div>
+</section>
+
+<section id="leiter">
+  <div class="sec-head">
+    <span class="eyebrow">Reihenfolge</span>
+    <h2>Der Stufenplan: erst Fundament, dann Asset, dann Kapital</h2>
+    <p>Die ehrlichsten Erfolgsgeschichten folgen derselben Abfolge. Wer Stufe 0 und 1 überspringt, landet bei den teuren Fehlern weiter unten.</p>
+  </div>
+  <div class="ladder">
+    <div class="rung"><span class="step">Stufe 0 · Fundament</span><h3>Ausgaben kennen, Puffer anlegen, Sparplan starten</h3>
+      <p>Niedrige Ausgaben sind der stärkste Hebel: Sie erhöhen die Sparrate und senken gleichzeitig, wie viel passives Einkommen du überhaupt brauchst.</p>
+      <ul><li>3 Monate Ausgaben auswerten, Fixkosten senken</li><li>Notgroschen (3–6 Monatsausgaben) auf Tagesgeld</li><li>Teure Schulden tilgen</li><li>ETF-Sparplan einrichten, auch mit 25 € im Monat</li></ul>
+      <span class="goal">Ziel: positive Sparquote, automatisiert</span></div>
+    <div class="rung"><span class="step">Stufe 1 · Aktives Einkommen hebeln</span><h3>Mehr verdienen, um mehr investieren zu können</h3>
+      <p>Koerner nennt es „sweaty, ugly income“. Gehaltserhöhung, Jobwechsel oder ein Service-Nebenjob (KI-Automationen, Editing, Websites für lokale Firmen) bringen schneller Kapital als jedes passive Modell am Anfang.</p>
+      <ul><li>Fähigkeit wählen, für die gut bezahlt wird</li><li>Ergebnis verkaufen statt Stunden (Retainer)</li><li>Überschüsse konsequent investieren</li></ul>
+      <span class="goal">Ziel: Sparrate deutlich erhöhen</span></div>
+    <div class="rung"><span class="step">Stufe 2 · Ein Asset bauen</span><h3>Ein Modell, nebenberuflich, 12–24 Monate Fokus</h3>
+      <p>Ein digitales Produkt, ein Kanal oder Listings auf einer Plattform mit eigenem Traffic. Thema: ein Problem, das du selbst gelöst hast oder bei dem dich andere um Rat fragen. Nicht kündigen, bevor ein „finanzielles Floß“ steht.</p>
+      <ul><li>Nachfrage billig testen, bevor du baust</li><li>Volumen aufbauen, bis die Plattform rankt</li><li>Zahlen wöchentlich in einer Tabelle tracken</li></ul>
+      <span class="goal">Ziel: 5.000–20.000 € pro Jahr aus dem Asset</span></div>
+    <div class="rung"><span class="step">Stufe 3 · Kapital arbeiten lassen</span><h3>Überschüsse aus Job und Asset in breite ETFs</h3>
+      <p>Das ist die einzige Quelle, die die meisten Videos als wirklich passiv einstufen. Später entnimmst du nach der 4-%-Regel oder lebst von Ausschüttungen.</p>
+      <ul><li>Breiter Welt-ETF als Kern</li><li>Dividenden höchstens als Qualitätsfilter</li><li>Entnahme flexibel halten (in Crashs weniger)</li></ul>
+      <span class="goal">Ziel: Depot = Jahresausgaben × 25</span></div>
+    <div class="rung" style="padding-bottom:0"><span class="step">Stufe 4 · Stapeln</span><h3>Den nächsten Stream erst, wenn der erste trägt</h3>
+      <p>Mehrere Quellen gleichzeitig aufzubauen war der häufigste Fehler der erfahrenen Creator. Einer nach dem anderen, und der stärkste bekommt die meiste Pflege.</p></div>
+  </div>
+</section>
+
+<section id="modelle">
+  <div class="sec-head">
+    <span class="eyebrow">22 Modelle</span>
+    <h2>Was die Videos empfehlen, und wie passiv es wirklich ist</h2>
+    <p>Der grüne Balken zeigt den realistischen Passiv-Grad nach Aufbau, die graue Markierung, wie passiv das Modell in den Videos verkauft wird. Je größer die Lücke, desto mehr Hype. Karte öffnen für Schritte, echte Zahlen und Warnungen.</p>
+  </div>
+  <div class="controls">
+    <div class="chips" id="catChips" role="group" aria-label="Kategorie"></div>
+    <label for="sortSel">Sortieren
+      <select id="sortSel">
+        <option value="passiv">Am passivsten</option>
+        <option value="hype">Größte Hype-Lücke</option>
+        <option value="risiko">Geringstes Risiko</option>
+        <option value="kapital">Wenig Startkapital</option>
+      </select></label>
+    <label for="lowCap"><input type="checkbox" id="lowCap"> nur unter 500 € Start</label>
+  </div>
+  <div class="legend"><span><i style="background:var(--accent)"></i>Passiv-Grad real (0–5)</span><span><i style="background:var(--muted);width:3px;height:14px"></i>Wie es versprochen wird</span><span>Risiko ●○○○○ = gering</span></div>
+  <div class="grid" id="modelGrid"></div>
+
+  <div style="margin-top:40px" class="sec-head">
+    <span class="eyebrow">Finger weg</span>
+    <h3 style="font-size:1.4rem">Was mehrere Quellen ausdrücklich abraten</h3>
+    <p>Dan Martells Filter: Ersetzt KI das gerade? Schrumpft die Branche? Ist Verlieren leichter als Gewinnen? Ein Ja reicht, um weiterzugehen.</p>
+  </div>
+  <div class="trash" id="trash"></div>
+
+  <div style="margin-top:40px" class="sec-head">
+    <span class="eyebrow">Wo sich die Quellen widersprechen</span>
+    <h3 style="font-size:1.4rem">Strittige Punkte</h3>
+    <p>Bei diesen Fragen kommen die Videos zu gegensätzlichen Ergebnissen. Oft hilft ein Blick darauf, wer was verkauft.</p>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Frage</th><th>Pro</th><th>Contra</th><th>Einordnung</th></tr></thead>
+    <tbody id="disputes"></tbody>
+  </table></div>
+</section>
+
+<section id="werkzeuge">
+  <div class="sec-head">
+    <span class="eyebrow">Selbst rechnen</span>
+    <h2>Rechner und Ideen-Check</h2>
+    <p>Beide Werkzeuge rechnen nur in deinem Browser. Die Werte sind Beispiele, ändere sie auf deine Situation.</p>
+  </div>
+  <div class="tools">
+    <div class="tool">
+      <h3>Wie viel Kapital brauche ich?</h3>
+      <div class="field"><label for="cTarget">Ziel pro Monat (€)</label><input type="number" id="cTarget" value="1000" min="0" step="50"></div>
+      <div class="field"><label for="cRate">Sparrate pro Monat (€)</label><input type="number" id="cRate" value="500" min="0" step="25"></div>
+      <div class="field"><label for="cStart">Vorhandenes Depot (€)</label><input type="number" id="cStart" value="10000" min="0" step="1000"></div>
+      <div class="field"><label for="cRet">Rendite p. a. (%)</label><input type="number" id="cRet" value="6" min="0" max="15" step="0.5"></div>
+      <div class="field"><label for="cWd">Entnahmerate (%)</label><input type="number" id="cWd" value="4" min="1" max="10" step="0.5"></div>
+      <div class="out">
+        <div class="line big"><span>Benötigtes Depot</span><b id="oNeed4">–</b></div>
+        <div class="line"><span>… erreicht in</span><b id="oYears">–</b></div>
+        <div class="line"><span>Nur von 3 % Dividende (nach 26,375 % Steuer)</span><b id="oNeedDiv">–</b></div>
+        <p class="small">4 % nach Trinity-Studie, 3,5 % als vorsichtigere Variante (Finanzbär). Gilt für breite Aktien-ETFs über rund 30 Jahre, Steuern auf Kursgewinne beim Verkauf nicht eingerechnet. Rendite ist eine Annahme, keine Prognose.</p>
+      </div>
+    </div>
+    <div class="tool">
+      <h3>Was kostet ein Kauf an passivem Einkommen?</h3>
+      <p class="small">Nach Finanzfreak: Jeder ausgegebene Euro fehlt im Depot und damit als lebenslange Entnahme von 4 % pro Jahr.</p>
+      <div class="field"><label for="kAmt">Geplante Ausgabe (€)</label><input type="number" id="kAmt" value="900" min="0" step="50"></div>
+      <div class="out">
+        <div class="line big"><span>Entgangenes Einkommen</span><b id="kOut">–</b></div>
+        <div class="line"><span>Investiert stattdessen, nach 20 Jahren bei 6 %</span><b id="kFv">–</b></div>
+        <div class="line"><span>… entspricht dann monatlich</span><b id="kFvM">–</b></div>
+        <p class="small">Faustregel aus dem Video: 100 € investiert ≈ 0,33 € pro Monat, lebenslang und inflationsangepasst.</p>
+      </div>
+    </div>
+    <div class="tool" style="grid-column:1/-1">
+      <h3>Ideen-Check: Trash-Filter + CLEAR-Score</h3>
+      <p class="small">Kombiniert Dan Martells Trash-Filter mit Iman Gadzhis CLEAR-Methode. Vorausgefüllt mit einem Beispiel, trage deine eigene Idee ein.</p>
+      <div class="field" style="grid-template-columns:1fr"><input type="text" id="iName" value="Beispiel: Interaktives Haushaltsbuch-Template auf Etsy" aria-label="Name der Idee"></div>
+      <div class="two" style="gap:20px">
+        <div style="display:grid;gap:10px" id="trashQs"></div>
+        <div style="display:grid;gap:10px" id="clearQs"></div>
+      </div>
+      <div class="result" id="iResult" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section id="realitaet">
+  <div class="sec-head">
+    <span class="eyebrow">Zahlen, die Creator offengelegt haben</span>
+    <h2>Realitätscheck</h2>
+    <p>Links die nüchternen Zahlen, an denen du dich orientieren kannst. Die großen Erfolgsbeispiele aus den Videos stehen darunter als Ausreißer, denn sie sind nicht typisch.</p>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Wer</th><th>Einsatz</th><th>Ergebnis</th><th>Quelle</th></tr></thead>
+    <tbody id="reality"></tbody>
+  </table></div>
+
+  <div class="two" style="margin-top:40px">
+    <div>
+      <h3 style="margin-bottom:8px">Warnsignale bei Guru-Videos</h3>
+      <ul class="flags" id="flags"></ul>
+    </div>
+    <div>
+      <h3 style="margin-bottom:8px">Ausreißer, keine Regel</h3>
+      <ul class="flags" id="outliers"></ul>
+    </div>
+  </div>
+
+  <div style="margin-top:40px" class="sec-head">
+    <h3 style="font-size:1.4rem">Fehler, die die Creator selbst gemacht haben</h3>
+    <p>Das wertvollste Material in den Videos: was erfahrene Leute im Nachhinein anders machen würden.</p>
+  </div>
+  <div class="mistakes" id="mistakes"></div>
+</section>
+
+<section id="gegenprobe">
+  <div class="sec-head">
+    <span class="eyebrow">Gegenprobe · 6 Suchen · 530 Treffer · 50 weitere Videos</span>
+    <h2>Was YouTube zeigt, wenn man nach schnellem Geld sucht</h2>
+    <p>Zusätzlich zu deinen 45 Videos wurden je die ersten rund 100 Treffer für „schnelles einkommen“, „smartes einkommen“, „online business“, „make money fast“, „smart ways to make money“ und „online business“ (englisch) gesichtet. Daraus kamen 50 Videos in die volle Auswertung: möglichst viele Kanäle, hohe Reichweite, bewusst auch Selbsttests und öffentlich-rechtliche Beiträge. Spiele-Guides, Musik und offensichtliche Krypto-Schneeballsysteme blieben draußen.</p>
+  </div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Suchbegriff</th><th>Treffer</th><th>Wer dominiert</th><th>Auffällig</th></tr></thead>
+    <tbody id="searchTbl"></tbody>
+  </table></div>
+  <p class="note" style="margin-top:12px">Die Treffer gelten für ein eingeloggtes deutsches Konto. YouTube personalisiert stark: Die englische Suche nach „online business“ lieferte trotz Spracheinstellung 85 identische Treffer wie die deutsche. Die Rohlisten liegen im Projektordner unter <code>quellen/suche</code>.</p>
+
+  <div style="margin-top:40px" class="sec-head">
+    <span class="eyebrow">Was die 50 Zusatzvideos ergeben</span>
+    <h3 style="font-size:1.4rem">Sieben Erkenntnisse</h3>
+    <p>Die Zusatzvideos bestätigen die Leitprinzipien weitgehend. Neu sind vor allem die vielen Selbsttests mit echten Zahlen und der Blick darauf, wer an den Videos verdient.</p>
+  </div>
+  <div class="laws" id="insights"></div>
+
+  <div style="margin-top:40px" class="sec-head">
+    <h3 style="font-size:1.4rem">Alle 50 Zusatzvideos im Kurzurteil</h3>
+    <p id="vidSum">Urteil über den Nutzen für dich, nicht über die Person. Details stehen im Projektordner in <code>quellen/notizen-erweiterung.md</code>.</p>
+  </div>
+  <div class="controls"><div class="chips" id="vidChips" role="group" aria-label="Urteil filtern"></div></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Video</th><th>Kernaussage</th><th>Urteil</th></tr></thead>
+    <tbody id="vidTbl"></tbody>
+  </table></div>
+</section>
+
+<section id="plan">
+  <div class="sec-head">
+    <span class="eyebrow">Umsetzung</span>
+    <h2>90-Tage-Startplan</h2>
+    <p>Die Abfolge folgt dem Stufenplan. Abgehakte Punkte werden nur in diesem Browser gespeichert.</p>
+  </div>
+  <div class="progress"><span class="num" id="pCount">0 / 0</span><div class="bar"><div class="real" id="pBar" style="width:0"></div></div><button class="chip" id="pReset" type="button">Zurücksetzen</button></div>
+  <div class="plan" id="planGrid"></div>
+</section>
+
+<section id="deutschland">
+  <div class="sec-head">
+    <span class="eyebrow">Gilt nur für Deutschland</span>
+    <h2>Was die englischen Videos nicht sagen</h2>
+    <p>Viele Zahlen in den Videos sind US-Zahlen. Diese Punkte musst du für Deutschland mitdenken. Allgemeine Information, für deinen Fall Steuerberatung fragen.</p>
+  </div>
+  <div class="de"><dl>
+    <dt>Kapitalerträge</dt><dd>25 % Abgeltungsteuer plus 5,5 % Soli darauf = 26,375 % (plus ggf. Kirchensteuer). Sparerpauschbetrag 1.000 € pro Person (2.000 € für Paare) per Freistellungsauftrag beim Broker. Aktien-ETFs: 30 % Teilfreistellung, effektiv rund 18,5 % Steuer auf Erträge. Thesaurierende ETFs: jährliche Vorabpauschale.</dd>
+    <dt>Online-Business</dt><dd>In der Regel Gewerbeanmeldung (Autoren und manche Kreative können freiberuflich sein). Kleinunternehmerregelung § 19 UStG seit 2025: Vorjahresumsatz bis 25.000 €, laufendes Jahr bis 100.000 €.</dd>
+    <dt>Pflichten auf Website &amp; Kanal</dt><dd>Impressum, Datenschutzerklärung, Werbung und Affiliate-Links kennzeichnen. Bei digitalen Produkten Widerrufsbelehrung, oft über Reseller wie Digistore24 oder CopeCart gelöst.</dd>
+    <dt>VG Wort</dt><dd>Deutsche Blogtexte ab etwa 1.800 Zeichen mit genug Zugriffen (in den Quellen ~1.500 pro Jahr) bringen eine jährliche Ausschüttung. Zwei deutsche Quellen nutzen das als echte passive Nebenquelle.</dd>
+    <dt>KI-Inhalte</dt><dd>KI-generierte Personen und Medien kennzeichnen: Plattformregeln (Amazon KDP, YouTube, Instagram) verlangen es schon, die Transparenzpflichten des EU AI Act kommen hinzu. KI-Personas als echte Menschen auszugeben ist Täuschung.</dd>
+    <dt>Gesundheit &amp; Finanzen</dt><dd>Heilversprechen fallen unter das Heilmittelwerbegesetz. Anlageempfehlungen gegen Provision können erlaubnispflichtig sein. Ernährungs- oder Psycho-Coaching ohne Qualifikation kann unter das Heilpraktikergesetz fallen. In diesen Nischen vorsichtig formulieren.</dd>
+    <dt>Bewertungen &amp; Vorverkauf</dt><dd>Gefälschte oder KI-generierte Kundenbewertungen sind unlauter (UWG, EU-Omnibus-Richtlinie), ebenso Bewertungen von Freunden ohne Hinweis. Das Widerrufsrecht schützt Verbraucher und ist keine Gratis-Rückgabe für gewerbliches Reselling. Vorbestellungen nur mit klarer Lieferzusage.</dd>
+    <dt>Kaltakquise</dt><dd>Werbe-E-Mails ohne Einwilligung sind in Deutschland meist unzulässig (§ 7 UWG), Massen-Kaltmails wie in US-Videos sind hier also kein Modell. Anrufe bei Firmen nur bei mutmaßlicher Einwilligung.</dd>
+    <dt>Nebenjob &amp; Arbeitsrecht</dt><dd>Nebenjob gegebenenfalls dem Arbeitgeber anzeigen, keine Konkurrenz zum Arbeitgeber, das Arbeitszeitgesetz gilt für alle Jobs zusammen (in der Regel höchstens 10 h am Tag, 11 h Ruhezeit). Minijob-Grenze 2025: 556 € im Monat. Minderjährige brauchen für ein Gewerbe die Zustimmung der Eltern und des Familiengerichts.</dd>
+    <dt>Bandbreite &amp; Daten</dt><dd>Apps, die deinen Internetanschluss „vermieten“, leiten fremden Datenverkehr über deine IP-Adresse. Das kann gegen die AGB deines Providers verstoßen und dich in Ermittlungen hineinziehen.</dd>
+  </dl></div>
+</section>
+
+<section id="quellen">
+  <div class="sec-head">
+    <span class="eyebrow">95 Links · alle ausgewertet</span>
+    <h2>Quellen</h2>
+    <p>Die ersten 45 Videos hast du zusammengestellt (32 Transkripte über den automatischen Abruf, 13 im Browser ausgelesen). Die übrigen 50 stammen aus den sechs Suchen der Gegenprobe und wurden alle im Browser ausgelesen. Bei jedem Video steht, ob der Creator am Thema mitverdient.</p>
+  </div>
+  <div class="src" id="sources"></div>
+</section>
+
+<footer>Erstellt aus den Untertiteln der verlinkten Videos. Keine Anlage-, Steuer- oder Rechtsberatung. Aussagen und Zahlen der Creator sind nicht unabhängig geprüft.<br><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></footer>
+</main>
+
+<script>
+const S = {
+ "M5y69v1RbU0":["Ali Abdaal","9 Passive Income Ideas - How I Make $27k per Week","Zahlen offen · gesponsert (Skillshare)"],
+ "4QLWlcneJig":["The Diary Of A CEO","Passive Income Expert: How To Make $10k Per Month In 90 Days!","Interview mit Chris Koerner · Werbeblöcke"],
+ "5vZjrxE8Wlc":["Mark Tilbury","7 Passive Income Ideas for 2026 (Up to $1,000/Day)","gesponsert (Hostinger)"],
+ "XFh3tRObiLM":["Greg Gottfried","„How I made over $800,000 in passive income last year“","verweist auf eigene Tutorials"],
+ "hNa3eT8Zr6A":["Geldschnurrbart","Passives Einkommen - Wie ich 5.360€/Monat generiere (5 Arten)","Zahlen offen"],
+ "GhNB96fjAWQ":["Doppelter Espresso mit Torben Platzer","Passives Einkommen 2025 Diese Quellen nutze ich!","Zahlen offen · Agentur-Werbung"],
+ "K3aJRAMKpxI":["echtgeld.tv","Dividenden-ETF: Passives Einkommen oder Selbstbetrug?","Analyse · Broker-Sponsor"],
+ "JiR_Ue-i9kM":["Daniel Igl","Wie du mit ChatGPT online Geld verdienst als Anfänger (2026)","verkauft Coaching"],
+ "nRKWkK018d8":["Anchu Kögl","Meine 5 FAULEN Einkommensquellen (die 4.000.000€ generiert haben)","Zahlen offen · verkauft Kurse"],
+ "1sodBmNahXQ":["Dominik Lebersorger","Ich habe passive Einkommensmethoden getestet","Selbstexperiment"],
+ "tXxX2J4KP-M":["Dominik Lebersorger","Geld verdienen mit KI: eine ehrliche Anleitung","gesponsert (Abacus AI)"],
+ "MyWuYrZTpfw":["Timo Baudzus","Millionär (49): So verdient er 10.000 €/Monat an der Börse","Interview"],
+ "iplk1G2D8WM":["Anchu Kögl","Das LANGWEILIGSTE Online Business, das ANFÄNGER reich macht!","verkauft Kurse"],
+ "L4LPAtvpstg":["Kanal nicht abrufbar","KI-Tool-Websites mit Werbung (deutsche Synchronfassung)","gesponsert (Hostinger)"],
+ "ToL5iUGr7AU":["Kanal nicht abrufbar","„10 years of passive income lessons, over $1 million last year“","Zahlen offen"],
+ "Qtyoy0F4DtM":["Homo Oeconomicus","Das nenne ich Mal passives Einkommen - Depotupdate Juni 2023","Zahlen offen"],
+ "CJhaOd2wjlo":["Markus Elsaesser","Der einfachste Weg für passives Einkommen!","Werbung (Kasona)"],
+ "ZpoBC7rX6Rc":["Finanzfreak","Von 0 auf 1.000€ passives Einkommen: So habe ich es geschafft","Zahlen offen"],
+ "_CyWGSzwTu4":["Shane Hummus","5 Claude AI Passive Income Ideas That Actually Work in 2026","verkauft Coaching"],
+ "0lQOWQfX3bo":["Nischa","7 Passive Income Ideas - How I Made $19k in a Week","Affiliate-Links"],
+ "Z4UB1P4eknc":["Ericnomics","5 Passive Income Ideas that ACTUALLY WORK (2026)",""],
+ "-Tjb4T-L7Zc":["Karlton Dennis","9 Passive Income Ideas - How I Make 7 Figures Per Year!","Werbung (eigenes Event)"],
+ "iVeMkgau_IY":["Decker Capital","Trading Podcast: Menschliche Trader überflüssig? Algo Bot & Krypto","Interview · Prop-Trading-Werbung"],
+ "DZoeGR_tatA":["Iman Gadzhi","5 Proven Ways To Make Money With AI (No Experience)","verkauft eigene KI-Tools"],
+ "RzFHcZA6uxA":["Jordan Welch","11 Lazy Ways To Make Money With AI (No Experience)","verkauft E-Commerce-Kurs"],
+ "LlhTEttKcwQ":["Mark Tilbury","I Tried The LAZIEST Way to Make Money With AI","Selbstexperiment · gesponsert (Higgsfield)"],
+ "IVQZqTZQ5ZI":["Wint Wealth","Quit His High Paying Job For Freedom With Just 45k Passive Income","Porträt"],
+ "6zb99U-_43M":["Mark Tilbury","7 Side Hustles Students Can Start In 2026","verkauft Membership"],
+ "13q83q7rFbw":["Growth Story Studio","8 BORING BUSINESSES That Make Money While You Sleep","Bengalisch"],
+ "DhEMFeo_gL8":["Dan Martell","The Only 25 Ways to Make Money in 2026","Lead-Magnet"],
+ "4ZpoDzR4I6Q":["Dhaval Kataria","I Tried 12 Passive Income Ideas to Make ₹1,00,000 in 2026","Selbstexperiment · Hindi"],
+ "RNwRH5NjL28":["Zero1 by Zerodha","5 Ways to Get Monthly Income without working","Aufklärung"],
+ "HKWLH1Zh79A":["The Diary Of A CEO Clips","The EASIEST Way To Make Money With AI (Daniel Priestley)","Interview"],
+ "73_3icYYnT8":["Finanzfluss","5 Passive Einkommensideen im Check! 2.000€/Monat verdienen: Ist das realistisch?","Analyse · Affiliate-Links"],
+ "FMiCTVIpMEY":["Finanzbär","So baust DU von 0 auf 1000€ passives Einkommen auf (2026)","Affiliate (P2P-Plattform)"],
+ "uy2JLqwiZpU":["Mark Tilbury","7 Passive Income Ideas for 2027 (Up to $1,000/Day)","gesponsert (Trading212, AutoDS)"],
+ "pc-N2L5u9a8":["Niklas Steenfatt","6 Ideen für passives Einkommen (zum Kopieren!)","gesponsert (Hostinger)"],
+ "3zGU-Lm_PxI":["Jumperbillijumper","Meine Smartphone und Mini PC Farm - Passives Einkommen","ohne Zahlen"],
+ "W-NFTVjSIaw":["Denis Kasper","7 langweilige, aber hochbezahlte Remote-Jobs","Lead-Magnet"],
+ "LDL1lxCzFt0":["Finanzbär","So baust DU von 0 auf 1000€ passives Einkommen auf (2024)","Broker-Werbung"],
+ "HWl3M824OnQ":["Homeoffice Millionär","Mein passives Einkommen nach nur 2 Jahren: 600€ Dividenden pro Monat","Zahlen offen · Werbung"],
+ "W9lXR8RJFf4":["Gerald Reimertz","PASSIVES EINKOMMEN ohne Startkapital - Ich zeige dir wie",""],
+ "VCsOyFDm0d8":["FinanzBildung","Passives Einkommen neben dem Vollzeitjob – 10 Möglichkeiten für Anfänger",""],
+ "bZSvOU9V6HM":["Aktien mit Kopf","Passives Einkommen mit Covered Call ETFs!","Broker-Werbung"],
+ "IJadm2aqMUE":["Dominik Lebersorger","Meine 7 Einkommensquellen, die 10.000€+ im Monat generieren","Zahlen offen · gesponsert"],
+ "73AxVfMT91U":["Torben Platzer","7 faule Wege, ohne Startkapital online Geld zu verdienen","Selbsttest · gesponsert (NordVPN)"],
+ "0YdBlb4cAhE":["Torben Platzer","Ich teste die faulsten Wege, um online Geld zu verdienen","Selbsttest · gesponsert"],
+ "1ZyRpntVifU":["rewinside","Ich teste faule Wege, um schnell online reich zu werden","Selbsttest · Unterhaltung"],
+ "57BnIqHEQQc":["Fynn Röber","Wie ich online Geld verdiene","verkauft Coaching"],
+ "ZP1tTeGL3YE":["Fynn Röber","7 Jobs von Zuhause (37 €/Stunde als Quereinsteiger)","verkauft Coaching"],
+ "r_kT1NlVamY":["Finanzfluss","Kann man als normaler Angestellter Millionär werden?","Rechnung"],
+ "TpeqC5b73Nw":["Finanzfluss","10 Wege, um online Geld zu verdienen","Überblick von 2018"],
+ "63rBStmovfk":["PULS Reportage (BR)","4-Wochen-Experiment mit KI: Einfach Geld verdienen mit ChatGPT?","öffentlich-rechtlich · Selbsttest"],
+ "B8Zl7yBQ9Sw":["ARD / hr","Mehr Geld dank Nebenjob – welcher Zuverdienst lohnt sich?","öffentlich-rechtlich · Statistik"],
+ "ULlYyhwoOhM":["Dominik Lebersorger","Ich habe Side Hustles getestet, die wirklich funktionieren","Erfahrungsberichte"],
+ "Z3zFhXo7rNg":["Dominik Lebersorger","Ich habe 30 Tage Affiliate Marketing getestet","Selbsttest · Zahlen offen"],
+ "ziPNAwBEyT8":["Dominik Lebersorger","10.000 € pro Monat mit einem Onlineshop: ehrlicher Shopify Guide","gesponsert (BuildYourStore/AutoDS)"],
+ "OsL8dRyx-bU":["Denis Kasper","Ich habe Claude KI gebeten, mir so viel Geld wie möglich zu verdienen","verkauft Coaching"],
+ "BV_2oDMlbEQ":["Sina Skulte","Mit Pinterest Geld verdienen: meine erfolgreiche Strategie","verkauft Kurs, rät trotzdem ab"],
+ "-PMbHvSlZ7Q":["RenditeRebels","Passives Einkommen zum Leben: die Rechnung und die Falle dahinter",""],
+ "f8ZlwJjnPnI":["Finanztip","Passives Einkommen durch Dividenden-ETFs?","Verbraucherportal"],
+ "qmJHBRCYjjo":["Tim Hildesheim","Seriös online Geld verdienen: So würde ich heute starten","verkauft Mentoring"],
+ "HRZwd4ZLKTM":["OwnGalaxy","3D-Druck: So druckst du dein Geld zurück! (Doku)","gesponsert · Verlosung"],
+ "eOE5Ej8qeLA":["Max Weiß","Das beste (Online) Business für Anfänger","verkauft Coaching"],
+ "QeKyWqLcTO0":["Tinus Klauser","Wie ich mit TikTok Geld verdiene (und wie du starten kannst)","Verkaufsvideo für Abo-Community"],
+ "PPK7KsGNqVU":["Niklas Steenfatt","Online Business starten in 12 Stunden!","gesponsert (Hostinger)"],
+ "kjY8snz4XEY":["Sean Dollwet","3 Boring but Realistic Online Businesses That Make 6-Figures","verkauft KDP-Coaching"],
+ "OcRYyQQwuDk":["Smart Finance","Finanzielle Freiheit mit ETFs: 2.500 € passives Einkommen – wie viel Kapital?","Ausschüttungsfokus"],
+ "wl9hRWkqxMY":["Marius Worch","Top 21 Apps zum Geld verdienen (täglich)","Affiliate-Links"],
+ "_KNgqxw8J6w":["Jakob & Max","Mache DAS, um 1000 € als Schüler zu verdienen!","verkauft Community"],
+ "k-3PoOT4vOM":["Alex Hormozi","How to Make Money So Fast It Feels ILLEGAL","verkauft Bücher"],
+ "uWdIgftpvBI":["Alex Hormozi","If I Started A Business in 2026, I'd Do This","verkauft Bücher"],
+ "sL16tsGafcQ":["Alex Hormozi","If You Want To Create Wealth In 2026, Watch This (4 Paths)","Leadmagnet"],
+ "2_W0tEu0csY":["Rise Above Reality","How to Actually Make Money Online No-BS Guide","Leadmagnet"],
+ "gTZSVThRWF8":["Mark Tilbury","Making Money Online is Easy, Actually (Just Copy Me)","gesponsert (BuildYourStore/AutoDS)"],
+ "ytAW1_g2IfI":["Mark Tilbury","The Laziest Ways to Make Money with AI (for Beginners)","gesponsert (AutoDS)"],
+ "j_KrWStXYDk":["fayefilms","How I make $10,000 a month as a STUDENT (and how you can too)","Leadmagnet · Affiliate"],
+ "vBhSquOR45I":["Ryan Daryani","I Tried The Laziest Ways To Make Money Online","Selbsttest · gesponsert (BuildYourStore/AutoDS)"],
+ "Qw2pFzgF1CM":["Scott Kress","I Tried The WEIRDEST Ways To Make Money Online","Selbsttest · Comedy"],
+ "yO5O_ngyA_8":["Codie Sanchez","I Tried The “Easiest” Ways To Make Money With AI","Selbsttest · Leadmagnet"],
+ "JrFZ_ky7AzE":["Sean Dollwet","The SIMPLEST Way To Make Money Online With Claude AI In 2026","verkauft KDP-Coaching"],
+ "-pp851qDmOY":["Money Talk With Leon","The SIMPLEST Way To Make Money Online With Claude AI In 2027","Affiliate-Links"],
+ "dQdpqW2qbIY":["Emil Torutev","I Tried Every Online Business Model for 5 Years STRAIGHT","verkauft Coaching"],
+ "lnM8VDPem9o":["Charlie Morgan","I Ranked Every Online Business Model So You Don't Have To","verkauft Agentur-Programm"],
+ "CzDTaLqozlQ":["Ali Abdaal","How to make your first $1,000 online","gesponsert (Stanley)"],
+ "zdshL1IcetU":["Dan Koe","The Most Lucrative AI Business To Start In 2027","eigenes Tool · Workshops"],
+ "4mWyMEgA32c":["aila collins","I Quit My Tech Job for the Online Business Dream (Here's the Reality)","Erfahrungsbericht"],
+ "pPpb4t2eV2M":["Iman Gadzhi","Best Online Business to Make $10k+/month In 2026 (Beginner Friendly)","Verkaufswebinar · Miteigentümer Whop"],
+ "LtofQBY-Nws":["Shane Hummus","7 Business Machines You Can Buy to Start Making Money","verkauft Coaching"],
+ "jcNN0Jv1oNQ":["EverythingProfessor","Every Way To Get Rich In 2025 Explained in 12 Minutes","Satire"],
+ "SmOs5498AD4":["Beverly Dines","How To Make Money THIS WEEK | 5 Legit Remote Sites That Pay Cash",""],
+ "dInJj8Jmm8M":["upMETHOD","5 Small Town Side Hustles That Make Big Money",""],
+ "zndqOgidKYQ":["Its Annie","The Most Realistic Online Business to Start if You're BROKE","Affiliate (Printify)"],
+ "CMPbEk4jL6M":["MyWifeQuitHerJob","9 One-Person Businesses Quietly Making $500k+ Right Now","verkauft Kurs"],
+ "bC64z_bG0ko":["Dina Lu","15 easiest side hustles for the average person in 2026","Leadmagnet"]
+};
+const PENDING = [];
+const SHORT = {"M5y69v1RbU0":"Abdaal","4QLWlcneJig":"Koerner/DOAC","5vZjrxE8Wlc":"Tilbury","XFh3tRObiLM":"Gottfried","hNa3eT8Zr6A":"Geldschnurrbart","GhNB96fjAWQ":"Platzer","K3aJRAMKpxI":"echtgeld","JiR_Ue-i9kM":"Igl","nRKWkK018d8":"Kögl","1sodBmNahXQ":"Lebersorger","tXxX2J4KP-M":"Lebersorger·KI","MyWuYrZTpfw":"Baudzus","iplk1G2D8WM":"Kögl·Kurs","L4LPAtvpstg":"Tool-Sites","ToL5iUGr7AU":"KDP-Creator·10J","Qtyoy0F4DtM":"HomoOec","CJhaOd2wjlo":"Elsässer","ZpoBC7rX6Rc":"Finanzfreak","_CyWGSzwTu4":"Hummus","0lQOWQfX3bo":"Nischa","Z4UB1P4eknc":"Ericnomics","-Tjb4T-L7Zc":"Dennis","iVeMkgau_IY":"Decker","DZoeGR_tatA":"Gadzhi","RzFHcZA6uxA":"Welch","LlhTEttKcwQ":"Tilbury·KI","IVQZqTZQ5ZI":"WintWealth","6zb99U-_43M":"Tilbury·Hustles","13q83q7rFbw":"GrowthStory","DhEMFeo_gL8":"Martell","4ZpoDzR4I6Q":"Kataria","RNwRH5NjL28":"Zero1","HKWLH1Zh79A":"Priestley","73_3icYYnT8":"Finanzfluss","FMiCTVIpMEY":"Finanzbär","uy2JLqwiZpU":"Tilbury·2027","pc-N2L5u9a8":"Steenfatt","3zGU-Lm_PxI":"Jumper","W-NFTVjSIaw":"Kasper","LDL1lxCzFt0":"Finanzbär·24","HWl3M824OnQ":"HomeofficeMio","W9lXR8RJFf4":"Reimertz","VCsOyFDm0d8":"FinanzBildung","bZSvOU9V6HM":"AktienMitKopf","IJadm2aqMUE":"Lebersorger·7"};
+Object.assign(SHORT,{"73AxVfMT91U":"Platzer·Faul","0YdBlb4cAhE":"Platzer·Test","1ZyRpntVifU":"rewinside","57BnIqHEQQc":"Röber","ZP1tTeGL3YE":"Röber·Jobs","r_kT1NlVamY":"Finanzfluss·Mio","TpeqC5b73Nw":"Finanzfluss·10","63rBStmovfk":"PULS","B8Zl7yBQ9Sw":"ARD","ULlYyhwoOhM":"Lebersorger·Community","Z3zFhXo7rNg":"Lebersorger·Affiliate","ziPNAwBEyT8":"Lebersorger·Shop","OsL8dRyx-bU":"Kasper·KI","BV_2oDMlbEQ":"Skulte","-PMbHvSlZ7Q":"RenditeRebels","f8ZlwJjnPnI":"Finanztip","qmJHBRCYjjo":"Hildesheim","HRZwd4ZLKTM":"OwnGalaxy","eOE5Ej8qeLA":"Weiß","QeKyWqLcTO0":"Klauser","PPK7KsGNqVU":"Steenfatt·12h","kjY8snz4XEY":"Dollwet","OcRYyQQwuDk":"SmartFinance","wl9hRWkqxMY":"Worch","_KNgqxw8J6w":"Jakob&Max","k-3PoOT4vOM":"Hormozi","uWdIgftpvBI":"Hormozi·2026","sL16tsGafcQ":"Hormozi·4Wege","2_W0tEu0csY":"RiseAbove","gTZSVThRWF8":"Tilbury·Easy","ytAW1_g2IfI":"Tilbury·Lazy","j_KrWStXYDk":"fayefilms","vBhSquOR45I":"Daryani","Qw2pFzgF1CM":"Kress","yO5O_ngyA_8":"Sanchez","JrFZ_ky7AzE":"Dollwet·Claude","-pp851qDmOY":"Leon","dQdpqW2qbIY":"Torutev","lnM8VDPem9o":"Morgan","CzDTaLqozlQ":"Abdaal·1K","zdshL1IcetU":"Koe","4mWyMEgA32c":"collins","pPpb4t2eV2M":"Gadzhi·Webinar","LtofQBY-Nws":"Hummus·Maschinen","jcNN0Jv1oNQ":"EverythingProf","SmOs5498AD4":"Dines","dInJj8Jmm8M":"upMETHOD","zndqOgidKYQ":"Annie","CMPbEk4jL6M":"Chou","bC64z_bG0ko":"DinaLu"});
+const short = id => SHORT[id] || id;
+const yt = id => "https://www.youtube.com/watch?v=" + id;
+const cite = ids => `<div class="cite">${ids.map(i=>`<a href="${yt(i)}" target="_blank" rel="noopener" title="${S[i]?S[i][0]+': '+S[i][1].replace(/"/g,'&quot;'):i}">${short(i)}</a>`).join("")}</div>`;
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+
+const LAWS = [
+ ["Passiv heißt vorab erarbeitet","Ali Abdaal, Iman Gadzhi, Torben Platzer und Dominik Lebersorger beschreiben es gleich: Du arbeitest vorher, das Geld kommt später ohne direkte Kopplung an deine Zeit. „Gehebeltes Einkommen“ trifft es besser.",["M5y69v1RbU0","DZoeGR_tatA","GhNB96fjAWQ","1sodBmNahXQ","hNa3eT8Zr6A","73_3icYYnT8","pc-N2L5u9a8"]],
+ ["Erst aktiv verdienen, dann passiv investieren","Kapital kommt aus Arbeit. Die Creator mit den größten passiven Einnahmen hatten vorher ein aktives Business oder eine hohe Sparrate.",["4QLWlcneJig","GhNB96fjAWQ","ZpoBC7rX6Rc","6zb99U-_43M","IVQZqTZQ5ZI","LDL1lxCzFt0","W-NFTVjSIaw","sL16tsGafcQ","qmJHBRCYjjo"]],
+ ["Es dauert Jahre","Ali: 8 Jahre bis zum heutigen Niveau. KDP-Creator: 2 Jahre unter 20.000 $ pro Jahr. Aaron: 6 Jahre bis 1.000 € Dividende im Monat. YouTube: im Schnitt ~90 Videos bis 1.000 Abonnenten.",["M5y69v1RbU0","ToL5iUGr7AU","Qtyoy0F4DtM","0lQOWQfX3bo","4mWyMEgA32c","dQdpqW2qbIY"]],
+ ["Traffic ist der eigentliche Engpass","Ein Produkt zu bauen ist leicht geworden. Käufer zu finden nicht. Plattformen mit eigenem Traffic (Amazon, Etsy, YouTube, Udemy) oder eine eigene Reichweite sind die Voraussetzung.",["0lQOWQfX3bo","nRKWkK018d8","ToL5iUGr7AU","_CyWGSzwTu4","M5y69v1RbU0","Z3zFhXo7rNg","1ZyRpntVifU"]],
+ ["Kopieren, was funktioniert","Wenn es eine Idee schon gibt, ist das ein Beweis, kein Hindernis. Konkurrenz studieren (Web Archive, SimilarWeb), dort starten, wo sie heute steht, eigene Ideen erst später.",["4QLWlcneJig","hNa3eT8Zr6A","6zb99U-_43M","5vZjrxE8Wlc"]],
+ ["Eins nach dem anderen","Mehrere Streams gleichzeitig scheitern selbst bei Profis. Dan Martell empfiehlt 1.000 Tage Fokus, Iman Gadzhi warnt vor Analyse-Paralyse durch zu viele Ideen.",["ToL5iUGr7AU","DhEMFeo_gL8","DZoeGR_tatA","nRKWkK018d8"]],
+ ["Ohne Pflege schrumpft es","Anchu Kögls ungepflegtes Altbusiness fiel von 49.000 € auf 24.000 € pro Jahr. Plattform-Algorithmen bestrafen Pausen. Rechne mit Pflegeaufwand.",["nRKWkK018d8","1sodBmNahXQ","GhNB96fjAWQ"]],
+ ["Niedrige Ausgaben sind ein Hebel","Wer wenig braucht, braucht ein kleineres Depot und spart schneller. Finanzfreak war mit 450 € Ausgaben bei 136.000 € Depot finanziell frei, Venkat lebt seit 2004 von Miete und Zinsen.",["ZpoBC7rX6Rc","IVQZqTZQ5ZI","RNwRH5NjL28","LDL1lxCzFt0"]],
+ ["Ein Kernskill, viele Einnahmequellen","Wer viele Quellen hat, verwertet meist eine einzige Kernkompetenz mehrfach: als Content, Kurs, Beratung, Software oder Beteiligung. Ein Content-Ökosystem verbindet die Quellen, jede stützt die nächste. Reine Information wird durch KI zur Massenware, eigene Erfahrung nicht.",["IJadm2aqMUE","HKWLH1Zh79A","VCsOyFDm0d8","pc-N2L5u9a8"]],
+ ["Prüfe, woran das Video verdient","Rund drei Viertel der 50 Zusatzvideos verdienen an Kurs, Coaching, Community, Sponsor oder Affiliate-Link. Shane Hummus sagt es offen: Am meisten verdient, wer anderen beibringt, wie man Geld verdient. Dieselbe Shop-Toolkette wurde in vier Videos dreier Kanäle als beste Lösung präsentiert, jedes Mal als bezahlte Platzierung.",["LtofQBY-Nws","63rBStmovfk","73AxVfMT91U","ziPNAwBEyT8","gTZSVThRWF8","vBhSquOR45I","j_KrWStXYDk"]]
+];
+document.getElementById("laws").innerHTML = LAWS.map((l,i)=>`<div class="law"><span class="tag">Prinzip ${i+1}</span><h3>${l[0]}</h3><p>${l[1]}</p>${cite(l[2])}</div>`).join("");
+
+const CATS = {kapital:"Kapital",digital:"Digitales Produkt",content:"Content & Reichweite",plattform:"Plattform",physisch:"Physisch",service:"Service"};
+// k: Startkapital-Stufe 0 (nichts) 1 (<500€) 2 (Tausende) 3 (Zehntausende+)
+const M = [
+ {n:"ETF-Sparplan + 4-%-Entnahme",c:"kapital",k:0,kt:"ab 25 €/Monat",z:"sofort, aber klein",p:5,v:5,r:2,ve:"good",
+  kurz:"Breite, thesaurierende Aktien-ETFs regelmäßig besparen, später jährlich rund 4 % entnehmen.",
+  s:["Notgroschen auf Tagesgeld zuerst","Depot bei günstigem Broker eröffnen, Freistellungsauftrag stellen","Breiten Welt-ETF wählen (MSCI World, ACWI oder FTSE All-World), bei gleichem Index nach Tracking Difference","Sparplan automatisieren, Sparrate jährlich erhöhen","Später ~4 % pro Jahr entnehmen, in Crashs 20–30 % weniger"],
+  zz:["60.000 € Depot ≈ 210 €/Monat, 335.000 € ≈ 1.085 €/Monat (Finanzfreak)","100 € investiert ≈ 0,33 € pro Monat lebenslang","Vanguard High Dividend lag seit 2013 rund 83 Prozentpunkte hinter dem normalen FTSE All-World","Finanzbär: 300 € im Monat ab null Euro → 1.000 € netto erst nach 35–45 Jahren; mit 100.000 € Start nach rund 20"],
+  w:["Die 4-%-Regel gilt für Aktien-ETFs über ~30 Jahre, nicht für das Gesamtvermögen","Renditen der Vergangenheit (US 8–12 %) sind keine Prognose","Geld, das du in 5–10 Jahren brauchst, gehört nicht ins Depot"],
+  q:["ZpoBC7rX6Rc","M5y69v1RbU0","GhNB96fjAWQ","-Tjb4T-L7Zc","RNwRH5NjL28","LDL1lxCzFt0","73_3icYYnT8"]},
+ {n:"Dividendenaktien & Dividenden-ETFs",c:"kapital",k:2,kt:"viel für spürbare Beträge",z:"Quartal für Quartal",p:5,v:5,r:2,ve:"mixed",
+  kurz:"Ausschüttungen als regelmäßiger Geldeingang. Psychologisch motivierend, rechnerisch oft schlechter als thesaurierend.",
+  s:["Dividende als Qualitätsfilter nutzen, nicht die Rendite maximieren","Ausschüttungsquote, Schulden, Dividendenhistorie und Absatz (nicht nur Umsatz) prüfen","Rendite auf Einstandskurs (Yield on Cost) betrachten","Ausschüttungen reinvestieren, solange du nicht davon lebst"],
+  zz:["100.000 € Depot → ~164 €/Monat netto (Geldschnurrbart)","~455.000 € Depot seit 2017 → ~1.000 €/Monat (Homo Oeconomicus)","Global X SuperDividend: 10–20 % Ausschüttung, aber Kurs seit 2011 halbiert","Paar seit 2019: 2025 rund 4.500 € netto Dividende, viele Hochdividendenwerte 20–30 % im Minus (Homeoffice Millionär)"],
+  w:["26,375 % Steuer auf jede Ausschüttung über dem Freibetrag","Sehr hohe Dividendenrendite ist oft ein Warnsignal (Kurs fällt, Geschäft bricht weg)","Ausschüttung minus Inflation kann real negativ sein"],
+  q:["hNa3eT8Zr6A","K3aJRAMKpxI","CJhaOd2wjlo","Qtyoy0F4DtM","RNwRH5NjL28","5vZjrxE8Wlc","HWl3M824OnQ","uy2JLqwiZpU"]},
+ {n:"Tagesgeld & Festgeld",c:"kapital",k:0,kt:"jeder Betrag",z:"sofort",p:5,v:5,r:1,ve:"good",
+  kurz:"Zinsen auf geparktes Geld. Der richtige Ort für den Notgroschen, kein Weg zum Vermögen.",
+  s:["Notgroschen von 3–6 Monatsausgaben parken","Einlagensicherung (100.000 € je Bank in der EU) beachten","Kleingedrucktes lesen: Neukundenzinsen, Zinsdeckel"],
+  zz:["2024/25 meist 2,5–3 % (Torben Platzer)","10.000 € bei 4 % = 400 € im Jahr (US-Beispiel)"],
+  w:["Nach Inflation und Steuern bleibt wenig","Nicht extra Konten eröffnen nur für ein paar Zehntelprozent"],
+  q:["GhNB96fjAWQ","XFh3tRObiLM","Z4UB1P4eknc"]},
+ {n:"REITs & Immobilienaktien",c:"kapital",k:1,kt:"ab einer Aktie",z:"Quartal für Quartal",p:5,v:5,r:3,ve:"mixed",
+  kurz:"Immobilien-Gesellschaften, die in den USA 90 % ihres Gewinns ausschütten müssen. Mieteinnahmen ohne Mieter.",
+  s:["Breit über Sektoren streuen (Wohnen, Logistik, Rechenzentren, Gesundheit)","Bewertung über FFO/AFFO statt KGV","Alternativ ein breiter REIT-ETF"],
+  zz:["Segro mit 3,4 %: 50.000 $ für ~140 $/Monat (Nischa)","Vincent: Hälfte eines Wohnungsverkaufs in REITs, Rest in Optionen"],
+  w:["Stark zinsabhängig","US-Quellensteuer und Ausschüttungen voll steuerpflichtig","Ohne Hebel braucht es viel Kapital"],
+  q:["0lQOWQfX3bo","MyWuYrZTpfw","Z4UB1P4eknc"]},
+ {n:"Vermietete Immobilie",c:"kapital",k:3,kt:"Eigenkapital + Kredit",z:"Monate bis Jahre",p:2,v:4,r:3,ve:"mixed",
+  kurz:"Der Klassiker. Mit Hebel stark, aber Mieter, Verwaltung und Instandhaltung machen es zum Nebenjob.",
+  s:["Lage und Mieterstruktur vor Rendite stellen","Realistisch mit ~4 % Nettorendite rechnen","Rücklagen für Instandhaltung und Leerstand","Hausverwaltung einpreisen, wenn es passiv sein soll"],
+  zz:["„250.000 € investieren, 800 € im Monat sorgenfrei“ nennt Torben Platzer heiße Luft","Vincent zieht sich aus physischen Immobilien zurück: Mieter, Ämter, Eigentümer","Finanzfluss: Mietrendite global ~2,4 %, also rund 1 Mio. € Immobilien für 2.000 € im Monat","US-Durchschnittshaus vermietet: nach Instandhaltung und Verwaltung etwa −180 $ im Monat (Mark Tilbury)"],
+  w:["Gute Objekte laufen oft über Kontakte, nicht den offenen Markt","Mietausfall, Mieterwechsel, Sanierungsstau","Klumpenrisiko in einem Objekt"],
+  q:["GhNB96fjAWQ","MyWuYrZTpfw","0lQOWQfX3bo","-Tjb4T-L7Zc","4QLWlcneJig","73_3icYYnT8","uy2JLqwiZpU"]},
+ {n:"P2P-Kredite",c:"kapital",k:1,kt:"ab kleinen Beträgen",z:"sofort",p:5,v:5,r:5,ve:"bad",
+  kurz:"Geld an Privatpersonen verleihen. Hohe Zinsversprechen, hohes Ausfall- und Plattformrisiko.",
+  s:["Wenn überhaupt: höchstens ~5 % des Vermögens","Plattform-Insolvenzrisiko verstehen","Über viele Kredite streuen"],
+  zz:["Plattformen werben mit 3–15 % (Karlton Dennis) bis über 20 % (Bondora laut Platzer)","Bondora: 25,8 % nominal, nach Ausfällen ~6,8 % (Finanzfluss)","Finanzbär rechnet mit 7,5 % und hält rund 58.000 € in einer Plattform, verlinkt per Affiliate"],
+  w:["Kreditnehmer bekommen oft keinen Bankkredit","Geht die Plattform pleite, ist das Geld weg"],
+  q:["GhNB96fjAWQ","-Tjb4T-L7Zc","5vZjrxE8Wlc","73_3icYYnT8","FMiCTVIpMEY"]},
+ {n:"Stillhalter-Optionen",c:"kapital",k:3,kt:"fünfstellig + Optionsbroker",z:"sofort (Prämie)",p:2,v:4,r:4,ve:"mixed",
+  kurz:"Versicherung für andere Anleger verkaufen (Cash-Secured Puts, Covered Calls). Für Fortgeschrittene mit tiefem Verständnis.",
+  s:["Spezieller Broker nötig (z. B. Interactive Brokers), nicht über Neobroker","Nicht mit Optionsscheinen oder Hebelzertifikaten verwechseln","Mit Spreads das maximale Risiko vorab begrenzen"],
+  zz:["Vincent: in 5 Jahren etwa doppelter Ertrag gegenüber der verkauften Wohnung, aber 50 % Buchverlust bei einem Wert"],
+  w:["Er selbst sagt: aktive Arbeit, kein passives Einkommen","Im Crash werden Verluste eingebucht","Nur mit Kapital, das du sicher halten kannst"],
+  q:["MyWuYrZTpfw"]},
+ {n:"Digitale Produkte",c:"digital",k:0,kt:"0–100 €",z:"Wochen bis Monate",p:4,v:5,r:1,ve:"good",
+  kurz:"Workbooks, Templates, Tracker, E-Books: einmal bauen, beliebig oft verkaufen. In mehreren Rankings auf Platz 1.",
+  s:["Thema: ein Problem, das du selbst gelöst hast oder bei dem man dich fragt","Nachfrage prüfen: Gibt es Konkurrenz mit Bewertungen auf Etsy oder Amazon?","Interaktiv statt Info-PDF (Workbook, Tabelle, 30-Tage-Challenge), denn Infos sind googlebar","Mit KI entwerfen, selbst prüfen und eigene Erfahrung ergänzen","Verkauf über Etsy, Digistore24, CopeCart, Stan Store oder eigenen Shop","Traffic dauerhaft aufbauen: Marktplatz-Suche oder eigener Content"],
+  zz:["E-Book, 150 Seiten, 2 Monate Arbeit → ~700 €/Monat (Geldschnurrbart)","Marge 90–95 % gegenüber 20–30 % bei physischen Produkten (Anchu Kögl)","KI-Workbook in 7 Tagen: 23 Verkäufe à 12 $ = 157 $ Gewinn (Mark Tilbury)","Notion-Vorlage für über 100 €, tausendfach verkauft, seit 2023 ohne Aufwand (Niklas Steenfatt)"],
+  w:["Flut an KI-PDFs: Qualität und Positionierung entscheiden","Ohne Traffic verkauft sich nichts","Erster Versuch ist selten der Treffer (Iman Gadzhi: „Spielautomat mit unendlich Versuchen“)"],
+  q:["DZoeGR_tatA","RzFHcZA6uxA","hNa3eT8Zr6A","nRKWkK018d8","LlhTEttKcwQ","XFh3tRObiLM","M5y69v1RbU0","pc-N2L5u9a8","VCsOyFDm0d8"]},
+ {n:"Onlinekurs",c:"digital",k:1,kt:"0–500 €",z:"2–4 Monate",p:3,v:5,r:2,ve:"good",
+  kurz:"Wissen als strukturierten Videokurs verkaufen. Hohe Preise möglich, aber Vermarktung ist die Hauptarbeit.",
+  s:["Du musst nur einen Schritt weiter sein als deine Zielgruppe","Erst live oder als Vorverkauf testen, dann aufzeichnen (Dhaval Kataria)","Plattform mit Traffic (Udemy, Skillshare) oder eigener Funnel","Eigener Funnel: Lead-Magnet, Webinar oder Video, Angebot, automatische Auslieferung","Werbeanzeigen erst, wenn organisch Verkäufe kommen"],
+  zz:["Ali Abdaal: 60–65.000 $/Monat über Skillshare, mit großer Audience","Erster Launch mit kleiner Liste: ~15.000 € in 4 Tagen (Anchu Kögl)","Skillshare: ~28 Stunden Watchtime ≈ 100 $ pro Monat"],
+  w:["Viele Kurs-Empfehler verkaufen selbst Kurse übers Kurse-Verkaufen","Ads-Rechnungen in Videos ohne MwSt., Gebühren und Erstattungen","Inhalte veralten und brauchen Updates"],
+  q:["iplk1G2D8WM","nRKWkK018d8","M5y69v1RbU0","ToL5iUGr7AU","4ZpoDzR4I6Q","0lQOWQfX3bo"]},
+ {n:"YouTube mit Evergreen-Wissen",c:"content",k:0,kt:"Smartphone",z:"6–24 Monate",p:3,v:5,r:2,ve:"good",
+  kurz:"Lehr-Videos zu Fragen, die Leute immer suchen. Alte Videos bringen jahrelang Views, Werbegeld und Kunden.",
+  s:["Nische mit Kaufkraft wählen (Finanzen, Business, Beruf)","Antwort-Videos zu konkreten Suchbegriffen, nicht Unterhaltung","Den eigenen Beruf dokumentieren: Expertise ist die Nische","Mindestens 1 Video pro Woche über 2 Jahre","Monetarisieren über Affiliate und eigene Produkte, nicht nur AdSense"],
+  zz:["Im Schnitt ~90 Videos bis 1.000 Abos; Ali brauchte 70 bis zum ersten AdSense-Geld","3–10k Views pro Video → 1.200–1.600 €/Monat (Anchu Kögl)","RPM Finanzen DE 14–18 €, Gaming ~1 $","Torben Platzer: 150–200 €/Tag aus alten Videos"],
+  w:["AdSense ist laut Kögl die schlechteste Monetarisierung","Pausen kosten Reichweite","KI-generierte Automation-Kanäle werden von YouTube gedrückt"],
+  q:["M5y69v1RbU0","nRKWkK018d8","GhNB96fjAWQ","_CyWGSzwTu4","ToL5iUGr7AU","XFh3tRObiLM","0lQOWQfX3bo"]},
+ {n:"Affiliate-Marketing",c:"content",k:0,kt:"0 €",z:"Monate",p:3,v:5,r:2,ve:"mixed",
+  kurz:"Provision für Empfehlungen. Funktioniert als Nebenprodukt von Reichweite, kaum als Startpunkt.",
+  s:["Nur Produkte empfehlen, die du selbst nutzt","Wiederkehrende Provisionen (Software, Konten) bevorzugen","Netzwerke: financeads, AWIN, impact, Amazon PartnerNet","Video statt Text, weil KI die Text-SEO überflutet hat","Links kennzeichnen"],
+  zz:["Finanz-Affiliate 20–100 € pro Abschluss (Torben Platzer)","Hobby-Nischenseite mit Kumpel → ~3.000 €/Monat (Geldschnurrbart)","Amazon zahlt 2–3 %: 8.000 Besuche für 100 $ im Monat (Ali-Rechnung)"],
+  w:["Ein Creator verlor 100.000 $ in Affiliate-Blogs, als ChatGPT-Artikel Google fluteten","Keine Kontrolle über Provisionssätze und Produktqualität","Du bekommst 10–30 % des Werts, den du verkaufst"],
+  q:["hNa3eT8Zr6A","nRKWkK018d8","ToL5iUGr7AU","GhNB96fjAWQ","M5y69v1RbU0","_CyWGSzwTu4","0lQOWQfX3bo"]},
+ {n:"Amazon KDP (Bücher)",c:"plattform",k:0,kt:"0 €",z:"Monate",p:4,v:5,r:1,ve:"mixed",
+  kurz:"Bücher hochladen, Amazon druckt, versendet und macht den Kundenservice. Low-Content ist voll, Sachbücher in engen Nischen gehen noch.",
+  s:["Enge Nische statt breites Thema („Produktivität für Pflegekräfte“)","Low-Content nur mit Nischenrecherche (z. B. Wortsuchrätsel)","Sachbuch: KI für Gliederung und Entwurf, dann selbst überarbeiten und Fakten prüfen","Volumen aufbauen und Geduld haben, bis Amazon die Listings rankt","KI-Anteil bei Amazon angeben"],
+  zz:["KDP-Creator: seit 2018 laufend, über ein Jahr ohne Login weiter Einnahmen","Rachel Richards: 2 Finanzbücher, ~97.000 $ in einem Jahr (Ausreißer mit Reichweite)"],
+  w:["Amazon-Algorithmus entscheidet über Sichtbarkeit","Flut an KI-Büchern","Autorentantiemen im Verlag nur ~2 € pro Buch"],
+  q:["XFh3tRObiLM","ToL5iUGr7AU","_CyWGSzwTu4","GhNB96fjAWQ","1sodBmNahXQ"]},
+ {n:"Print-on-Demand",c:"plattform",k:0,kt:"0 €",z:"Wochen bis Monate",p:2,v:5,r:2,ve:"bad",
+  kurz:"Designs auf T-Shirts und Tassen, Druck und Versand übernimmt ein Dienstleister. Kaum Marge, viel Konkurrenz.",
+  s:["Kleine Nischen suchen, die noch nicht besetzt sind","Merch on Demand: Bewerbung nötig","Ohne Werbekosten und Gratisversand halten"],
+  zz:["Printify-Beispiel: 26 % Marge, mit Gratisversand nur 5 % (Ericnomics)","Indien-Test: Bestellungen kamen, entscheidend war die Zustellquote (Dhaval Kataria)"],
+  w:["Algorithmus verlangt regelmäßige neue Designs","Dan Martell stuft es als Trash ein, Ericnomics als Top-3","Marken- und Urheberrecht bei Designs"],
+  q:["Z4UB1P4eknc","XFh3tRObiLM","DhEMFeo_gL8","1sodBmNahXQ","4ZpoDzR4I6Q","GhNB96fjAWQ"]},
+ {n:"Micro-Tools & Verzeichnis-Seiten",c:"content",k:1,kt:"unter 100 €",z:"Monate (SEO)",p:4,v:5,r:2,ve:"mixed",
+  kurz:"Kleine Websites, die ein nerviges Problem lösen oder Anbieter auflisten. Einnahmen über Werbung oder bezahlte Platzierung.",
+  s:["Problem mit echtem Suchvolumen finden","Seite mit KI-Website-Builder bauen","AdSense beantragen (Prüfung 2–4 Wochen)","Bei Verzeichnissen: nach Traffic die gelisteten Firmen für Top-Platzierung ansprechen","Viele Seiten testen, die Gewinner ausbauen"],
+  zz:["ConvertCase: ~25.000 $/Monat (alter Ausreißer)","Chris Koerner: einige Seiten bringen 0 $, einige Tausende"],
+  w:["KI-Antworten in Google senken die Klicks auf solche Seiten","Einfach zu kopieren, also viel Konkurrenz"],
+  q:["4QLWlcneJig","L4LPAtvpstg"]},
+ {n:"Lokaler Newsletter",c:"content",k:2,kt:"~1.000 € Ads",z:"1–2 Monate",p:2,v:3,r:2,ve:"mixed",
+  kurz:"Wöchentlicher Newsletter für eine Stadt, finanziert über Anzeigen lokaler Firmen.",
+  s:["Abonnenten per Meta Ads in einem Radius gewinnen","Selbst und persönlich schreiben, nicht per ChatGPT","Nach einem Monat Werbeplätze an lokale Firmen verkaufen","Vorlage in die nächste Stadt kopieren"],
+  zz:["US-Rechnung: Abonnent 0,50–1 $, Werbung ~0,50 $ pro Abonnent und Monat (Chris Koerner)"],
+  w:["US-Zahlen, für Deutschland ungeprüft","Wöchentliches Schreiben und Anzeigenverkauf sind Arbeit"],
+  q:["4QLWlcneJig"]},
+ {n:"Besitz vermieten",c:"physisch",k:0,kt:"was du hast",z:"Tage",p:3,v:4,r:2,ve:"good",
+  kurz:"Stellplatz, Ausrüstung, Zimmer oder Lagerfläche über Plattformen vermieten. Kleine Beträge, sofort startbar.",
+  s:["Liste machen: was besitzt du, das andere mieten würden?","Über Plattformen vermieten, die Versicherung mitbringen","Bei Neukäufen rechnen, ab wie vielen Vermietungen sie sich zahlen"],
+  zz:["Einfahrt am Bahnhof: 70 $ pro Platz und Woche (Mark Tilbury)","Hochzeitsbogen aus Holz: ~250 $ Material, ~1.000 $ pro Vermietung (Chris Koerner)"],
+  w:["Verschleiß und Schäden","Mietrecht und Versicherung prüfen"],
+  q:["5vZjrxE8Wlc","4QLWlcneJig","13q83q7rFbw"]},
+ {n:"Verkaufsautomaten",c:"physisch",k:1,kt:"300–500 €",z:"Wochen",p:2,v:4,r:3,ve:"mixed",
+  kurz:"Gebrauchter Automat, Ware vom Großhändler, Standort gegen Umsatzbeteiligung. Wird erst mit Personal zum Auffüllen passiv.",
+  s:["Standort ist alles: viel Laufkundschaft (Wohnanlagen, große Büros)","Standortgeber am Umsatz beteiligen","Sortiment nach echten Verkäufen ausrichten, nicht nach Ideal"],
+  zz:["20/80-Verteilung: wenige Standorte bringen das meiste (Chris Koerner)"],
+  w:["Auffüllen, Defekte, Kartenleser-Kosten","Ohne Angestellten ein Job"],
+  q:["4QLWlcneJig","13q83q7rFbw"]},
+ {n:"KI-Services für kleine Firmen",c:"service",k:0,kt:"0–100 €",z:"30–60 Tage",p:1,v:4,r:2,ve:"good",
+  kurz:"Telefon-Agenten, Automationen, Websites, Clipping. Kein passives Einkommen, aber der schnellste Weg zu Kapital (Stufe 1).",
+  s:["Eine Branche wählen, ein Problem lösen (verpasste Anrufe, E-Mails, Website)","Ergebnis verkaufen: Setup-Gebühr plus monatlicher Retainer","3–5 Fallstudien mit Rabatt sammeln","Täglich ein Kontaktversuch","Lösung in der Branche kopieren"],
+  zz:["Telefon-Agent: Setup 1.000–3.000 $ plus 800–1.500 $ im Monat (Iman Gadzhi)","Website 999 $ plus 99 $ im Monat Pflege","Social-Media-Retainer früher 600–1.200 € pro Kunde (Dominik Lebersorger)","Video-Editing 25–500 € pro Video, Clips 20–50 € pro Stück (Denis Kasper)"],
+  w:["Du verkaufst eine Wissenslücke, die sich schließt","Vertrieb ist der Kernskill","Einkommen hängt an deiner Arbeit"],
+  q:["4QLWlcneJig","DZoeGR_tatA","RzFHcZA6uxA","tXxX2J4KP-M","DhEMFeo_gL8","W-NFTVjSIaw","IJadm2aqMUE"]},
+ {n:"Membership & Community",c:"digital",k:0,kt:"0 €",z:"Monate",p:1,v:4,r:2,ve:"bad",
+  kurz:"Monatliches Abo für Zugang, Inhalte oder Austausch. Wird oft passiv verkauft, ist aber laufende Arbeit.",
+  s:["Nur mit bestehender Audience starten","Klaren Mehrwert pro Monat definieren","Aufwand für Events und Antworten vorher einplanen"],
+  zz:["Patreon: etwa 1 von 1.000 Abonnenten zahlt (Ali Abdaal)","Alis Community: 2.800 $ pro Woche bei 3–4 Events pro Woche"],
+  w:["KDP-Creator nennt es einen „Albtraum“ für die Zeitfreiheit","Abos sind schwer zu verkaufen (Anchu Kögl)"],
+  q:["M5y69v1RbU0","ToL5iUGr7AU","iplk1G2D8WM","-Tjb4T-L7Zc"]},
+ {n:"Software & Micro-SaaS",c:"digital",k:1,kt:"0–10.000 €",z:"1–4 Jahre",p:3,v:5,r:4,ve:"mixed",
+  kurz:"Ein kleines Tool im Abo. Mit KI leicht zu bauen, schwer zu verkaufen und Kunden zu halten.",
+  s:["Echtes Problem einer zahlungsfähigen Zielgruppe (eher B2B)","Früh mit zahlenden Kunden testen, nicht jahrelang bauen","Abo statt Einmalkauf"],
+  zz:["Ali Abdaal: Lernplattform 10.000 $ im ersten Jahr, 25.000 $ im fünften","Jordan Welch: 3 Jahre ohne Geld, erst im 6. Jahr Verkauf","KI-Schreib-App für 30 € im Monat mit rund 3.000 Nutzern nach einem Jahr (Bekannter von Niklas Steenfatt)","Daniel Priestley: Nischen-Software lohnt sich schon mit 500–1.000 Kunden, wird aber schnell Massenware"],
+  w:["Kündigungen (Churn) fressen Wachstum","Marketing und Vertrieb sind Spezialwissen"],
+  q:["M5y69v1RbU0","RzFHcZA6uxA","5vZjrxE8Wlc","DhEMFeo_gL8","iplk1G2D8WM","HKWLH1Zh79A","pc-N2L5u9a8","uy2JLqwiZpU"]},
+ {n:"Dienstleistung mit Team & Systemen",c:"service",k:2,kt:"wenig bis Kredit",z:"Monate",p:3,v:4,r:3,ve:"good",
+  kurz:"Einen Service zum Unternehmen ausbauen: Mitarbeiter, Standards, Automatisierung. Niklas Steenfatt: In 95 % der Fälle ist „passives“ Einkommen eigentlich skaliertes Einkommen.",
+  s:["Wertleiter bauen: günstiges Einstiegsangebot, darüber teurere Stufen","Jede Aufgabe, die zweimal vorkommt, automatisieren oder als Anleitung standardisieren","Mitarbeiter einstellen und sich aus dem Tagesgeschäft ziehen","Wiederkehrende Verträge bevorzugen (Wartung, Abos, Jahresverträge)","Später weitere Standorte, Lizenz oder Franchise"],
+  zz:["Masseur in Kapstadt: eigenes Studio auf Kredit, angestellte Masseure, massiert selbst kaum noch (Niklas Steenfatt)","Yogastudio-Beispiel: Einzelticket 20 € bis Retreat 3.500 € pro Person (Gerald Reimertz)","Langweilige B2B-Firmen mit Jahresverträgen: Reinigung, Schädlingsbekämpfung, Großwäscherei"],
+  w:["Unternehmerisches Risiko, oft mit Kredit","Erst eine Phase sehr harter Arbeit","Personal kostet und will geführt werden"],
+  q:["pc-N2L5u9a8","W9lXR8RJFf4","13q83q7rFbw","5vZjrxE8Wlc"]},
+ {n:"Content-Ökosystem & Personal Brand",c:"content",k:0,kt:"Smartphone",z:"1–3 Jahre",p:3,v:5,r:2,ve:"good",
+  kurz:"YouTube, Newsletter, Affiliate und eigene Produkte rund um ein Thema verbinden. In zwei Rankings auf Platz 1, aber der aufwendigste Weg.",
+  s:["Thema: ein Kernskill oder eine Erfahrung, über die nur du sprechen kannst","Content, der Beziehung schafft, nicht nur Information","Zuschauer in einen Newsletter holen","Affiliate-Links und ein eigenes digitales Produkt anbieten","Überschüsse in ETFs investieren"],
+  zz:["Dominik Lebersorger: in 5 Jahren vom Mindestlohnjob zu 7 Quellen mit über 10.000 € im Monat, alle rund um Social Media","Zwei Videos mit je über 1 Mio. Views: ~25.000 € vs. ~5.000 € AdSense, je nach Thema","Mark Tilbury: Personal Brand über 10 Mio. $ in 5 Jahren"],
+  w:["Am Anfang monatelang kaum Reichweite","Ohne neuen Content sinkt die Reichweite","Kurs und Buch bauen war für Lebersorger „das stressigste Jahr meines Lebens“"],
+  q:["VCsOyFDm0d8","IJadm2aqMUE","HKWLH1Zh79A","uy2JLqwiZpU","pc-N2L5u9a8"]}
+];
+const VLABEL = {good:"empfehlenswert",mixed:"mit Vorbehalt",bad:"eher nicht"};
+let activeCat = "alle";
+const chipsEl = document.getElementById("catChips");
+const catList = [["alle","Alle"],...Object.entries(CATS)];
+chipsEl.innerHTML = catList.map(([k,l])=>`<button type="button" class="chip" data-cat="${k}" aria-pressed="${k==='alle'}">${l}</button>`).join("");
+chipsEl.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;activeCat=b.dataset.cat;chipsEl.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));renderModels();save();});
+const dots = r => "●".repeat(r)+"○".repeat(5-r);
+function renderModels(){
+  const sort=document.getElementById("sortSel").value, low=document.getElementById("lowCap").checked;
+  let list=M.filter(m=>(activeCat==="alle"||m.c===activeCat)&&(!low||m.k<=1));
+  const f={passiv:(a,b)=>b.p-a.p||a.r-b.r,hype:(a,b)=>(b.v-b.p)-(a.v-a.p),risiko:(a,b)=>a.r-b.r||b.p-a.p,kapital:(a,b)=>a.k-b.k||b.p-a.p}[sort];
+  list.sort(f);
+  const g=document.getElementById("modelGrid");
+  if(!list.length){g.innerHTML=`<div class="empty">Keine Modelle für diese Auswahl. Entferne den Kapital-Filter oder wähle „Alle“.</div>`;return;}
+  g.innerHTML=list.map(m=>`<article class="card">
+    <div class="top">
+      <div class="row"><span class="cat">${CATS[m.c]}</span><span class="verdict v-${m.ve}">${VLABEL[m.ve]}</span></div>
+      <h3>${m.n}</h3>
+      <p class="kurz">${m.kurz}</p>
+      <div class="meter"><div class="lbl"><span>Passiv-Grad</span><span class="num">${m.p}/5${m.v>m.p?` · versprochen ${m.v}/5`:""}</span></div>
+        <div class="bar" role="img" aria-label="Passiv-Grad ${m.p} von 5, versprochen ${m.v} von 5"><div class="real" style="width:${m.p*20}%"></div><div class="prom" style="left:calc(${m.v*20}% - 2px)"></div></div></div>
+    </div>
+    <div class="facts">
+      <div><span>Start</span><b>${m.kt}</b></div>
+      <div><span>Erstes Geld</span><b>${m.z}</b></div>
+      <div><span>Risiko</span><b class="dots" aria-label="Risiko ${m.r} von 5">${dots(m.r)}</b></div>
+    </div>
+    <details><summary>Playbook öffnen</summary><div class="detail">
+      <div><h4>Schritte</h4><ol>${m.s.map(x=>`<li>${x}</li>`).join("")}</ol></div>
+      <div><h4>Echte Zahlen aus den Videos</h4><ul>${m.zz.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div><h4>Warnungen</h4><ul class="warn">${m.w.map(x=>`<li>${x}</li>`).join("")}</ul></div>
+      <div><h4>Quellen</h4>${cite(m.q)}</div>
+    </div></details>
+  </article>`).join("");
+}
+document.getElementById("sortSel").addEventListener("change",()=>{renderModels();save();});
+document.getElementById("lowCap").addEventListener("change",()=>{renderModels();save();});
+
+const TRASH = [
+ ["Daytrading & Krypto-Trading","Verlieren ist leichter als Gewinnen. Selbst ein Profi aus einer Handelsfirma hat privat mehrfach sein Konto verloren.",["DhEMFeo_gL8","iVeMkgau_IY","M5y69v1RbU0"]],
+ ["NFT-Flipping & MLM","Hype vorbei bzw. Geld durch Anwerben statt Verkaufen. Meist Verlust.",["DhEMFeo_gL8"]],
+ ["„Super-Dividenden“-ETFs","Zweistellige Ausschüttung, aber das Kapital schmilzt. Linke Tasche, rechte Tasche.",["K3aJRAMKpxI","RNwRH5NjL28"]],
+ ["KI-YouTube-Automation (Shorts)","Shorts zahlen kaum, YouTube drückt KI-Inhalte. Für 10.000 $ im Monat bräuchte man 30–50 Mio. Views.",["RzFHcZA6uxA"]],
+ ["Dateneingabe, Umfragen & Cashback","KI ersetzt die Arbeit, kein Vermögenswert: Sobald du aufhörst, hört das Geld auf. Cashback spart nur einen Bruchteil.",["DhEMFeo_gL8","4ZpoDzR4I6Q","VCsOyFDm0d8"]],
+ ["SMS-Empfangs-Farmen","Alte Smartphones empfangen Codes für fremde Konten. Rechtlich und sicherheitlich heikel, Einnahmen unbelegt.",["3zGU-Lm_PxI"]],
+ ["Generische Stockfotos","200 hochgeladene Fotos, 3 Verkäufe, etwa 4 € Gewinn.",["1sodBmNahXQ","GhNB96fjAWQ"]],
+ ["Dropshipping ohne Marke","Dünne Margen, Retouren, Werbekosten. Im Selbsttest 0 % zugestellt. Nur ein Kursverkäufer stuft es als Top ein.",["iplk1G2D8WM","4ZpoDzR4I6Q","RzFHcZA6uxA"]],
+ ["Geldverdien-Apps, Bandbreite vermieten, Spiele-Belohnungen","In den Tests 1–8 € pro Stunde, Auszahlung erst ab Schwellen, die viele nie erreichen. Bezahlt wird mit Daten oder der eigenen IP-Adresse.",["wl9hRWkqxMY","vBhSquOR45I","0YdBlb4cAhE","1ZyRpntVifU"]],
+ ["Trading-Bots nach Social-Media-Hype","Der beworbene Krypto-Bot und ein selbst gebauter KI-Bot verloren beide. Ein Bot auf einem schlechten Prozess verliert nur schneller.",["yO5O_ngyA_8","0YdBlb4cAhE"]],
+ ["Pinterest-Affiliate-„Hacks“","Massenhaft Affiliate-Links verstoßen gegen die Richtlinien, Konten werden gesperrt. Funktioniert nur als Traffic für eine eigene, seriöse Website.",["BV_2oDMlbEQ"]],
+ ["Coachings mit Einkommensgarantie","„Bis du 3–5.000 € im Monat verdienst“: Das Geschäft ist der Verkauf des Coachings.",["JiR_Ue-i9kM","iplk1G2D8WM"]]
+];
+document.getElementById("trash").innerHTML = TRASH.map(t=>`<div><b>${t[0]}</b><span>${t[1]}</span>${cite(t[2])}</div>`).join("");
+
+const DISPUTES = [
+ ["Dividenden oder thesaurierend?","Dividenden belohnen und helfen beim Durchhalten (echtgeld, Elsässer, Aaron)","Gesamtrendite schlechter, Steuer sofort fällig (Finanzfreak, Zero1)","Rechnerisch gewinnt thesaurierend. Dividenden als Qualitätsfilter sind vertretbar.",["K3aJRAMKpxI","CJhaOd2wjlo","ZpoBC7rX6Rc","RNwRH5NjL28"]],
+ ["Job kündigen, um Gas zu geben?","„Burn the boats“ verzehnfacht oft das Ergebnis (Koerner)","Erst ein finanzielles Floß bauen (KDP-Creator)","Beide sagen am Ende: erst kündigen, wenn ein profitabler Weg sichtbar ist.",["4QLWlcneJig","ToL5iUGr7AU"]],
+ ["KI-Telefonagenten: Chance oder gesättigt?","Wenig Konkurrenz wegen Lernkurve (Iman Gadzhi: 16/25)","Das gesättigtste KI-Angebot (Jordan Welch: C-Tier)","Hängt von Region und Branche ab. Lokal testen.",["DZoeGR_tatA","RzFHcZA6uxA"]],
+ ["Ist Membership passiv?","Läuft mit wenig Aufwand (Karlton Dennis)","Ein Albtraum für die Zeitfreiheit (KDP-Creator, Ali Abdaal)","Die Creator mit eigener Community beschreiben sie als Arbeit.",["-Tjb4T-L7Zc","ToL5iUGr7AU","M5y69v1RbU0"]],
+ ["Print-on-Demand","Top 3 für Anfänger (Ericnomics)","Trash: überfüllt (Dan Martell)","Margen von 5–26 % sprechen gegen den Einstieg.",["Z4UB1P4eknc","DhEMFeo_gL8"]],
+ ["P2P-Kredite für planbares Einkommen?","7,5 % voll entnehmbar, halb so viel Kapital wie bei ETFs (Finanzbär)","Ausfälle drücken 25,8 % auf ~6,8 %, Plattformrisiko, höchstens kleiner Anteil (Finanzfluss, Platzer)","Der Befürworter verlinkt die Plattform per Affiliate.",["FMiCTVIpMEY","73_3icYYnT8","GhNB96fjAWQ"]],
+ ["Covered-Call-ETFs","Monatlich ~13 % Ausschüttung, Puffer in Seitwärtsmärkten (Aktien mit Kopf)","Gewinne gedeckelt, im Crash trotzdem Verluste; hohe Ausschüttung ist keine hohe Rendite (echtgeld)","Selbst der Befürworter: Für Vermögensaufbau reicht ein normaler ETF, höchstens Beimischung in der Rente.",["bZSvOU9V6HM","K3aJRAMKpxI"]],
+ ["Entnahmerate 4 % oder 3,5 %?","4 % nach Trinity-Studie, 98 % Erfolg über 30 Jahre (Finanzfreak)","4 % gilt als veraltet, lieber 3,5 % (Finanzbär); Finanzfluss rechnet mit 3–4 %","Im Rechner unten lassen sich beide Werte vergleichen.",["ZpoBC7rX6Rc","LDL1lxCzFt0","73_3icYYnT8"]],
+ ["Dropshipping / E-Commerce","S-Tier (Jordan Welch)","Hohes Risiko, Marge 10–20 % (Anchu Kögl), Selbsttest gescheitert (Dhaval)","Der Befürworter verkauft genau diesen Kurs.",["RzFHcZA6uxA","iplk1G2D8WM","4ZpoDzR4I6Q"]],
+ ["Webdesign für lokale Firmen","Seriöser Einstieg, 2.000–5.000 € pro Website, Kunden über Google Maps finden (Hildesheim); Landingpages mit KI (Tilbury)","Unterste Stufe, „KI macht das jetzt“ (Charlie Morgan)","Die Bewertungen folgen dem eigenen Produkt. Gefragt bleibt, wer Ergebnisse liefert: Anfragen, Sichtbarkeit, Pflege.",["qmJHBRCYjjo","ytAW1_g2IfI","lnM8VDPem9o","kjY8snz4XEY"]],
+ ["Ausschüttungs-ETFs für 2.500 € im Monat","Mit 5,5 % Mischausschüttung reichen rund 682.000 € (Smart Finance)","Ausschüttung ist nicht Gesamtrendite: Dividenden-ETF seit 2019 +106 %, Welt-ETF +134 %, gleicher Maximalverlust (Finanztip)","Mit 4 % Entnahme aus einem breiten ETF wären es rund 940.000 €. Höhere Ausschüttung senkt die sichtbare Zahl, nicht das Risiko.",["OcRYyQQwuDk","f8ZlwJjnPnI","-PMbHvSlZ7Q"]],
+ ["Faceless-YouTube","27 Kanäle, 5–7 € pro 1.000 Views, alte Videos verdienen weiter (Fynn Röber)","19 Mio. Views brachten rund 4.000 $, dann Demonetarisierung wegen wiederverwendeter Inhalte (Emil Torutev)","Der Befürworter verkauft Coaching dafür. Ohne eigene Inhalte drohen Demonetarisierung und Plattformrisiko.",["57BnIqHEQQc","dQdpqW2qbIY","_KNgqxw8J6w"]]
+];
+document.getElementById("disputes").innerHTML = DISPUTES.map(d=>`<tr><td><b>${d[0]}</b></td><td>${d[1]}</td><td>${d[2]}</td><td>${d[3]}${cite(d[4])}</td></tr>`).join("");
+
+const REALITY = [
+ ["Geldschnurrbart","100.000 € Dividendendepot","~164 €/Monat netto","hNa3eT8Zr6A"],
+ ["Finanzfreak","335.000 € ETF, 3.000–5.100 €/Monat Sparrate, ~4 Jahre","~1.085 €/Monat (4-%-Regel)","ZpoBC7rX6Rc"],
+ ["Homo Oeconomicus","~455.000 € Depot, seit 2017","~1.000 €/Monat Dividende","Qtyoy0F4DtM"],
+ ["Geldschnurrbart","E-Book: 2 Monate Vollzeit","~700 €/Monat","hNa3eT8Zr6A"],
+ ["Geldschnurrbart","Deutscher Finanzblog (VG Wort)","~300 €/Monat","hNa3eT8Zr6A"],
+ ["Anchu Kögl","YouTube, 3–10k Views pro Video, wöchentlich","1.200–1.600 €/Monat","nRKWkK018d8"],
+ ["Anchu Kögl","Altes Business, seit 2022 ungepflegt","49.000 → 24.000 € pro Jahr","nRKWkK018d8"],
+ ["Mark Tilbury","KI-Influencer, 7 Tage, 99 $ Budget","157 $ Gewinn","LlhTEttKcwQ"],
+ ["Dominik Lebersorger","200 Stockfotos","3 Verkäufe, ~4 €","1sodBmNahXQ"],
+ ["Dhaval Kataria","KI-Dropshipping mit Ads","0 % zugestellt, Verlust","4ZpoDzR4I6Q"],
+ ["KDP-Creator","100.000 $ in Affiliate-Blogartikel","Verlust nach ChatGPT-Flut","ToL5iUGr7AU"],
+ ["KDP-Creator","Erste 2 Jahre nebenberuflich","unter 20.000 $ pro Jahr","ToL5iUGr7AU"],
+ ["Homeoffice Millionär","Paar, investiert seit 2019, 55 Aktien","2025: ~4.500 € netto Dividende im Jahr","HWl3M824OnQ"],
+ ["Dominik Lebersorger","Je ein Video mit über 1 Mio. Views, Business- vs. Fitness-Thema","~25.000 € vs. ~5.000 € AdSense","IJadm2aqMUE"],
+ ["Finanzbär (Rechnung)","300 € im Monat, Start bei 0 €","1.000 € netto nach 35–45 Jahren","LDL1lxCzFt0"],
+ ["Finanzfluss (Rechnung)","Immobilien mit ~2,4 % Mietrendite","~1 Mio. € für 2.000 € im Monat","73_3icYYnT8"],
+ ["Mark Tilbury (US-Rechnung)","Durchschnittshaus, 20 % Anzahlung, vermietet","etwa −180 $ im Monat nach Kosten","uy2JLqwiZpU"],
+ ["PULS Reportage (BR)","4 Wochen KI-Shop, Stockfotos, Kinderbuch, Logos","0 € von Fremden, −5,49 € Toolkosten","63rBStmovfk"],
+ ["Dominik Lebersorger","30 Tage TikTok-Affiliate ohne Reichweite, 42.000 Views","0,13 €","Z3zFhXo7rNg"],
+ ["Dominik Lebersorger","Buch-Video mit 60.000 Views, Amazon-Links","~125 € Provision","Z3zFhXo7rNg"],
+ ["Dominik Lebersorger","Kaugummiautomat für 250 €, Standplatz gratis","64 € Umsatz im ersten Monat","ULlYyhwoOhM"],
+ ["Torben Platzer","7 „faule“ Methoden über mehrere Wochen","je 17–178 €, meist unter Mindestlohn","73AxVfMT91U"],
+ ["Ryan Daryani","5 Tage, 5 faule Methoden inkl. Dropshipping","17 $ gesamt (Dropshipping: 70 $ Umsatz, 9 $ Gewinn)","vBhSquOR45I"],
+ ["Codie Sanchez","5 KI-Bots, 10 Tage, 100 $ Budget","Trading −16 $, Flipping +88 $, Clipping −32 $","yO5O_ngyA_8"],
+ ["aila collins","18 Monate eigener Shop, rund 70.000 £ Ersparnisse als Puffer","~400 £ Gewinn pro Monat","4mWyMEgA32c"],
+ ["Emil Torutev","Faceless-YouTube, 19 Mio. Views über 5 Jahre","~4.000 $, dann demonetarisiert","dQdpqW2qbIY"],
+ ["Emil Torutev","Dropshipping-Produkt mit 6 Mio. Views","10.000 $ Umsatz, Gewinn etwa null","dQdpqW2qbIY"],
+ ["Muno (3D-Drucklampen)","2 Gründer, 24 Drucker, 120.000 € Werbung im Jahr","365.000 € Umsatz, 20–25 % Marge vor Steuern","HRZwd4ZLKTM"],
+ ["ARD/hr (YouGov 2019)","Nebenjobs in Deutschland","Hälfte unter 500 € im Monat, ein Fünftel 500–2.500 €","B8Zl7yBQ9Sw"],
+ ["ARD/hr (US-Umfrage)","Side Hustles, rund 12 h pro Woche","Median 686 $ im Monat, über die Hälfte unter 200 $","B8Zl7yBQ9Sw"],
+ ["Finanzfluss (Rechnung)","37.000 € brutto, 10 % Sparquote, 7 % Rendite, 42 Jahre","~1 Mio. € nominal, ~400.000 € real nach Steuer","r_kT1NlVamY"]
+];
+document.getElementById("reality").innerHTML = REALITY.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="num">${r[2]}</td><td>${cite([r[3]])}</td></tr>`).join("");
+
+const FLAGS = [
+ ["Verdient am Kurs über das Modell","Anchu Kögl selbst: Dropshipping-Gurus verdienen mit Dropshipping-Kursen. Jordan Welch nennt „Content über KI“ das beste KI-Modell."],
+ ["Einkommensgarantie","„Bis du 3–5.000 € im Monat verdienst“ verschiebt das Risiko nicht zu dir, sondern verkauft das Coaching."],
+ ["„90 % passiv“, „30 Minuten am Tag“","Selbst die Anbieter sagen im selben Video, dass es nie ganz passiv ist."],
+ ["Testimonials als Normalfall","Einzelne Teilnehmer mit 10.000 € im ersten Monat sagen nichts über den Durchschnitt."],
+ ["Werberechnung ohne Kosten","100 € Ads → 2 Kurse à 199 €: ohne MwSt., Gebühren, Erstattungen und Fehlschläge gerechnet."],
+ ["Gesponsertes Tool als Abkürzung","Website-Builder und KI-Tools mit Rabattcode sind meist Werbepartner des Videos. Dieselbe Shop-Toolkette tauchte in vier Videos dreier Kanäle als „beste Lösung“ auf."],
+ ["Luxus als Köder","Dubai, Villa, Rolex oder Pick-up im Intro: Verkauft wird ein Gefühl, keine Methode."],
+ ["Künstliche Verknappung","„Preis steigt bald“, „nur drei bis fünf Plätze“, ein Gewinnspiel erst ab 10.000 Views."],
+ ["Der Anti-Guru-Guru","„Ich verkaufe keine Kurse“, aber Affiliate-Links, Tool-Partner oder ein „kostenloses Erstgespräch“."],
+ ["Umsatz als Gewinn gerechnet","„100.000 Views × 1 % × 16 $“: Der Verkaufspreis ist nicht der Gewinn, und 1 % Kaufquote ist selten."]
+];
+document.getElementById("flags").innerHTML = FLAGS.map(f=>`<li><b>${f[0]}</b><span>${f[1]}</span></li>`).join("");
+const OUT = [
+ ["Organic Chemistry Tutor","~79.000 $/Monat AdSense mit einfachen Lösungsvideos, nach vielen Jahren.","_CyWGSzwTu4"],
+ ["iOS-Icon-Pack","~300.000 $ in wenigen Wochen, perfektes Timing.","M5y69v1RbU0"],
+ ["ConvertCase","~25.000 $/Monat für ein Groß-/Kleinschreibungs-Tool, seit Jahren etabliert.","L4LPAtvpstg"],
+ ["Rachel Richards","~97.000 $ Tantiemen aus 2 Büchern in einem Jahr.","_CyWGSzwTu4"],
+ ["Buc-ee's-Fanshop","Hunderttausende im ersten Monat durch Presse. Koerner: nicht wiederholbar.","4QLWlcneJig"],
+ ["Designjoy","3,1 Mio. $ Umsatz mit einem Design-Abo, 84 $ Kosten im Monat, ohne Mitarbeiter.","CMPbEk4jL6M"],
+ ["Geldautomaten-Aufsteller","„12 Mio. $ in 3 Jahren“ mit Automaten für je 2.100 $, verdient zusätzlich am Coaching dazu.","LtofQBY-Nws"]
+];
+document.getElementById("outliers").innerHTML = OUT.map(o=>`<li><b>${o[0]}</b><span>${o[1]}</span>${cite([o[2]])}</li>`).join("");
+
+const MIST = [
+ ["Mehrere Streams gleichzeitig","Nach 10 Jahren fällt der KDP-Creator immer noch darauf herein. Einen aufbauen, dann den nächsten.","ToL5iUGr7AU"],
+ ["Zu früh aufgegeben","Plattformen testen neue Listings erst. Der Sprung von 100.000 auf 600.000 $ kam durch ein Jahr Volumen.","ToL5iUGr7AU"],
+ ["Streams mit Kundenservice","Bezahlte Communities kosten die Zeitfreiheit, die man eigentlich wollte.","ToL5iUGr7AU"],
+ ["Eigene Ideen statt kopieren","Koerner verbrachte 2 Jahre damit, ein Preismodell neu zu erfinden, und landete beim Modell der Konkurrenz.","4QLWlcneJig"],
+ ["Auf Text-SEO gesetzt","100.000 $ in Blogartikel, dann kam ChatGPT. Video ist schwerer zu kopieren.","ToL5iUGr7AU"],
+ ["Abo ohne Nachfrage gebaut","Academy mit Inhalten für 3 Monate erstellt, niemand meldete sich an. Der Kurs danach verkaufte sich.","iplk1G2D8WM"],
+ ["Glückssträhne für System gehalten","38 Gewinntage ohne Backtest, dann Konto verloren.","iVeMkgau_IY"],
+ ["Zu kurz getestet","Im 7-Tage-Test auf das falsche Konto gesetzt; das andere ging danach viral.","LlhTEttKcwQ"],
+ ["Familie als Feedback","Freunde beschönigen. Ehrliches Urteil kommt von Fremden und Verkaufszahlen.","5vZjrxE8Wlc"],
+ ["Ein Jahr Infoprodukt ohne Pause","Kurs und Buch kosteten ein Jahr ohne Privatleben. Vorher prüfen: Löst es ein Problem für eine zahlungsfähige Zielgruppe?","IJadm2aqMUE"],
+ ["Gründungen versenkt","Vor dem Erfolg mit seiner Firma scheiterten mehrere Gründungen. Fehler einplanen und weitermachen.","W9lXR8RJFf4"],
+ ["Ohne Abbruchgrenze kündigen","Nach 18 Monaten 400 £ Gewinn im Monat. Was sie trägt: 70.000 £ Puffer und die vorher festgelegte Grenze, bei 10.000 £ zurück in den Job zu gehen.","4mWyMEgA32c"],
+ ["Fünf Jahre Methoden-Hopping","YouTube-Automation, Dropshipping, Krypto, Clipping, Agentur: jedes Modell nach wenigen Monaten gewechselt, keins trug.","dQdpqW2qbIY"],
+ ["Erst verkaufen, dann selbst nutzen","Der Clipping-Bot fand keinen Kunden, half aber dem eigenen Team. Ein Werkzeug erst intern nutzen, dann anderen verkaufen.","yO5O_ngyA_8"],
+ ["Regulierung übersehen","Spielzeug-Designs brauchen eine CE-Prüfung für rund 440 € pro Einzelteil, 4.000–5.000 € vor dem ersten Verkauf.","HRZwd4ZLKTM"]
+];
+document.getElementById("mistakes").innerHTML = MIST.map(m=>`<div class="mistake"><span class="who">${S[m[2]][0]}</span><h3>${m[0]}</h3><p>${m[1]}</p>${cite([m[2]])}</div>`).join("");
+
+const SEARCH = [
+ ["„schnelles einkommen“","96","Daniel Igl (8), Dominik Lebersorger (6), Finanzfluss (4)","Ein Drittel der Titel verspricht „passiv“; viele Listen mit Remote-Jobs und Apps."],
+ ["„smartes einkommen“","85","Smart Finance (38 Treffer)","Fast nur Ausschüttungs- und Covered-Call-ETFs, dazu Krypto-„Farm“-Projekte mit Merkmalen eines Schneeballsystems."],
+ ["„online business“","97","Dominik Lebersorger, Anchu Kögl, Daniel Igl","Ein Viertel dreht sich um KI-Geschäftsmodelle; Agentur, Shop und Affiliate dominieren."],
+ ["„make money fast“","53","Mark Tilbury (7)","Nur 53 Treffer ladbar, davon 17 Spiele-Guides zu GTA 6. Der Rest: Listen mit „bis 1.000 $ am Tag“."],
+ ["„smart ways to make money“","100","Mark Tilbury (9), Dan Martell (6)","Ein Viertel KI-Themen; dazwischen wenige Finanzklassiker wie Dave Ramsey."],
+ ["„online business“ (EN)","100","wie die deutsche Suche","85 Treffer identisch mit der deutschen Suche, nur 15 neue."]
+];
+document.getElementById("searchTbl").innerHTML = SEARCH.map(s=>`<tr><td><b>${s[0]}</b></td><td class="num">${s[1]}</td><td>${s[2]}</td><td>${s[3]}</td></tr>`).join("");
+
+const INSIGHTS = [
+ ["Selbsttests enden fast immer nahe null","Vier Wochen KI-Shop bei PULS: 0 € von Fremden. 30 Tage Affiliate ohne Reichweite: 0,13 €. Fünf faule Methoden in fünf Tagen: 17 $. Wer kündigte, steht nach 18 Monaten bei 400 £ Gewinn im Monat.",["63rBStmovfk","Z3zFhXo7rNg","vBhSquOR45I","73AxVfMT91U","4mWyMEgA32c"]],
+ ["Was funktioniert, ist meist eine Dienstleistung","Webdesign und Anzeigen für lokale Firmen, Website-Wartung, Autoaufbereitung, ein Design-Abo, 1:1-Coaching. Im Bot-Test gewannen die langweiligen Aufgaben, der Trading-Bot verlor.",["qmJHBRCYjjo","kjY8snz4XEY","dInJj8Jmm8M","CMPbEk4jL6M","uWdIgftpvBI","yO5O_ngyA_8","lnM8VDPem9o"]],
+ ["Der eigentliche Markt sind die Zuschauer","Rund drei Viertel der Videos verkaufen etwas. Der KI-Experte bei PULS verdient an Kursen über KI-Geld, Shane Hummus nennt das Lehren den besten Weg. Prüfe bei jedem Tipp, wer daran verdient.",["63rBStmovfk","LtofQBY-Nws","QeKyWqLcTO0","pPpb4t2eV2M","73AxVfMT91U"]],
+ ["Reichweite schlägt jede Methode","Dieselbe Affiliate-Methode brachte ohne Publikum 0,13 €, mit 60.000 Views 125 €. rewinside verdiente 192 € an einem Tag, weil man ihn kennt.",["Z3zFhXo7rNg","1ZyRpntVifU","PPK7KsGNqVU","CzDTaLqozlQ"]],
+ ["Verkauf an Freunde ist kein Marktbeweis","Ali Abdaals Challenge-Teilnehmer verkauften zuerst an Familie und Freunde. Ihr ehrliches Fazit: Fremde zu gewinnen ist der schwierige Teil.",["CzDTaLqozlQ","OsL8dRyx-bU","j_KrWStXYDk"]],
+ ["Nebenjob-Realität in Zahlen","4,5 Mio. Menschen in Deutschland haben einen Nebenjob. Die Hälfte verdient weniger als 500 € im Monat, ein Minijob im Schnitt 376 €. In den USA liegt der Median bei 686 $.",["B8Zl7yBQ9Sw","ZP1tTeGL3YE","SmOs5498AD4","bC64z_bG0ko"]],
+ ["Langsam reich ist planbar","Ein Normalverdiener mit 25 % Sparquote kommt real auf rund 1 Mio. €. Schon 30–50 % passive Deckung der Ausgaben verändern das Leben. Hormozi: Wer schnell reich werden will, bleibt oft arm.",["r_kT1NlVamY","-PMbHvSlZ7Q","sL16tsGafcQ","jcNN0Jv1oNQ","f8ZlwJjnPnI"]]
+];
+document.getElementById("insights").innerHTML = INSIGHTS.map((l,i)=>`<div class="law"><span class="tag">Erkenntnis ${i+1}</span><h3>${l[0]}</h3><p>${l[1]}</p>${cite(l[2])}</div>`).join("");
+
+const VIDS = [
+ ["73AxVfMT91U","m","Selbsttest mit 7 Methoden: 90 % lohnen nicht, der Rest bringt 17–178 €, meist unter Mindestlohn."],
+ ["0YdBlb4cAhE","b","Krypto-Bot −10 €, 225.000 Views ohne einen Verkauf: Reichweite allein verkauft nichts."],
+ ["1ZyRpntVifU","m","192 € an einem Tag, fast alles dank Promi-Bonus. Fazit: „Sucht euch einen normalen Job.“"],
+ ["57BnIqHEQQc","m","27 Faceless-Kanäle mit 5–7 € pro 1.000 Views, präsentiert als Einstieg ins eigene Coaching."],
+ ["ZP1tTeGL3YE","m","Remote-Jobs von 8 bis 40 € pro Stunde; der „37-€-Schnitt“ mischt Microjobs und Coaching."],
+ ["r_kT1NlVamY","g","Normalverdiener mit 10 % Sparquote: 1 Mio. nominal, rund 400.000 € real. Hebel: Sparquote und Gehalt."],
+ ["TpeqC5b73Nw","m","Solider Überblick von 2018; Text-Nischenseiten sind durch KI heute entwertet."],
+ ["63rBStmovfk","g","Vier Wochen KI-Shop, Stockfotos und Kinderbuch: 0 € von Fremden. Der KI-Experte verdient an Kursen."],
+ ["B8Zl7yBQ9Sw","g","Belastbare Zahlen zu Nebenjobs in Deutschland, dazu Arbeitsrecht und Warnungen vor MLM."],
+ ["ULlYyhwoOhM","m","Community-Beispiele: Nachhilfe, Videoschnitt, Reselling. Aktive Arbeit, 200 € bis vierstellig."],
+ ["Z3zFhXo7rNg","g","30 Tage Affiliate ohne Reichweite: 0,13 €. Mit Reichweite: rund 2 € pro 1.000 Views."],
+ ["ziPNAwBEyT8","m","Shop-Grundlagen brauchbar, das Titel-Versprechen bleibt unbelegt, der Tool-Teil ist Werbung."],
+ ["OsL8dRyx-bU","m","KI-Plan für 1:1-Coaching: 100 Kaltnachrichten für 1 Kunden, 3–4 h täglich neben dem Job."],
+ ["BV_2oDMlbEQ","g","Entlarvt Pinterest-Affiliate-Mythen; funktioniert nur als Traffic für einen echten Blog."],
+ ["-PMbHvSlZ7Q","g","4-%-Regel, Inflation, Crash zur falschen Zeit, FI-Quote: die beste Rechnung zum Leben von Kapital."],
+ ["f8ZlwJjnPnI","g","Dividenden-ETFs: höhere Ausschüttung, aber weniger Gesamtrendite und nicht weniger Risiko."],
+ ["qmJHBRCYjjo","g","Webdesign, lokales SEO und Google Ads für kleine Firmen: wenig Kapitalrisiko, hohe Nachfrage."],
+ ["HRZwd4ZLKTM","m","3D-Druck-Firma: 365.000 € Umsatz, ein Drittel geht in Werbung; Spielzeug braucht CE-Prüfung."],
+ ["eOE5Ej8qeLA","b","Agentur mit „in wenigen Wochen 10.000 € im Monat“: Bestfall-Spannen ohne Belege."],
+ ["QeKyWqLcTO0","b","Komplettes Verkaufsvideo für eine TikTok-Community, mit Testimonials und künstlicher Verknappung."],
+ ["PPK7KsGNqVU","m","Der Shop steht in 12 Stunden, Verkäufe bleiben offen. Lässt KI-Fake-Bewertungen stehen (in der EU unzulässig)."],
+ ["kjY8snz4XEY","m","Website-Wartung, SOP-Vorlagen, KDP mit ehrlichen Nachteilen; endet im Coaching-Verkauf."],
+ ["OcRYyQQwuDk","b","Rechnet nur mit Ausschüttung; Covered Calls lassen den Kapitalbedarf kleiner wirken, als er ist."],
+ ["wl9hRWkqxMY","b","21 Apps für 50–100 € im Monat; bezahlt wird mit Daten, Aufmerksamkeit oder dem eigenen Anschluss."],
+ ["_KNgqxw8J6w","b","Lifestyle-Köder für Schüler; der Tipp, das Widerrufsrecht fürs Reselling auszunutzen, ist missbräuchlich."],
+ ["k-3PoOT4vOM","g","Preis nach Wert statt Kosten, schneller Cashflow, Kunden halten. Für Unternehmer, nicht für den Nebenjob."],
+ ["uWdIgftpvBI","g","Erst die eigene Zeit teuer 1:1 verkaufen, dann skalieren. Die Premium-Stufe bringt oft den Großteil des Gewinns."],
+ ["sL16tsGafcQ","g","Vier Wege zu Vermögen; Investieren ist der langsamste und setzt hohes aktives Einkommen voraus."],
+ ["2_W0tEu0csY","m","Gute Liste von Warnwörtern, aber die Beispielrechnung verwechselt Verkaufspreis mit Gewinn."],
+ ["gTZSVThRWF8","m","Beschreibt das Methoden-Hopping treffend; die „Lösung“ ist der Sponsor."],
+ ["ytAW1_g2IfI","m","7 KI-Methoden nach Lernkurve und Konkurrenz bewertet; der Avatar-Tipp ist Täuschung, der Shop-Teil Werbung."],
+ ["j_KrWStXYDk","g","Ehrlich: Kurs-Gurus verdienen am Kurs. Nachhilfe und eigene Mitschriften statt Social Media als Einstieg."],
+ ["vBhSquOR45I","g","Fünf faule Methoden in fünf Tagen: 17 $ gesamt."],
+ ["Qw2pFzgF1CM","b","Comedy: rund 100 $ an einem Tag mit Fußbildern, sofort fürs Essen ausgegeben."],
+ ["yO5O_ngyA_8","g","KI-Bots im Test: Trading verliert, langweilige Aufgaben gewinnen, vor allem im eigenen Business."],
+ ["JrFZ_ky7AzE","m","KDP-Schritte nachvollziehbar, Fokus auf echten Nutzen; KI-Massenbücher bleiben riskant."],
+ ["-pp851qDmOY","b","KI-PDFs zu ADHS und Autismus ohne Fachprüfung, Rolex als Motivation, Gewinnspiel als Köder."],
+ ["dQdpqW2qbIY","m","Fünf Jahre Fehlschläge ehrlich beziffert; die „neue“ Lösung ist eine Agentur plus Coaching."],
+ ["lnM8VDPem9o","m","Rangliste: Dienstleistungen ganz oben, Trading und Print-on-Demand ganz unten, sortiert nach dem eigenen Produkt."],
+ ["CzDTaLqozlQ","g","Bester Einstiegsplan: 1 €, dann 10 € per Vorverkauf, dann 100 €, dann 1.000 € mit einem 1:1-Angebot."],
+ ["zdshL1IcetU","m","Aufmerksamkeit als Kernfähigkeit, KI liefert Entwürfe; Honorare von 10.000–75.000 $ sind unrealistisch."],
+ ["4mWyMEgA32c","g","Job gekündigt, nach 18 Monaten 400 £ Gewinn im Monat: Margen, Admin und Puffer ehrlich erklärt."],
+ ["pPpb4t2eV2M","m","Gutes Raster mit sechs Kriterien, danach Webinar-Verkauf mit „keine Skills nötig“."],
+ ["LtofQBY-Nws","m","Automaten und Maschinen mit Ausreißer-Beispielen; offen gesagt: Lehren bringt mehr als das Geschäft selbst."],
+ ["jcNN0Jv1oNQ","m","Satire über Reichtumswege; planbar ist nur der sparsame, langsame Weg."],
+ ["SmOs5498AD4","g","KI-Training als Freelancer (laut Video 40–100 $ pro Stunde) mit Prüffragen für seriöse Plattformen."],
+ ["dInJj8Jmm8M","g","Autoaufbereitung, Hochdruckreinigung, Gartenpflege: schnell gestartet, gute Marge, harte Arbeit."],
+ ["zndqOgidKYQ","m","Print-on-Demand mit kostenlosem TikTok-Traffic; empfiehlt unmarkierte KI-Models, zeigt kein Ergebnis."],
+ ["CMPbEk4jL6M","g","Neun Solo-Modelle mit klarer Entscheidungsregel nach Kapital und Fähigkeit; die Beispiele sind Ausreißer."],
+ ["bC64z_bG0ko","g","„Es gibt keine einfachen Side Hustles“: Teilzeitjob, Nachhilfe, Assistenz, passend zu den eigenen Skills."]
+];
+const VJ = {g:["good","brauchbar"],m:["mixed","mit Vorsicht"],b:["bad","Finger weg"]};
+let vFilter = "alle";
+const vCount = k => VIDS.filter(v=>v[1]===k).length;
+document.getElementById("vidChips").innerHTML = [["alle",`Alle ${VIDS.length}`],["g",`brauchbar ${vCount("g")}`],["m",`mit Vorsicht ${vCount("m")}`],["b",`Finger weg ${vCount("b")}`]].map(([k,l])=>`<button type="button" class="chip" data-v="${k}" aria-pressed="${k==='alle'}">${l}</button>`).join("");
+function renderVids(){
+  const order={g:0,m:1,b:2};
+  document.getElementById("vidTbl").innerHTML = VIDS.filter(v=>vFilter==="alle"||v[1]===vFilter).sort((a,b)=>order[a[1]]-order[b[1]]).map(v=>`<tr><td><a href="${yt(v[0])}" target="_blank" rel="noopener"><b>${esc(S[v[0]][0])}</b></a><br><span class="small">${esc(S[v[0]][1])}${S[v[0]][2]?" · "+esc(S[v[0]][2]):""}</span></td><td>${esc(v[2])}</td><td><span class="verdict v-${VJ[v[1]][0]}">${VJ[v[1]][1]}</span></td></tr>`).join("");
+}
+document.getElementById("vidChips").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;vFilter=b.dataset.v;document.querySelectorAll("#vidChips button").forEach(x=>x.setAttribute("aria-pressed",x===b));renderVids();});
+renderVids();
+
+const PLAN = [
+ ["Woche 1–2 · Fundament",["Ausgaben der letzten 3 Monate auswerten","Zwei Fixkosten senken oder kündigen","Notgroschen-Ziel festlegen und Tagesgeld einrichten","Depot eröffnen und ETF-Sparplan starten","Freistellungsauftrag beim Broker stellen"]],
+ ["Woche 3–4 · Richtung",["10 Probleme notieren, die du gelöst hast oder bei denen man dich fragt","Top 3 durch den Ideen-Check schicken","Ein Modell wählen und die anderen bewusst parken","Konkurrenz studieren: 5 erfolgreiche Anbieter und was sie gleich machen"]],
+ ["Monat 2 · Nachfrage testen",["Mit 5 Leuten aus der Zielgruppe sprechen (keine Freunde)","Billigsten Test machen: Vorverkauf, Live-Version oder erste Listings","Erste Version bauen (Workbook, 10 Videos oder 5 Listings)","Tabelle für Zahlen anlegen: Views, Klicks, Verkäufe"]],
+ ["Monat 3 · Rhythmus",["Fester Wochenrhythmus fürs Veröffentlichen","Gewerbe anmelden, sobald Einnahmen kommen","Impressum, Datenschutz und Kennzeichnung prüfen","Nach 90 Tagen auswerten, aber nicht abbrechen, bevor die Plattform gerankt hat"]]
+];
+let checks = {};
+const KEY="pe-playbook-v1";
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||"{}");checks=d.checks||{};if(d.cat)activeCat=d.cat;if(d.sort)document.getElementById("sortSel").value=d.sort;if(d.low)document.getElementById("lowCap").checked=true;}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({checks,cat:activeCat,sort:document.getElementById("sortSel").value,low:document.getElementById("lowCap").checked}));}catch(e){}}
+function renderPlan(){
+  document.getElementById("planGrid").innerHTML = PLAN.map((ph,i)=>`<div class="phase"><h3>${ph[0]}</h3>${ph[1].map((t,j)=>{const id=`c${i}-${j}`;return `<label for="${id}"><input type="checkbox" id="${id}" ${checks[id]?"checked":""}><span>${t}</span></label>`}).join("")}</div>`).join("");
+  updateProgress();
+}
+function updateProgress(){const total=PLAN.reduce((a,p)=>a+p[1].length,0);const done=Object.values(checks).filter(Boolean).length;document.getElementById("pCount").textContent=`${done} / ${total}`;document.getElementById("pBar").style.width=(done/total*100)+"%";}
+document.getElementById("planGrid").addEventListener("change",e=>{if(e.target.type!=="checkbox")return;checks[e.target.id]=e.target.checked;updateProgress();save();});
+document.getElementById("pReset").addEventListener("click",()=>{checks={};renderPlan();save();});
+
+const eur = v => isFinite(v) ? Math.round(v).toLocaleString("de-DE")+" €" : "–";
+const eur2 = v => isFinite(v) ? v.toLocaleString("de-DE",{minimumFractionDigits:2,maximumFractionDigits:2})+" €" : "–";
+function calc(){
+  const t=+document.getElementById("cTarget").value||0, rate=+document.getElementById("cRate").value||0, start=+document.getElementById("cStart").value||0, ret=(+document.getElementById("cRet").value||0)/100;
+  const wd=(+document.getElementById("cWd").value||4)/100; const need=t*12/wd, needDiv=t*12/(0.03*(1-0.26375));
+  document.getElementById("oNeed4").textContent=eur(need);
+  document.getElementById("oNeedDiv").textContent=eur(needDiv);
+  let y="–";
+  if(start>=need) y="schon erreicht";
+  else { const mr=ret/12; let v=start, m=0; while(v<need && m<1200){v=v*(1+mr)+rate;m++;} y = m>=1200 ? "über 100 Jahre" : (Math.floor(m/12)+" J. "+(m%12)+" Mon."); }
+  document.getElementById("oYears").textContent=y;
+}
+["cTarget","cRate","cStart","cRet","cWd"].forEach(id=>document.getElementById(id).addEventListener("input",calc));
+function konsum(){const a=+document.getElementById("kAmt").value||0;document.getElementById("kOut").textContent=eur2(a*0.04/12)+" / Monat";const fv=a*Math.pow(1.06,20);document.getElementById("kFv").textContent=eur(fv);document.getElementById("kFvM").textContent=eur2(fv*0.04/12);}
+document.getElementById("kAmt").addEventListener("input",konsum);
+
+const TQ=["Ersetzt KI diese Arbeit gerade?","Schrumpft der Markt oder veraltet er?","Ist Verlieren leichter als Gewinnen?"];
+const tAns=[false,false,false];
+const CQ=[["Konkurrenz","1 = überfüllt, 5 = Platz frei",3],["Langlebigkeit","Gibt es das in 5 Jahren noch?",4],["Lernaufwand","1 = sehr schwer, 5 = schnell gelernt",4],["Autonomie","Läuft es ohne dich?",4],["Wiederkehrend","Kommt das Geld wieder?",3]];
+const cVal=CQ.map(c=>c[2]);
+document.getElementById("trashQs").innerHTML = `<span class="eyebrow">Trash-Filter</span>`+TQ.map((q,i)=>`<div class="field"><span>${q}</span><div class="yn" data-i="${i}"><button type="button" class="y" aria-pressed="false">Ja</button><button type="button" class="n" aria-pressed="true">Nein</button></div></div>`).join("");
+document.getElementById("clearQs").innerHTML = `<span class="eyebrow">CLEAR (je 1–5)</span>`+CQ.map((c,i)=>`<div class="field"><label for="cl${i}">${c[0]} <span class="small">· ${c[1]}</span></label><span style="display:flex;gap:8px;align-items:center"><input type="range" id="cl${i}" min="1" max="5" value="${c[2]}"><b class="num" id="clv${i}">${c[2]}</b></span></div>`).join("");
+document.getElementById("trashQs").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const g=b.parentElement,i=+g.dataset.i;tAns[i]=b.classList.contains("y");g.querySelector(".y").setAttribute("aria-pressed",tAns[i]);g.querySelector(".n").setAttribute("aria-pressed",!tAns[i]);idea();});
+CQ.forEach((c,i)=>document.getElementById("cl"+i).addEventListener("input",e=>{cVal[i]=+e.target.value;document.getElementById("clv"+i).textContent=e.target.value;idea();}));
+document.getElementById("iName").addEventListener("input",idea);
+function idea(){
+  const el=document.getElementById("iResult"), name=esc(document.getElementById("iName").value.trim()||"Deine Idee");
+  if(tAns.some(Boolean)){el.className="result r-bad";el.innerHTML=`<b>Durchgefallen: ${name}</b>Mindestens eine Trash-Frage mit Ja beantwortet. Nach Dan Martell: weitergehen, bevor du Zeit investierst.`;return;}
+  const s=cVal.reduce((a,b)=>a+b,0);
+  const cls=s>=19?"r-good":s>=14?"r-mixed":"r-bad";
+  const txt=s>=19?"Starker Kandidat. Jetzt die Nachfrage billig testen.":s>=14?"Machbar, aber mit klarer Schwäche. Prüfe den niedrigsten Wert.":"Schwach. Vergleiche mit einem anderen Modell aus der Liste.";
+  const weakest=CQ[cVal.indexOf(Math.min(...cVal))][0];
+  el.className="result "+cls;el.innerHTML=`<b>${s} / 25 · ${name}</b>${txt} Schwächster Punkt: ${weakest}. Zum Vergleich bei Iman Gadzhi: digitale Produkte 20, KI-Telefonagenten 16, KI-Websites 15, Clipping 14, KI-UGC 12.`;
+}
+
+document.getElementById("sources").innerHTML =
+  Object.entries(S).map(([id,s])=>`<a class="item" href="${yt(id)}" target="_blank" rel="noopener"><span class="st done">ausgewertet</span><span class="t">${esc(s[1])}</span><span class="m">${esc(s[0])}${s[2]?" · "+esc(s[2]):""}</span></a>`).join("") +
+  PENDING.map(p=>`<a class="item" href="${yt(p[0])}" target="_blank" rel="noopener"><span class="st wait">ausstehend</span><span class="t">${esc(p[2])}</span><span class="m">${esc(p[1])}</span></a>`).join("");
+
+load();
+chipsEl.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.cat===activeCat));
+renderModels(); renderPlan(); calc(); konsum(); idea();
+</script>
+</body>
+</html>
