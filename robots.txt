@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://playbook-passives-einkommen.de/sitemap.xml
