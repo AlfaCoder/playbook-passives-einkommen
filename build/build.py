@@ -132,6 +132,9 @@ def render_page(p):
         {"@type": "ListItem", "position": 2, "name": "Themen", "item": DOMAIN + "/themen/"},
         {"@type": "ListItem", "position": 3, "name": p["h1"], "item": url}]})
     body = yt_links(p["body"])
+    if p.get("quellen"):
+        body += '<h2>Offizielle Quellen</h2><p class="src">Rechtliche Angaben und Grenzwerte haben wir am 23. November 2026 an diesen Stellen geprüft:</p><ul class="src">' + "".join(
+            f'<li><a href="{esc(u)}" rel="noopener">{esc(t)}</a></li>' for t, u in p["quellen"]) + "</ul>"
     out = head(p["title"], p["description"], url, og, extra) + nav("") + f'''
 <main class="read">
 <p class="crumbs"><a href="/">Playbook</a> / <a href="/themen/">Themen</a> / {esc(p["short_crumb"] if "short_crumb" in p else p["h1"])}</p>
