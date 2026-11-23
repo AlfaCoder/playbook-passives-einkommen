@@ -44,7 +44,8 @@ nav.top a.cta:hover{background:var(--accent);color:var(--accent-ink);opacity:.9}
 article h1{font-size:clamp(2rem,5.5vw,3.2rem);font-weight:800;letter-spacing:-.02em;margin:14px 0 12px}
 article .lede{font-size:1.2rem;color:var(--ink);margin:0 0 8px}
 article .meta{font-size:.85rem;color:var(--muted);margin-bottom:28px}
-article h2{font-size:clamp(1.4rem,3.4vw,1.85rem);font-weight:700;margin:44px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
+article h2{font-size:clamp(1.4rem,3.4vw,1.85rem);font-weight:700;margin:44px 0 12px;padding-top:20px;border-top:1px solid var(--line);color:var(--accent);position:relative}
+article h2::before{content:"";position:absolute;top:-2px;left:0;width:48px;height:3px;border-radius:2px;background:var(--accent)}
 article h3{font-size:1.15rem;margin:28px 0 8px}
 article p{margin:0 0 14px}
 article ul,article ol{margin:0 0 16px;padding-left:1.3em}

@@ -124,7 +124,9 @@ def head(title, desc, url, og_img, extra_ld=None, robots=None):
 <link rel="stylesheet" href="/fonts.css">
 <link rel="stylesheet" href="/assets/page.css">
 <link rel="stylesheet" href="/assets/toc.css">
+<link rel="stylesheet" href="/assets/charts.css">
 <script src="/assets/toc.js" defer></script>
+<script src="/assets/charts.js" defer></script>
 {ld_html}</head>
 <body>
 '''

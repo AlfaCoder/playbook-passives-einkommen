@@ -27,6 +27,7 @@ const need=t*12/0.035;let v=s,m=0;while(v<need&&m<1200){v=v*(1+y/12)+r;m++;}
 $("oy").textContent=s>=need?"schon erreicht":m>=1200?"über 100 Jahre":Math.floor(m/12)+" J. "+(m%12)+" Mon.";}
 ["t","r","s","y"].forEach(i=>$(i).addEventListener("input",c));c();})();
 </script>
+<figure class="viz" data-viz="sparplan" data-inputs="t,r,s,y" data-title="So wächst dein Depot bis zum Ziel (3,5 % Entnahme)" data-sub="Rechnet mit deinen Werten aus dem Rechner. Fahre über das Diagramm für die Werte pro Jahr."></figure>
 
 <h2>So rechnen die Videos</h2>
 <p>Die seriösen Finanzkanäle kommen alle auf dieselbe Grundformel: Du teilst das, was du im Jahr brauchst, durch eine sichere Entnahmerate. Unterschiedlich ist nur, wie vorsichtig sie sind.</p>

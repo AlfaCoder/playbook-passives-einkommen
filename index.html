@@ -31,6 +31,7 @@
 </script>
 <link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="/assets/toc.css">
+<link rel="stylesheet" href="/assets/charts.css">
 <style>
 /* Layout: Kontobuch-Ästhetik. Schmale Lesespalte, Modelle als Karteikarten-Raster, Zahlen in Mono wie in einer Bilanz. */
 :root{
@@ -59,7 +60,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .wrap{max-width:1080px;margin:0 auto}
 .read{max-width:68ch}
 h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
-h2{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:700;letter-spacing:-.01em;color:var(--accent)}
+.sec-head .eyebrow{display:flex;align-items:center;gap:8px}
+.sec-head .eyebrow::before{content:"";width:18px;height:3px;border-radius:2px;background:var(--accent)}
 h3{font-size:1.15rem;font-weight:700}
 p{margin:0}
 .eyebrow{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
@@ -335,6 +338,7 @@ nav.top a.navcta:hover{background:var(--accent);color:var(--surface);opacity:.9}
     <div class="rung" style="padding-bottom:0"><span class="step">Stufe 4 · Stapeln</span><h3>Den nächsten Stream erst, wenn der erste trägt</h3>
       <p>Mehrere Quellen gleichzeitig aufzubauen war der häufigste Fehler der erfahrenen Creator. Einer nach dem anderen, und der stärkste bekommt die meiste Pflege.</p></div>
   </div>
+  <figure class="viz" data-viz="fruehstart" data-rate="300" data-ret="6" data-title="Warum Stufe 3 früh starten sollte: 300 € im Monat bis 67" data-sub="Derselbe Sparplan, nur zehn Jahre früher oder später begonnen. Der Zinseszins macht den Unterschied."></figure>
 </section>
 
 <section id="modelle">
@@ -407,6 +411,7 @@ nav.top a.navcta:hover{background:var(--accent);color:var(--surface);opacity:.9}
         <p class="small">Faustregel aus dem Video: 100 € investiert ≈ 0,33 € pro Monat, lebenslang und inflationsangepasst.</p>
       </div>
     </div>
+    <figure class="viz" style="grid-column:1/-1;margin:0" data-viz="sparplan" data-inputs="cTarget,cRate,cStart,cRet,cWd" data-title="So wächst dein Depot bis zum Ziel" data-sub="Rechnet mit den Werten aus dem Rechner oben. Fahre über das Diagramm für die Werte pro Jahr."></figure>
     <div class="tool" style="grid-column:1/-1">
       <h3>Ideen-Check: Trash-Filter + CLEAR-Score</h3>
       <p class="small">Kombiniert Dan Martells Trash-Filter mit Iman Gadzhis CLEAR-Methode. Vorausgefüllt mit einem Beispiel, trage deine eigene Idee ein.</p>
@@ -1084,5 +1089,6 @@ chipsEl.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.da
 renderModels(); renderPlan(); calc(); konsum(); idea();
 </script>
 <script src="/assets/toc.js" defer></script>
+<script src="/assets/charts.js" defer></script>
 </body>
 </html>
