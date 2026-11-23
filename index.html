@@ -108,6 +108,17 @@ nav.top a.brand .bt small{font-family:var(--f-mono);font-size:.62rem;letter-spac
 .cite a{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-family:var(--f-mono);text-decoration:none;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 9px 2px 6px}
 .cite a svg{width:9px;height:9px;fill:#E5483B;flex:none}
 .cite a:hover{color:var(--accent);border-color:var(--accent)}
+.cite:not(.open) a.x{display:none}
+.cite-more{font:inherit;font-size:.72rem;color:var(--accent);background:none;border:1px dashed var(--line);border-radius:999px;padding:2px 9px;cursor:pointer}
+.cite-more:hover{border-color:var(--accent)}
+.src-more summary{list-style:none;cursor:pointer;padding:12px 0;color:var(--accent);font-weight:600;font-size:.92rem;border-bottom:1px solid var(--line)}
+.src-more summary::-webkit-details-marker{display:none}
+.src-more summary::before{content:"▸ ";display:inline-block;transition:transform .15s}
+.src-more[open] summary::before{transform:rotate(90deg)}
+.src-more summary span+span,.src-more[open] summary span:first-child{display:none}
+.src-more[open] summary span+span{display:inline}
+.src-more[open] summary{border-bottom:1px solid var(--line)}
+.src-more>a.item{display:grid}
 
 /* Ladder */
 .ladder{display:grid;gap:0;border-left:2px solid var(--accent);margin-left:10px}
@@ -659,7 +670,8 @@ const SHORT = {"M5y69v1RbU0":"Abdaal","4QLWlcneJig":"Koerner/DOAC","5vZjrxE8Wlc"
 Object.assign(SHORT,{"73AxVfMT91U":"Platzer·Faul","0YdBlb4cAhE":"Platzer·Test","1ZyRpntVifU":"rewinside","57BnIqHEQQc":"Röber","ZP1tTeGL3YE":"Röber·Jobs","r_kT1NlVamY":"Finanzfluss·Mio","TpeqC5b73Nw":"Finanzfluss·10","63rBStmovfk":"PULS","B8Zl7yBQ9Sw":"ARD","ULlYyhwoOhM":"Lebersorger·Community","Z3zFhXo7rNg":"Lebersorger·Affiliate","ziPNAwBEyT8":"Lebersorger·Shop","OsL8dRyx-bU":"Kasper·KI","BV_2oDMlbEQ":"Skulte","-PMbHvSlZ7Q":"RenditeRebels","f8ZlwJjnPnI":"Finanztip","qmJHBRCYjjo":"Hildesheim","HRZwd4ZLKTM":"OwnGalaxy","eOE5Ej8qeLA":"Weiß","QeKyWqLcTO0":"Klauser","PPK7KsGNqVU":"Steenfatt·12h","kjY8snz4XEY":"Dollwet","OcRYyQQwuDk":"SmartFinance","wl9hRWkqxMY":"Worch","_KNgqxw8J6w":"Jakob&Max","k-3PoOT4vOM":"Hormozi","uWdIgftpvBI":"Hormozi·2026","sL16tsGafcQ":"Hormozi·4Wege","2_W0tEu0csY":"RiseAbove","gTZSVThRWF8":"Tilbury·Easy","ytAW1_g2IfI":"Tilbury·Lazy","j_KrWStXYDk":"fayefilms","vBhSquOR45I":"Daryani","Qw2pFzgF1CM":"Kress","yO5O_ngyA_8":"Sanchez","JrFZ_ky7AzE":"Dollwet·Claude","-pp851qDmOY":"Leon","dQdpqW2qbIY":"Torutev","lnM8VDPem9o":"Morgan","CzDTaLqozlQ":"Abdaal·1K","zdshL1IcetU":"Koe","4mWyMEgA32c":"collins","pPpb4t2eV2M":"Gadzhi·Webinar","LtofQBY-Nws":"Hummus·Maschinen","jcNN0Jv1oNQ":"EverythingProf","SmOs5498AD4":"Dines","dInJj8Jmm8M":"upMETHOD","zndqOgidKYQ":"Annie","CMPbEk4jL6M":"Chou","bC64z_bG0ko":"DinaLu"});
 const short = id => SHORT[id] || id;
 const yt = id => "https://www.youtube.com/watch?v=" + id;
-const cite = (ids,lbl="Gesagt von") => `<div class="cite">${lbl?`<span class="cite-l">${lbl}</span>`:""}${ids.map(i=>`<a href="${yt(i)}" target="_blank" rel="noopener" title="${S[i]?'YouTube · '+S[i][0]+': '+S[i][1].replace(/"/g,'&quot;'):i}" aria-label="${S[i]?'Video von '+S[i][0].replace(/"/g,'&quot;')+' auf YouTube öffnen':'Video auf YouTube öffnen'}"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2l5 3-5 3z"/></svg>${short(i)}</a>`).join("")}</div>`;
+const cite = (ids,lbl="Gesagt von") => `<div class="cite">${lbl?`<span class="cite-l">${lbl}</span>`:""}${ids.map((i,k)=>`<a${k>=3?' class="x"':''} href="${yt(i)}" target="_blank" rel="noopener" title="${S[i]?'YouTube · '+S[i][0]+': '+S[i][1].replace(/"/g,'&quot;'):i}" aria-label="${S[i]?'Video von '+S[i][0].replace(/"/g,'&quot;')+' auf YouTube öffnen':'Video auf YouTube öffnen'}"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2l5 3-5 3z"/></svg>${short(i)}</a>`).join("")}${ids.length>3?`<button type="button" class="cite-more" aria-expanded="false">+${ids.length-3} weitere</button>`:""}</div>`;
+document.addEventListener("click",e=>{const b=e.target.closest(".cite-more");if(!b)return;const o=b.parentElement.classList.toggle("open");b.setAttribute("aria-expanded",o);b.textContent=o?"weniger":"+"+b.parentElement.querySelectorAll("a.x").length+" weitere"});
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 
 const LAWS = [
@@ -1097,9 +1109,12 @@ function idea(){
   el.className="result "+cls;el.innerHTML=`<b>${s} / 25 · ${name}</b>${txt} Schwächster Punkt: ${weakest}. Zum Vergleich bei Iman Gadzhi: digitale Produkte 20, KI-Telefonagenten 16, KI-Websites 15, Clipping 14, KI-UGC 12.`;
 }
 
-document.getElementById("sources").innerHTML =
-  Object.entries(S).map(([id,s])=>`<a class="item" href="${yt(id)}" target="_blank" rel="noopener"><span class="st done">ausgewertet</span><span class="t">${esc(s[1])}</span><span class="m">${esc(s[0])}${s[2]?" · "+esc(s[2]):""}</span></a>`).join("") +
-  PENDING.map(p=>`<a class="item" href="${yt(p[0])}" target="_blank" rel="noopener"><span class="st wait">ausstehend</span><span class="t">${esc(p[2])}</span><span class="m">${esc(p[1])}</span></a>`).join("");
+{const items =
+  Object.entries(S).map(([id,s])=>`<a class="item" href="${yt(id)}" target="_blank" rel="noopener"><span class="st done">ausgewertet</span><span class="t">${esc(s[1])}</span><span class="m">${esc(s[0])}${s[2]?" · "+esc(s[2]):""}</span></a>`).concat(
+  PENDING.map(p=>`<a class="item" href="${yt(p[0])}" target="_blank" rel="noopener"><span class="st wait">ausstehend</span><span class="t">${esc(p[2])}</span><span class="m">${esc(p[1])}</span></a>`));
+const all=items,N=6;
+document.getElementById("sources").innerHTML = all.slice(0,N).join("") +
+  (all.length>N?`<details class="src-more"><summary><span>Alle ${all.length} Quellen anzeigen</span><span>Weniger anzeigen</span></summary>${all.slice(N).join("")}</details>`:"");}
 
 load();
 chipsEl.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.cat===activeCat));
