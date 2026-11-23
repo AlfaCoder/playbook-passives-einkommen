@@ -280,6 +280,17 @@ def render_404():
 '''
     wr(os.path.join(ROOT, "404.html"), out)
 
+# --- Themenliste im Playbook (index.html) aktualisieren ---
+def update_index_topics():
+    p = os.path.join(ROOT, "index.html")
+    h = rd(p)
+    cards = "".join(f'<a href="/{x["slug"]}/"><b>{esc(x["h1"])}</b><span>{esc(x["short"])}</span></a>' for x in PAGES)
+    cards += '<a href="/buecher/"><b>Bücher aus den Videos</b><span>Was die Creator zu Geld, Business und Verkauf empfehlen.</span></a>'
+    h2 = re.sub(r"<!--TOPICS-->.*?<!--/TOPICS-->", lambda m: "<!--TOPICS-->" + cards + "<!--/TOPICS-->", h, flags=re.S)
+    if h2 == h and "<!--TOPICS-->" not in h:
+        sys.exit("TOPICS-Marker fehlt in index.html")
+    wr(p, h2)
+
 def sitemap():
     urls = ["/", "/themen/", "/buecher/", "/arbeitsheft/"] + [f'/{p["slug"]}/' for p in PAGES]
     body = "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls)
@@ -288,7 +299,7 @@ def sitemap():
 if __name__ == "__main__":
     for p in PAGES:
         render_page(p)
-    render_hub(); render_books(); render_workbook_page(); render_404(); sitemap()
+    render_hub(); render_books(); render_workbook_page(); render_404(); update_index_topics(); sitemap()
     if "--no-images" not in sys.argv:
         for p in PAGES:
             og_image(os.path.join(ROOT, p["slug"], "og.png"), "Playbook · " + p.get("og_eyebrow", "Realitätscheck"), p["og_title"], p["og_sub"])
