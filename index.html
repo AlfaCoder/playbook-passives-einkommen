@@ -220,6 +220,17 @@ td.num{white-space:nowrap}
 footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 footer a{color:var(--accent)}
+nav.top details.toc{flex:none;position:static}
+nav.top details.toc summary{list-style:none;cursor:pointer;color:var(--muted);font-size:.85rem;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+nav.top details.toc summary::-webkit-details-marker{display:none}
+nav.top details.toc summary::after{content:" ▾"}
+nav.top details.toc[open] summary,nav.top details.toc summary:hover{background:var(--sunk);color:var(--ink)}
+nav.top .tocpanel{position:fixed;top:52px;right:max(16px,calc((100vw - 1080px)/2));z-index:20;display:grid;min-width:230px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:6px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+nav.top .tocpanel a{border-radius:6px;padding:8px 10px}
+@media (min-width:900px){nav.top details.toc{margin-left:auto}}
+@media (max-width:899px){nav.top .wrap>*{order:3}nav.top a.brand{order:0}nav.top details.toc{order:1}nav.top a.navcta{order:2}
+nav.top::after{content:"";position:absolute;top:0;bottom:0;right:0;width:32px;pointer-events:none;background:linear-gradient(to right,transparent,var(--bg))}
+nav.top .tocpanel{right:16px;left:16px;min-width:0}}
 nav.top a.navcta{background:var(--accent);color:var(--surface)}
 nav.top a.navcta:hover{background:var(--accent);color:var(--surface);opacity:.9}
 .herocta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
@@ -242,17 +253,26 @@ nav.top a.navcta:hover{background:var(--accent);color:var(--surface);opacity:.9}
 <nav class="top" aria-label="Abschnitte"><div class="wrap">
   <a class="brand" href="#start">Playbook</a>
   <a class="navcta" href="/arbeitsheft/">Gratis-Arbeitsheft</a>
-  <a href="#gesetze">Leitprinzipien</a>
-  <a href="#leiter">Stufenplan</a>
   <a href="#modelle">Modelle</a>
-  <a href="#werkzeuge">Rechner &amp; Check</a>
+  <a href="#werkzeuge">Rechner</a>
   <a href="#realitaet">Realitätscheck</a>
-  <a href="#gegenprobe">Gegenprobe</a>
   <a href="#plan">90-Tage-Plan</a>
-  <a href="#deutschland">Deutschland</a>
-  <a href="#quellen">Quellen</a>
   <a href="/themen/">Themen</a>
   <a href="/buecher/">Bücher</a>
+  <details class="toc"><summary>Inhalt</summary>
+    <div class="tocpanel">
+      <a href="#gesetze">Leitprinzipien</a>
+      <a href="#leiter">Stufenplan</a>
+      <a href="#modelle">Modelle</a>
+      <a href="#werkzeuge">Rechner &amp; Ideen-Check</a>
+      <a href="#realitaet">Realitätscheck</a>
+      <a href="#gegenprobe">Gegenprobe</a>
+      <a href="#plan">90-Tage-Plan</a>
+      <a href="#deutschland">Deutschland</a>
+      <a href="#themen">Themen im Detail</a>
+      <a href="#quellen">Quellen</a>
+    </div>
+  </details>
 </div></nav>
 
 <main class="wrap">
@@ -1051,6 +1071,7 @@ document.getElementById("sources").innerHTML =
   Object.entries(S).map(([id,s])=>`<a class="item" href="${yt(id)}" target="_blank" rel="noopener"><span class="st done">ausgewertet</span><span class="t">${esc(s[1])}</span><span class="m">${esc(s[0])}${s[2]?" · "+esc(s[2]):""}</span></a>`).join("") +
   PENDING.map(p=>`<a class="item" href="${yt(p[0])}" target="_blank" rel="noopener"><span class="st wait">ausstehend</span><span class="t">${esc(p[2])}</span><span class="m">${esc(p[1])}</span></a>`).join("");
 
+document.querySelectorAll("nav.top .tocpanel a").forEach(x=>x.addEventListener("click",()=>x.closest("details").removeAttribute("open")));
 load();
 chipsEl.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.cat===activeCat));
 renderModels(); renderPlan(); calc(); konsum(); idea();
