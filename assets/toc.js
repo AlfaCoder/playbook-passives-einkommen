@@ -1,6 +1,22 @@
 /* Mitscrollendes Inhaltsverzeichnis.
    Playbook (index.html): nutzt die Links aus dem vorhandenen Inhalt-Menü.
    Unterseiten: baut das Verzeichnis aus den h2-Überschriften des Artikels. */
+/* Burger-Menü */
+(function () {
+  const btn = document.querySelector("nav.top .burger"), menu = document.getElementById("mmenu");
+  if (!btn || !menu) return;
+  const set = open => {
+    btn.setAttribute("aria-expanded", open); btn.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
+    menu.hidden = !open;
+    if (open) { const d = document.querySelector("nav.top details.toc[open]"); if (d) d.removeAttribute("open"); }
+  };
+  btn.addEventListener("click", e => { e.stopPropagation(); set(menu.hidden); });
+  menu.addEventListener("click", e => { if (e.target.closest("a")) set(false); });
+  document.addEventListener("click", e => { if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) set(false); });
+  addEventListener("keydown", e => { if (e.key === "Escape" && !menu.hidden) { set(false); btn.focus(); } });
+  addEventListener("resize", () => { if (innerWidth > 899 && !menu.hidden) set(false); });
+})();
+
 /* Knopf „Nach oben“ – auf allen Seiten, erscheint nach etwas Scrollen. */
 (function () {
   const b = document.createElement("button");

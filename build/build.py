@@ -57,7 +57,24 @@ NAV = [("/themen/", "Themen"), ("/rechner-kapital-passives-einkommen/", "Rechner
 
 def nav(current):
     items = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h == current else ""}>{t}</a>' for h, t in NAV)
-    return f'<nav class="top" aria-label="Navigation"><div class="wrap"><a class="brand" href="/" aria-label="Playbook Passives Einkommen, Startseite"><svg class=\"logo\" viewBox=\"0 0 64 64\" width=\"30\" height=\"30\" aria-hidden=\"true\"><rect width=\"64\" height=\"64\" rx=\"14\" fill=\"#0E6A4E\"/><path d=\"M16 44h8V32h-8z\" fill=\"#fff\" opacity=\".55\"/><path d=\"M28 44h8V24h-8z\" fill=\"#fff\" opacity=\".8\"/><path d=\"M40 44h8V16h-8z\" fill=\"#fff\"/></svg><span class=\"bt\"><b>Playbook</b><small>Passives Einkommen</small></span></a>{items}<a class="cta" href="/arbeitsheft/">Gratis-Arbeitsheft</a></div></nav>'
+    return f'<nav class="top" aria-label="Navigation"><div class="wrap"><a class="brand" href="/" aria-label="Playbook Passives Einkommen, Startseite"><svg class=\"logo\" viewBox=\"0 0 64 64\" width=\"30\" height=\"30\" aria-hidden=\"true\"><rect width=\"64\" height=\"64\" rx=\"14\" fill=\"#0E6A4E\"/><path d=\"M16 44h8V32h-8z\" fill=\"#fff\" opacity=\".55\"/><path d=\"M28 44h8V24h-8z\" fill=\"#fff\" opacity=\".8\"/><path d=\"M40 44h8V16h-8z\" fill=\"#fff\"/></svg><span class=\"bt\"><b>Playbook</b><small>Passives Einkommen</small></span></a>{items}<a class="cta" href="/arbeitsheft/">Gratis-Arbeitsheft</a>{mmenu(current)}</div></nav>'
+
+def mmenu(current=""):
+    """Burger-Menü für kleine Bildschirme: alle Unterseiten auf einen Blick."""
+    def a(href, text, cls=""):
+        cur = ' aria-current="page"' if href == current else ""
+        c = f' class="{cls}"' if cls else ""
+        return f'<a href="{href}"{c}{cur}>{esc(text)}</a>'
+    topics = "".join(a(f'/{x["slug"]}/', x["h1"]) for x in PAGES)
+    return ('<button class="burger" type="button" aria-expanded="false" aria-controls="mmenu" aria-label="Menü öffnen">'
+            '<span></span><span></span><span></span></button>'
+            '<div class="mmenu" id="mmenu" hidden>'
+            + a("/arbeitsheft/", "Gratis-Arbeitsheft (PDF)", "mcta")
+            + '<p class="mh">Übersicht</p>' + a("/", "Playbook (Startseite)") + a("/themen/", "Alle Themen")
+            + a("/rechner-kapital-passives-einkommen/", "Rechner: Kapitalbedarf") + a("/buecher/", "Bücher aus den Videos")
+            + '<p class="mh">Themen</p>' + topics
+            + '<p class="mh">Rechtliches</p><div class="mlegal">' + a("/impressum.html", "Impressum") + a("/datenschutz.html", "Datenschutz") + '</div>'
+            + '</div>')
 
 FOOTER = ('<footer class="read">Zusammenfassung und Einordnung öffentlich zugänglicher YouTube-Videos. Keine Anlage-, Steuer- oder Rechtsberatung. '
           'Zahlen der Creator sind nicht unabhängig geprüft.'
@@ -137,7 +154,7 @@ def render_page(p):
     if p.get("quellen"):
         body += '<h2>Offizielle Quellen</h2><p class="src">Rechtliche Angaben und Grenzwerte haben wir am 23. November 2026 an diesen Stellen geprüft:</p><ul class="src">' + "".join(
             f'<li><a href="{esc(u)}" rel="noopener">{esc(t)}</a></li>' for t, u in p["quellen"]) + "</ul>"
-    out = head(p["title"], p["description"], url, og, extra) + nav("") + f'''
+    out = head(p["title"], p["description"], url, og, extra) + nav(f'/{p["slug"]}/') + f'''
 <main class="read">
 <p class="crumbs"><a href="/">Playbook</a> / <a href="/themen/">Themen</a> / {esc(p["short_crumb"] if "short_crumb" in p else p["h1"])}</p>
 <article>
@@ -227,7 +244,7 @@ def render_workbook_page():
     body = rd(os.path.join(B, "arbeitsheft-seite.html"))
     out = head("Kostenloses Arbeitsheft: 90-Tage-Startplan für passives Einkommen",
                "Gratis-PDF zum Ausdrucken: Ausgaben-Check, Freiheitszahl, Ideen-Test, Nachfrage-Test und 13-Wochen-Tracker. Ohne Anmeldung, ohne E-Mail.",
-               url, url + "og.png") + nav("") + f'''
+               url, url + "og.png") + nav("/arbeitsheft/") + f'''
 <main class="read">
 <p class="crumbs"><a href="/">Playbook</a> / Arbeitsheft</p>
 <article>
@@ -289,6 +306,7 @@ def update_index_topics():
     cards = "".join(f'<a href="/{x["slug"]}/"><b>{esc(x["h1"])}</b><span>{esc(x["short"])}</span></a>' for x in PAGES)
     cards += '<a href="/buecher/"><b>Bücher aus den Videos</b><span>Was die Creator zu Geld, Business und Verkauf empfehlen.</span></a>'
     h2 = re.sub(r"<!--TOPICS-->.*?<!--/TOPICS-->", lambda m: "<!--TOPICS-->" + cards + "<!--/TOPICS-->", h, flags=re.S)
+    h2 = re.sub(r"<!--MMENU-->.*?<!--/MMENU-->", lambda m: "<!--MMENU-->" + mmenu("/") + "<!--/MMENU-->", h2, flags=re.S)
     if h2 == h and "<!--TOPICS-->" not in h:
         sys.exit("TOPICS-Marker fehlt in index.html")
     wr(p, h2)
