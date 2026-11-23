@@ -103,7 +103,10 @@ nav.top a.brand .bt small{font-family:var(--f-mono);font-size:.62rem;letter-spac
 .law .tag{font-family:var(--f-mono);font-size:.72rem;color:var(--accent)}
 .law p{color:var(--muted);font-size:.95rem}
 .cite{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-.cite a{font-size:.72rem;font-family:var(--f-mono);text-decoration:none;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+.cite{align-items:center}
+.cite-l{font-size:.72rem;color:var(--muted);margin-right:2px}
+.cite a{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-family:var(--f-mono);text-decoration:none;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 9px 2px 6px}
+.cite a svg{width:9px;height:9px;fill:#E5483B;flex:none}
 .cite a:hover{color:var(--accent);border-color:var(--accent)}
 
 /* Ladder */
@@ -320,7 +323,7 @@ nav.top a.navcta:hover{background:var(--accent);color:var(--surface);opacity:.9}
   <div class="sec-head">
     <span class="eyebrow">Konsens über die Quellen</span>
     <h2>Zehn Leitprinzipien, auf die sich fast alle einigen</h2>
-    <p>Diese Punkte tauchen in deutschen, englischen und indischen Videos unabhängig voneinander auf. Die Kürzel verlinken auf die Videos.</p>
+    <p>Diese Punkte tauchen in deutschen, englischen und indischen Videos unabhängig voneinander auf. Unter jedem Prinzip stehen die YouTube-Kanäle, die es vertreten. Ein Klick öffnet das jeweilige Video.</p>
   </div>
   <div class="laws" id="laws"></div>
 </section>
@@ -656,7 +659,7 @@ const SHORT = {"M5y69v1RbU0":"Abdaal","4QLWlcneJig":"Koerner/DOAC","5vZjrxE8Wlc"
 Object.assign(SHORT,{"73AxVfMT91U":"Platzer·Faul","0YdBlb4cAhE":"Platzer·Test","1ZyRpntVifU":"rewinside","57BnIqHEQQc":"Röber","ZP1tTeGL3YE":"Röber·Jobs","r_kT1NlVamY":"Finanzfluss·Mio","TpeqC5b73Nw":"Finanzfluss·10","63rBStmovfk":"PULS","B8Zl7yBQ9Sw":"ARD","ULlYyhwoOhM":"Lebersorger·Community","Z3zFhXo7rNg":"Lebersorger·Affiliate","ziPNAwBEyT8":"Lebersorger·Shop","OsL8dRyx-bU":"Kasper·KI","BV_2oDMlbEQ":"Skulte","-PMbHvSlZ7Q":"RenditeRebels","f8ZlwJjnPnI":"Finanztip","qmJHBRCYjjo":"Hildesheim","HRZwd4ZLKTM":"OwnGalaxy","eOE5Ej8qeLA":"Weiß","QeKyWqLcTO0":"Klauser","PPK7KsGNqVU":"Steenfatt·12h","kjY8snz4XEY":"Dollwet","OcRYyQQwuDk":"SmartFinance","wl9hRWkqxMY":"Worch","_KNgqxw8J6w":"Jakob&Max","k-3PoOT4vOM":"Hormozi","uWdIgftpvBI":"Hormozi·2026","sL16tsGafcQ":"Hormozi·4Wege","2_W0tEu0csY":"RiseAbove","gTZSVThRWF8":"Tilbury·Easy","ytAW1_g2IfI":"Tilbury·Lazy","j_KrWStXYDk":"fayefilms","vBhSquOR45I":"Daryani","Qw2pFzgF1CM":"Kress","yO5O_ngyA_8":"Sanchez","JrFZ_ky7AzE":"Dollwet·Claude","-pp851qDmOY":"Leon","dQdpqW2qbIY":"Torutev","lnM8VDPem9o":"Morgan","CzDTaLqozlQ":"Abdaal·1K","zdshL1IcetU":"Koe","4mWyMEgA32c":"collins","pPpb4t2eV2M":"Gadzhi·Webinar","LtofQBY-Nws":"Hummus·Maschinen","jcNN0Jv1oNQ":"EverythingProf","SmOs5498AD4":"Dines","dInJj8Jmm8M":"upMETHOD","zndqOgidKYQ":"Annie","CMPbEk4jL6M":"Chou","bC64z_bG0ko":"DinaLu"});
 const short = id => SHORT[id] || id;
 const yt = id => "https://www.youtube.com/watch?v=" + id;
-const cite = ids => `<div class="cite">${ids.map(i=>`<a href="${yt(i)}" target="_blank" rel="noopener" title="${S[i]?S[i][0]+': '+S[i][1].replace(/"/g,'&quot;'):i}">${short(i)}</a>`).join("")}</div>`;
+const cite = (ids,lbl="Gesagt von") => `<div class="cite">${lbl?`<span class="cite-l">${lbl}</span>`:""}${ids.map(i=>`<a href="${yt(i)}" target="_blank" rel="noopener" title="${S[i]?'YouTube · '+S[i][0]+': '+S[i][1].replace(/"/g,'&quot;'):i}" aria-label="${S[i]?'Video von '+S[i][0].replace(/"/g,'&quot;')+' auf YouTube öffnen':'Video auf YouTube öffnen'}"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2l5 3-5 3z"/></svg>${short(i)}</a>`).join("")}</div>`;
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
 
 const LAWS = [
@@ -840,7 +843,7 @@ function renderModels(){
       <div><h4>Schritte</h4><ol>${m.s.map(x=>`<li>${x}</li>`).join("")}</ol></div>
       <div><h4>Echte Zahlen aus den Videos</h4><ul>${m.zz.map(x=>`<li>${x}</li>`).join("")}</ul></div>
       <div><h4>Warnungen</h4><ul class="warn">${m.w.map(x=>`<li>${x}</li>`).join("")}</ul></div>
-      <div><h4>Quellen</h4>${cite(m.q)}</div>
+      <div><h4>Quellen</h4>${cite(m.q,"")}</div>
     </div></details>
   </article>`).join("");
 }
@@ -912,7 +915,7 @@ const REALITY = [
  ["ARD/hr (US-Umfrage)","Side Hustles, rund 12 h pro Woche","Median 686 $ im Monat, über die Hälfte unter 200 $","B8Zl7yBQ9Sw"],
  ["Finanzfluss (Rechnung)","37.000 € brutto, 10 % Sparquote, 7 % Rendite, 42 Jahre","~1 Mio. € nominal, ~400.000 € real nach Steuer","r_kT1NlVamY"]
 ];
-document.getElementById("reality").innerHTML = REALITY.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="num">${r[2]}</td><td>${cite([r[3]])}</td></tr>`).join("");
+document.getElementById("reality").innerHTML = REALITY.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="num">${r[2]}</td><td>${cite([r[3]],"")}</td></tr>`).join("");
 
 const FLAGS = [
  ["Verdient am Kurs über das Modell","Anchu Kögl selbst: Dropshipping-Gurus verdienen mit Dropshipping-Kursen. Jordan Welch nennt „Content über KI“ das beste KI-Modell."],
