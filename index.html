@@ -220,12 +220,28 @@ td.num{white-space:nowrap}
 footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 footer a{color:var(--accent)}
+nav.top a.navcta{background:var(--accent);color:var(--surface)}
+nav.top a.navcta:hover{background:var(--accent);color:var(--surface);opacity:.9}
+.herocta{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btnp{display:inline-block;background:var(--accent);color:var(--surface);text-decoration:none;font-weight:600;padding:11px 18px;border-radius:999px}
+.btns{display:inline-block;color:var(--accent);text-decoration:none;font-weight:600;padding:10px 16px;border-radius:999px;border:1px solid var(--accent)}
+.btnp:hover,.btns:hover{opacity:.9}
+.dlbox{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;background:var(--accent-soft);border-radius:var(--r);padding:20px;margin-top:28px}
+.dlbox img{width:110px;border-radius:4px;box-shadow:4px 4px 0 var(--line);display:block}
+.dlbox h3{margin-bottom:6px}.dlbox p{margin-bottom:12px}
+@media (max-width:560px){.dlbox{grid-template-columns:1fr}.dlbox img{width:90px}}
+.topics{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.topics a{display:block;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.topics a:hover{border-color:var(--accent)}
+.topics b{display:block;font-family:var(--f-display);margin-bottom:4px}
+.topics span{font-size:.88rem;color:var(--muted)}
 </style>
 </head>
 <body>
 
 <nav class="top" aria-label="Abschnitte"><div class="wrap">
   <a class="brand" href="#start">Playbook</a>
+  <a class="navcta" href="/arbeitsheft/">Gratis-Arbeitsheft</a>
   <a href="#gesetze">Leitprinzipien</a>
   <a href="#leiter">Stufenplan</a>
   <a href="#modelle">Modelle</a>
@@ -235,6 +251,8 @@ footer a{color:var(--accent)}
   <a href="#plan">90-Tage-Plan</a>
   <a href="#deutschland">Deutschland</a>
   <a href="#quellen">Quellen</a>
+  <a href="/themen/">Themen</a>
+  <a href="/buecher/">Bücher</a>
 </div></nav>
 
 <main class="wrap">
@@ -243,6 +261,7 @@ footer a{color:var(--accent)}
   <span class="eyebrow">Destillat aus 95 YouTube-Videos und 530 Suchtreffern · Stand November 2026</span>
   <h1>Passives Einkommen ist <em>vorab erarbeitetes</em> Einkommen.</h1>
   <p class="lede">Fast alle Quellen sagen dasselbe, auch die, die Kurse verkaufen: Arbeitsfreies Geld gibt es kaum. Was es gibt, sind Einnahmen, die nicht mehr an deine Stunden gekoppelt sind. Dafür arbeitest du vorher, über Monate oder Jahre. Dieses Playbook sortiert, was dabei funktioniert, was es kostet und wo die Videos übertreiben.</p>
+  <div class="herocta"><a class="btnp" href="/arbeitsheft/">Gratis-Arbeitsheft: 90-Tage-Plan</a><a class="btns" href="/rechner-kapital-passives-einkommen/">Kapitalbedarf berechnen</a></div>
   <div class="ledger">
     <div><b>95</b><span>Videos ausgewertet</span></div>
     <div><b>~33 h</b><span>Videomaterial</span></div>
@@ -440,6 +459,10 @@ footer a{color:var(--accent)}
   </div>
   <div class="progress"><span class="num" id="pCount">0 / 0</span><div class="bar"><div class="real" id="pBar" style="width:0"></div></div><button class="chip" id="pReset" type="button">Zurücksetzen</button></div>
   <div class="plan" id="planGrid"></div>
+<div class="dlbox"><img src="/arbeitsheft/cover.png" alt="Titelseite des kostenlosen Arbeitshefts" width="110" height="155"><div>
+<h3>Kostenloses Arbeitsheft zum 90-Tage-Plan</h3>
+<p>Alle Schritte zum Ausdrucken: Kassensturz, Freiheitszahl, Ideen-Check, Nachfrage-Test und 13-Wochen-Tracker. 9 Seiten, ohne Anmeldung.</p>
+<a class="btnp" href="/arbeitsheft/Arbeitsheft-90-Tage-Startplan.pdf" download>PDF herunterladen</a> <a class="btns" href="/arbeitsheft/">Mehr zum Heft</a></div></div>
 </section>
 
 <section id="deutschland">
@@ -457,9 +480,18 @@ footer a{color:var(--accent)}
     <dt>Gesundheit &amp; Finanzen</dt><dd>Heilversprechen fallen unter das Heilmittelwerbegesetz. Anlageempfehlungen gegen Provision können erlaubnispflichtig sein. Ernährungs- oder Psycho-Coaching ohne Qualifikation kann unter das Heilpraktikergesetz fallen. In diesen Nischen vorsichtig formulieren.</dd>
     <dt>Bewertungen &amp; Vorverkauf</dt><dd>Gefälschte oder KI-generierte Kundenbewertungen sind unlauter (UWG, EU-Omnibus-Richtlinie), ebenso Bewertungen von Freunden ohne Hinweis. Das Widerrufsrecht schützt Verbraucher und ist keine Gratis-Rückgabe für gewerbliches Reselling. Vorbestellungen nur mit klarer Lieferzusage.</dd>
     <dt>Kaltakquise</dt><dd>Werbe-E-Mails ohne Einwilligung sind in Deutschland meist unzulässig (§ 7 UWG), Massen-Kaltmails wie in US-Videos sind hier also kein Modell. Anrufe bei Firmen nur bei mutmaßlicher Einwilligung.</dd>
-    <dt>Nebenjob &amp; Arbeitsrecht</dt><dd>Nebenjob gegebenenfalls dem Arbeitgeber anzeigen, keine Konkurrenz zum Arbeitgeber, das Arbeitszeitgesetz gilt für alle Jobs zusammen (in der Regel höchstens 10 h am Tag, 11 h Ruhezeit). Minijob-Grenze 2025: 556 € im Monat. Minderjährige brauchen für ein Gewerbe die Zustimmung der Eltern und des Familiengerichts.</dd>
+    <dt>Nebenjob &amp; Arbeitsrecht</dt><dd>Nebenjob gegebenenfalls dem Arbeitgeber anzeigen, keine Konkurrenz zum Arbeitgeber, das Arbeitszeitgesetz gilt für alle Jobs zusammen (in der Regel höchstens 10 h am Tag, 11 h Ruhezeit). Minijob-Grenze 2026: 603 € im Monat. Minderjährige brauchen für ein Gewerbe die Zustimmung der Eltern und des Familiengerichts.</dd>
     <dt>Bandbreite &amp; Daten</dt><dd>Apps, die deinen Internetanschluss „vermieten“, leiten fremden Datenverkehr über deine IP-Adresse. Das kann gegen die AGB deines Providers verstoßen und dich in Ermittlungen hineinziehen.</dd>
   </dl></div>
+</section>
+
+<section id="themen">
+  <div class="sec-head">
+    <span class="eyebrow">Vertiefung</span>
+    <h2>Themen im Detail</h2>
+    <p>Einzelne Fragen ausführlich beantwortet, mit Rechnern, Selbsttests und Quellen.</p>
+  </div>
+  <div class="topics"><a href="/rechner-kapital-passives-einkommen/"><b>Wie viel Kapital brauche ich für 1.000 € passives Einkommen?</b><span>Rechner: Kapitalbedarf und Jahre bis zum Ziel, mit 3 bis 4 % Entnahme.</span></a><a href="/4-prozent-regel/"><b>Die 4-Prozent-Regel einfach erklärt</b><span>Wie viel du jedes Jahr aus dem Depot nehmen kannst, und wann 3,5 % klüger sind.</span></a><a href="/dividenden-etf-oder-thesaurierend/"><b>Dividenden-ETF oder thesaurierend: was bringt mehr passives Einkommen?</b><span>Ausschüttung ist nicht Rendite: Zahlen von Finanztip, echtgeld und Finanzfreak.</span></a><a href="/amazon-kdp-erfahrungen/"><b>Amazon KDP: Erfahrungen und echte Zahlen</b><span>Bücher selbst veröffentlichen: was KDP-Creator wirklich verdienen und wie lange es dauert.</span></a><a href="/print-on-demand-erfahrungen/"><b>Print-on-Demand: Lohnt sich das noch?</b><span>T-Shirts und Tassen ohne Lager: Margen, Selbsttests und wo es noch funktioniert.</span></a><a href="/affiliate-marketing-erfahrungen/"><b>Affiliate-Marketing: Was Selbsttests wirklich bringen</b><span>0,13 € ohne Reichweite, 125 € mit Reichweite: warum Traffic alles entscheidet.</span></a><a href="/dropshipping-erfahrungen/"><b>Dropshipping: Was nach Werbung wirklich übrig bleibt</b><span>70 $ Umsatz, 9 $ Gewinn: Selbsttests, Margen und warum Gurus am Kurs verdienen.</span></a><a href="/geld-verdienen-apps/"><b>Geld verdienen mit Apps: Was sie im Test wirklich zahlen</b><span>Umfragen, Spiele, Bandbreite teilen: 1–8 € pro Stunde, bezahlt mit deinen Daten.</span></a><a href="/nebenjob-steuern-minijob/"><b>Nebenjob und Nebengewerbe: Steuern, Minijob, Arbeitsrecht</b><span>Was du für Nebenjob oder Kleingewerbe in Deutschland wissen musst, mit Zahlen 2026.</span></a><a href="/unserioese-finanz-gurus-erkennen/"><b>Seriös oder Abzocke? So erkennst du unseriöse Finanz-Gurus</b><span>Die Warnsignale aus 95 Videos: Luxus-Köder, Einkommensgarantie, gesponserte Tools.</span></a><a href="/buecher/"><b>Bücher aus den Videos</b><span>Was die Creator zu Geld, Business und Verkauf empfehlen.</span></a></div>
 </section>
 
 <section id="quellen">

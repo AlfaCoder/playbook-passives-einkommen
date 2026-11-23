@@ -1,0 +1,59 @@
+<!--{"order":1,"title":"Wie viel Kapital für 1.000 € passives Einkommen? Rechner","h1":"Wie viel Kapital brauche ich für 1.000 € passives Einkommen?","short":"Rechner: Kapitalbedarf und Jahre bis zum Ziel, mit 3 bis 4 % Entnahme.","short_crumb":"Rechner Kapitalbedarf","description":"Rechner: Wie viel Depot brauchst du für 500, 1.000 oder 2.500 € passives Einkommen im Monat, und wie lange dauert es mit deiner Sparrate? Mit Zahlen aus Finanzfluss, Finanzbär und Finanztip.","lede":"Die kurze Antwort: für 1.000 € im Monat rund <b>300.000 bis 455.000 €</b> in breiten Aktien-ETFs, je nachdem, wie vorsichtig du entnimmst und ob du netto rechnest. Mit dem Rechner prüfst du deine eigenen Zahlen.","n_sources":8,"og_title":"Wie viel Kapital für <em>1.000 €</em> im Monat?","og_sub":"Rechner mit 3–4 % Entnahme, Sparrate und Jahren bis zum Ziel.","og_eyebrow":"Rechner","related":["4-prozent-regel","dividenden-etf-oder-thesaurierend","nebenjob-steuern-minijob"],"faq":[["Wie viel Geld brauche ich für 1.000 € passives Einkommen im Monat?","Mit der 4-%-Regel 300.000 € (1.000 € × 12 ÷ 0,04), mit vorsichtigeren 3,5 % rund 343.000 €. Willst du 1.000 € netto nach Steuern, rechnet Finanzbär mit rund 455.000 € bei 3,5 % Entnahme."],["Reichen Dividenden statt Entnahme?","Ja, aber du brauchst nicht weniger Kapital. Ein breiter Dividenden-ETF schüttet rund 3 % aus. Finanztip zeigt, dass Dividenden-ETFs seit 2019 weniger Gesamtrendite brachten als ein Welt-ETF, bei gleichem Maximalverlust."],["Wie lange dauert es, 300.000 € anzusparen?","Mit 500 € im Monat, 10.000 € Startkapital und 6 % Rendite etwa 24 Jahre. Mit 1.000 € im Monat etwa 15 Jahre. Die Sparrate ist der größte Hebel."]]}-->
+<div class="tldr"><b class="k">Auf einen Blick</b><ul>
+<li>Kapitalbedarf = gewünschtes Jahreseinkommen ÷ Entnahmerate. Bei 4 % also Jahresbedarf × 25.</li>
+<li>Für 1.000 € im Monat: 300.000 € (4 %), 343.000 € (3,5 %), 400.000 € (3 %). Netto nach Steuern eher 455.000 €.</li>
+<li>Die Sparrate bestimmt, wann du ankommst, viel stärker als die Rendite.</li>
+</ul></div>
+
+<h2>Rechner: Kapitalbedarf und Zeit bis zum Ziel</h2>
+<div class="calc" id="calc">
+  <div class="row"><label for="t">Ziel pro Monat (€)</label><input id="t" type="number" value="1000" min="0" step="50"></div>
+  <div class="row"><label for="r">Sparrate pro Monat (€)</label><input id="r" type="number" value="500" min="0" step="25"></div>
+  <div class="row"><label for="s">Vorhandenes Depot (€)</label><input id="s" type="number" value="10000" min="0" step="1000"></div>
+  <div class="row"><label for="y">Rendite pro Jahr (%)</label><input id="y" type="number" value="6" min="0" max="15" step="0.5"></div>
+  <div class="out">
+    <div><span>Kapital bei 4 % Entnahme</span><b id="o4">–</b></div>
+    <div><span>Kapital bei 3,5 % Entnahme</span><b id="o35">–</b></div>
+    <div><span>Kapital bei 3 % Entnahme</span><b id="o3">–</b></div>
+    <div><span>Erreicht (bei 3,5 %) in</span><b id="oy">–</b></div>
+  </div>
+  <p class="src">Rendite ist eine Annahme, keine Prognose. Steuern beim Verkauf sind nicht eingerechnet; für ein Ziel nach Steuern etwa 20–30 % mehr Kapital einplanen.</p>
+</div>
+<script>
+(function(){const $=id=>document.getElementById(id);const f=v=>isFinite(v)?Math.round(v).toLocaleString("de-DE")+" €":"–";
+function c(){const t=+$("t").value||0,r=+$("r").value||0,s=+$("s").value||0,y=(+$("y").value||0)/100;
+$("o4").textContent=f(t*12/0.04);$("o35").textContent=f(t*12/0.035);$("o3").textContent=f(t*12/0.03);
+const need=t*12/0.035;let v=s,m=0;while(v<need&&m<1200){v=v*(1+y/12)+r;m++;}
+$("oy").textContent=s>=need?"schon erreicht":m>=1200?"über 100 Jahre":Math.floor(m/12)+" J. "+(m%12)+" Mon.";}
+["t","r","s","y"].forEach(i=>$(i).addEventListener("input",c));c();})();
+</script>
+
+<h2>So rechnen die Videos</h2>
+<p>Die seriösen Finanzkanäle kommen alle auf dieselbe Grundformel: Du teilst das, was du im Jahr brauchst, durch eine sichere Entnahmerate. Unterschiedlich ist nur, wie vorsichtig sie sind.</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Quelle</th><th>Ziel</th><th>Annahme</th><th>Kapital</th></tr></thead>
+<tbody>
+<tr><td>[[73_3icYYnT8]]</td><td>2.000 € / Monat</td><td>4 % Entnahme</td><td class="num">800.000 €</td></tr>
+<tr><td>[[LDL1lxCzFt0]]</td><td>1.000 € netto</td><td>3,5 % Entnahme, nach Steuer</td><td class="num">~455.000 €</td></tr>
+<tr><td>[[-PMbHvSlZ7Q]]</td><td>40.000 € / Jahr</td><td>4 % bzw. 3,5 %</td><td class="num">1 Mio. / 1,14 Mio. €</td></tr>
+<tr><td>[[OcRYyQQwuDk]]</td><td>2.500 € netto</td><td>5,5 % Ausschüttungs-Mix</td><td class="num">~682.000 €</td></tr>
+<tr><td>[[ZpoBC7rX6Rc]]</td><td>1.085 € / Monat</td><td>4 %, eigenes Depot</td><td class="num">335.000 €</td></tr>
+</tbody></table></div>
+<p>Die letzte Zeile ist ein echtes Depot: Der Frugalist bei [[ZpoBC7rX6Rc|Finanzfreak]] hat in rund vier Jahren 335.000 € angespart, allerdings mit einer Sparrate von 3.000 bis 5.100 € im Monat und einem sehr sparsamen Leben. Seine Faustregel: <b>Jede 100 € im Depot bringen etwa 0,33 € im Monat, lebenslang.</b></p>
+<p>Die Rechnung von Smart Finance wirkt günstiger, weil sie mit hohen Ausschüttungen aus Covered-Call-ETFs rechnet. Das senkt nur die sichtbare Zahl, nicht das Risiko. Mehr dazu auf der Seite <a href="/dividenden-etf-oder-thesaurierend/">Dividenden-ETF oder thesaurierend</a>.</p>
+
+<h2>Netto oder brutto: der Unterschied ist groß</h2>
+<p>Viele Videos rechnen brutto. In Deutschland zahlst du auf Kapitalerträge 26,375 % Abgeltungsteuer plus Soli (gegebenenfalls Kirchensteuer). Bei Aktien-ETFs sind 30 % der Erträge steuerfrei (Teilfreistellung), effektiv bleiben rund 18,5 %. Pro Person sind 1.000 € Erträge im Jahr steuerfrei (Sparerpauschbetrag).</p>
+<p>[[LDL1lxCzFt0|Finanzbär]] kommt so auf rund 15.900 € brutto im Jahr für 1.000 € netto im Monat. Wer nur verkauft, zahlt außerdem nur auf den Gewinnanteil Steuern, nicht auf die eingezahlten Beträge. Der genaue Wert hängt also von deiner Situation ab.</p>
+
+<h2>Was das für einen Normalverdiener heißt</h2>
+<p>[[r_kT1NlVamY|Finanzfluss]] hat einen Angestellten mit 37.000 € Bruttogehalt durchgerechnet, der ab 25 zehn Prozent seines Nettos spart und 7 % Rendite erzielt. Mit 67 hat er nominal etwa 1 Mio. €, nach Inflation und Steuern rund 400.000 € heutiger Kaufkraft. Mit 25 % Sparquote wäre es real etwa 1 Mio. €.</p>
+<p>[[LDL1lxCzFt0|Finanzbär]] rechnet für 300 € im Monat ab null etwa 35 bis 45 Jahre bis 1.000 € netto. Mit 100.000 € Startkapital sind es rund 20 Jahre. Sein Satz dazu: Die ersten 100.000 € sind die wichtigsten.</p>
+<div class="warn"><b>Wichtig:</b> Du musst nicht bei 100 % ankommen, damit es sich lohnt. [[-PMbHvSlZ7Q|RenditeRebels]] nennt das die passive Deckungsquote: Schon wenn Kapitalerträge 30 bis 50 % deiner Ausgaben decken, kannst du Stunden reduzieren oder einen Job mit mehr Sinn wählen.</div>
+
+<h2>Die drei Hebel</h2>
+<ol>
+<li><b>Ausgaben:</b> Jeder Euro, den du im Monat weniger brauchst, senkt das Ziel um 300 € (bei 4 %). Ein Streamingabo für 15 € entspricht rund 4.500 € Kapital, ein Autokredit über 500 € rund 150.000 €.</li>
+<li><b>Sparrate:</b> Mehr verdienen und die Hälfte jeder Gehaltserhöhung zusätzlich sparen. Finanzfluss nennt das den Spar-Booster.</li>
+<li><b>Zeit:</b> Früh anfangen und in Crashs nicht verkaufen. Die Rendite selbst kannst du kaum beeinflussen.</li>
+</ol>

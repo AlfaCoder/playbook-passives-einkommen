@@ -1,0 +1,47 @@
+<!--{"order":2,"title":"4-Prozent-Regel einfach erklärt, mit Rechner","h1":"Die 4-Prozent-Regel einfach erklärt","short":"Wie viel du jedes Jahr aus dem Depot nehmen kannst, und wann 3,5 % klüger sind.","short_crumb":"4-Prozent-Regel","description":"Die 4-Prozent-Regel einfach erklärt: Herkunft (Trinity-Studie), Rechenbeispiel, Kritik, Sequenzrisiko und warum viele mit 3,5 % rechnen. Mit Rechner für dein Depot.","lede":"Nimm im ersten Jahr 4 % deines Depots, danach jedes Jahr denselben Betrag plus Inflation. Historisch hat das Geld so 30 Jahre gereicht. Was die Regel kann, wo sie wackelt und wie du sie für Deutschland anpasst.","n_sources":6,"og_title":"Die <em>4-Prozent-Regel</em> einfach erklärt","og_sub":"Herkunft, Rechenbeispiel, Kritik – und warum viele mit 3,5 % rechnen.","og_eyebrow":"Grundlagen","related":["rechner-kapital-passives-einkommen","dividenden-etf-oder-thesaurierend","unserioese-finanz-gurus-erkennen"],"faq":[["Was besagt die 4-Prozent-Regel?","Du entnimmst im ersten Jahr 4 % deines Aktien-Depots und erhöhst den Betrag danach jedes Jahr um die Inflation. Nach der Trinity-Studie hat das in rund 98 % der historischen 30-Jahres-Zeiträume gereicht."],["Ist die 4-Prozent-Regel in Deutschland sinnvoll?","Als Faustregel ja, aber sie ist eine US-Studie, vor Steuern und für 30 Jahre. Wer früher aufhört oder vorsichtiger sein will, rechnet mit 3 bis 3,5 % und plant Steuern ein."],["Was ist das Sequenzrisiko?","Fällt der Markt in den ersten Jahren, während du entnimmst, verkaufst du zu tiefen Kursen und das Depot erholt sich schwerer. Ein Cash-Puffer von 1 bis 3 Jahresausgaben hilft, in dieser Zeit nichts verkaufen zu müssen."]]}-->
+<div class="tldr"><b class="k">Auf einen Blick</b><ul>
+<li>Depot × 4 % = Entnahme im ersten Jahr. Umgekehrt: Jahresausgaben × 25 = nötiges Depot.</li>
+<li>Gilt für breit gestreute Aktien-ETFs, über rund 30 Jahre, vor Steuern.</li>
+<li>Vorsichtiger: 3 bis 3,5 %, flexible Entnahme in Crashs und ein Cash-Puffer.</li>
+</ul></div>
+
+<h2>Woher die Regel kommt</h2>
+<p>Die Regel stammt aus US-Studien der 1990er, am bekanntesten die Trinity-Studie. Sie prüften, wie viel man aus einem Aktien-Anleihen-Depot entnehmen konnte, ohne dass es in 30 Jahren aufgebraucht war. Mit 4 % im ersten Jahr und danach inflationsangepasst ging das in rund 98 % der Zeiträume gut. [[ZpoBC7rX6Rc|Finanzfreak]] nutzt die Regel für sein eigenes Depot mit 100 % Aktien-ETFs.</p>
+
+<h2>Rechenbeispiel</h2>
+<div class="calc">
+  <div class="row"><label for="d">Depotwert (€)</label><input id="d" type="number" value="300000" min="0" step="10000"></div>
+  <div class="row"><label for="w">Entnahmerate (%)</label><input id="w" type="number" value="4" min="1" max="8" step="0.25"></div>
+  <div class="out">
+    <div><span>Entnahme im ersten Jahr</span><b id="oj">–</b></div>
+    <div><span>… pro Monat</span><b id="om">–</b></div>
+  </div>
+</div>
+<script>
+(function(){const $=i=>document.getElementById(i);const f=v=>Math.round(v).toLocaleString("de-DE")+" €";
+function c(){const d=+$("d").value||0,w=(+$("w").value||0)/100;$("oj").textContent=f(d*w);$("om").textContent=f(d*w/12);}
+["d","w"].forEach(i=>$(i).addEventListener("input",c));c();})();
+</script>
+<p>Mit 300.000 € und 4 % sind das 12.000 € im ersten Jahr, also 1.000 € im Monat. Steigt die Inflation um 2 %, nimmst du im zweiten Jahr 12.240 €, egal wie die Börse gelaufen ist.</p>
+
+<h2>Die Kritik: 4 % sind nicht garantiert</h2>
+<p>Die Regel ist eine Wahrscheinlichkeit, keine Garantie. [[-PMbHvSlZ7Q|RenditeRebels]] nennt drei Gründe, warum vorsichtigere Anleger lieber 3,3 bis 3,7 % ansetzen:</p>
+<ul>
+<li><b>Bewertung und Zinsen:</b> Wer zu einem teuren Zeitpunkt startet, hat schlechtere Aussichten.</li>
+<li><b>Längerer Zeitraum:</b> Wer mit 45 aufhört, braucht 40 bis 50 Jahre, nicht 30.</li>
+<li><b>Inflation:</b> Bei 3 % Inflation brauchst du in 20 Jahren 72.000 € für das, was heute 40.000 € kostet.</li>
+</ul>
+<p>Der Unterschied ist teuer: Für 40.000 € im Jahr brauchst du bei 4 % eine Million, bei 3,5 % rund 1,14 Mio. €. [[LDL1lxCzFt0|Finanzbär]] hält 4 % für veraltet und rechnet mit 3,5 %, [[73_3icYYnT8|Finanzfluss]] mit 3 bis 4 %.</p>
+
+<h2>Das größte Risiko: der Crash zur falschen Zeit</h2>
+<p>Gefährlich ist nicht der durchschnittliche Ertrag, sondern die Reihenfolge. Beispiel aus dem Video von RenditeRebels: 1 Mio. € Depot, im ersten Jahr −20 % und 40.000 € entnommen, bleiben 760.000 €. Fällt der Markt im zweiten Jahr noch einmal um 10 %, sind es 684.000 €, bevor du wieder entnimmst. Von dort erholt sich das Depot nur schwer.</p>
+<p>Gegenmittel, die mehrere Quellen nennen:</p>
+<ul>
+<li><b>Cash-Puffer:</b> 1 bis 3 Jahresausgaben auf Tagesgeld. Im Crash lebst du davon und verkaufst keine Aktien.</li>
+<li><b>Flexibel entnehmen:</b> In schlechten Jahren 20 bis 30 % weniger nehmen (Finanzfreak).</li>
+<li><b>Zusatzeinkommen:</b> Ein kleiner Job oder ein Nebenprojekt nimmt Druck vom Depot.</li>
+</ul>
+
+<h2>Für Deutschland anpassen</h2>
+<p>Die Studie rechnet vor Steuern. Hier zahlst du beim Verkauf Abgeltungsteuer auf den Gewinnanteil, bei Aktien-ETFs effektiv rund 18,5 %, nach dem Sparerpauschbetrag von 1.000 € pro Person. Plane deshalb entweder eine etwas niedrigere Entnahmerate oder etwa 20 bis 30 % mehr Kapital ein. Den Kapitalbedarf mit verschiedenen Raten vergleichst du im <a href="/rechner-kapital-passives-einkommen/">Rechner</a>.</p>
+<div class="warn"><b>Nicht vergessen:</b> Viele, die finanziell frei sind, arbeiten nach 12 bis 18 Monaten wieder, nicht wegen des Geldes, sondern wegen Struktur und Sinn. RenditeRebels empfiehlt deshalb „Basis-Freiheit plus freiwilliges Einkommen“ statt eines möglichst großen Depots.</div>

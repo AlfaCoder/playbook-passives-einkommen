@@ -1,0 +1,114 @@
+{
+  "intro": "Diese Bücher werden in den ausgewerteten YouTube-Videos genannt oder empfohlen. Nicht jede Empfehlung ist neutral: Manche Creator empfehlen ihr eigenes Buch. Das steht jeweils dabei, genauso wie unsere kurze Einordnung.",
+  "kategorien": [
+    {
+      "name": "Geld anlegen",
+      "intro": "Für Stufe 3 im Playbook: Kapital arbeiten lassen. Hier lohnt sich ein solides Grundlagenbuch mehr als jedes Video.",
+      "buecher": [
+        {
+          "titel": "Souverän investieren mit Indexfonds und ETFs",
+          "autor": "Gerd Kommer",
+          "text": "Das deutsche Standardwerk zum passiven Investieren mit breiten ETFs. Finanzfluss stützt sich auf Kommers Daten, etwa zur weltweiten Mietrendite von rund 2,4 %. Gut, um die 4-%-Regel und Streuung wirklich zu verstehen.",
+          "quelle": "[[73_3icYYnT8|Finanzfluss]]",
+          "suche": "Gerd Kommer Souverän investieren mit Indexfonds und ETFs"
+        }
+      ]
+    },
+    {
+      "name": "Unternehmertum und Zeit",
+      "intro": "Für Stufe 1 und 2: mehr verdienen und ein Asset aufbauen, ohne die eigene Zeit komplett zu verkaufen.",
+      "buecher": [
+        {
+          "titel": "The Millionaire Fastlane",
+          "autor": "MJ DeMarco",
+          "text": "Kernidee: Wohlstand entsteht, wenn du viel Wert an wenige oder wenig Wert an viele lieferst, statt Zeit gegen Geld zu tauschen. Der KDP-Creator mit zehn Jahren Erfahrung nennt es seine wichtigste Lektion.",
+          "quelle": "[[ToL5iUGr7AU|KDP-Creator, 10 Jahre]]",
+          "suche": "MJ DeMarco Millionaire Fastlane"
+        },
+        {
+          "titel": "Die 4-Stunden-Woche",
+          "autor": "Timothy Ferriss",
+          "de": "Original: The 4-Hour Workweek",
+          "text": "Der Klassiker zum Automatisieren und Delegieren eines Geschäfts. Ali Abdaal nennt ihn beim Thema „Business, das ohne dich läuft“. Lies es als Ideensammlung, nicht als Anleitung: Vieles stammt aus der Zeit vor Social Media und KI.",
+          "quelle": "[[M5y69v1RbU0|Ali Abdaal]]",
+          "suche": "Timothy Ferriss Die 4-Stunden-Woche"
+        },
+        {
+          "titel": "Buy Back Your Time",
+          "autor": "Dan Martell",
+          "text": "Wie du dir als Selbstständiger Zeit zurückkaufst, indem du Aufgaben abgibst. Achtung: Martell empfiehlt in seinem Video sein eigenes Buch. Nützlich vor allem, wenn ein Nebenprojekt zu wachsen beginnt.",
+          "quelle": "[[DhEMFeo_gL8|Dan Martell]] (eigenes Buch)",
+          "suche": "Dan Martell Buy Back Your Time"
+        }
+      ]
+    },
+    {
+      "name": "Angebote und Verkauf",
+      "intro": "Für alle, die eine Dienstleistung oder ein Produkt verkaufen wollen. In fast allen Videos ist Vertrieb der eigentliche Engpass.",
+      "buecher": [
+        {
+          "titel": "$100M Offers",
+          "autor": "Alex Hormozi",
+          "text": "Hier steht die „Value Equation“, die Hormozi in seinen Videos erklärt: Wert entsteht aus Wunschergebnis und Erfolgswahrscheinlichkeit, geteilt durch Zeit und Aufwand. Hilft, Preise nach Nutzen statt nach Kosten zu setzen. Hormozis eigenes Buch.",
+          "quelle": "[[k-3PoOT4vOM|Alex Hormozi]] (eigenes Buch)",
+          "suche": "Alex Hormozi 100M Offers"
+        },
+        {
+          "titel": "$100M Money Models",
+          "autor": "Alex Hormozi",
+          "text": "Hormozi erwähnt, dass es sich am ersten Wochenende schneller verkauft hat als jedes andere Sachbuch. Inhaltlich geht es darum, wie Angebote, Zusatzangebote und Vorauszahlung den Cashflow verbessern. Eher für Unternehmer als für Einsteiger.",
+          "quelle": "[[uWdIgftpvBI|Alex Hormozi]] (eigenes Buch)",
+          "suche": "Alex Hormozi 100M Money Models"
+        },
+        {
+          "titel": "80/20 Sales and Marketing",
+          "autor": "Perry Marshall",
+          "text": "Grundlage für die „umgedrehte Verkaufspyramide“, die Gerald Reimertz am Beispiel eines Yogastudios erklärt: viele günstige Einstiegsangebote, wenige teure. Zeigt, warum Bestandskunden der wertvollste Teil eines Geschäfts sind.",
+          "quelle": "[[W9lXR8RJFf4|Gerald Reimertz]]",
+          "suche": "Perry Marshall 80/20 Sales and Marketing"
+        },
+        {
+          "titel": "Main Street Millionaire",
+          "autor": "Codie Sanchez",
+          "text": "Über das Kaufen und Verbessern kleiner, „langweiliger“ Firmen statt neuer Online-Ideen. Passt zu ihrem Selbsttest, in dem die unspektakulären Aufgaben gewannen. Sanchez' eigenes Buch, im Video beworben.",
+          "quelle": "[[yO5O_ngyA_8|Codie Sanchez]] (eigenes Buch)",
+          "suche": "Codie Sanchez Main Street Millionaire"
+        }
+      ]
+    },
+    {
+      "name": "Kreativität und Inhalte",
+      "intro": "Für alle, die mit Content, einem Kanal oder digitalen Produkten starten.",
+      "buecher": [
+        {
+          "titel": "Alles nur geklaut",
+          "autor": "Austin Kleon",
+          "de": "Original: Steal Like an Artist",
+          "text": "Kurzes, sehr zugängliches Buch darüber, wie Kreative von anderen lernen, ohne zu kopieren. Mark Tilbury nennt es beim Thema Content. Passt zum Leitprinzip „Kopieren, was funktioniert“ im Playbook, mit der wichtigen Grenze zum Plagiat.",
+          "quelle": "[[5vZjrxE8Wlc|Mark Tilbury]]",
+          "suche": "Austin Kleon Alles nur geklaut"
+        }
+      ]
+    },
+    {
+      "name": "Fallbeispiele aus den Videos",
+      "intro": "Bücher, die in den Videos als Beispiel für passives Einkommen genannt werden, nicht als Lektüreempfehlung.",
+      "buecher": [
+        {
+          "titel": "Passive Income, Aggressive Retirement",
+          "autor": "Rachel Richards",
+          "text": "Rachel Richards brachten dieses Buch und „Money Honey“ in einem Jahr rund 97.000 $ Tantiemen, bei nur 75 $ Werbung. Ein Ausreißer mit Finanznische und Publikum, aber ein gutes Beispiel für ein Sachbuch zu einem klaren Problem.",
+          "quelle": "[[_CyWGSzwTu4|Shane Hummus]]",
+          "suche": "Rachel Richards Passive Income Aggressive Retirement"
+        },
+        {
+          "titel": "Money Honey",
+          "autor": "Rachel Richards",
+          "text": "Das zweite Buch aus demselben Beispiel: ein Einsteigerbuch zu Finanzen. Interessant vor allem, wenn du selbst über Amazon KDP veröffentlichen willst.",
+          "quelle": "[[_CyWGSzwTu4|Shane Hummus]]",
+          "suche": "Rachel Richards Money Honey"
+        }
+      ]
+    }
+  ]
+}

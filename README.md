@@ -9,3 +9,16 @@ Statische Website: kritische Auswertung von 95 YouTube-Videos zu passivem Einkom
 Gehostet über GitHub Pages. Keine Cookies, kein Tracking, keine externen Ressourcen.
 
 Keine Anlage-, Steuer- oder Rechtsberatung.
+
+## Unterseiten bauen
+
+Themenseiten, Bücherseite, Arbeitsheft-PDF, Vorschaubilder und `sitemap.xml` entstehen aus `build/`:
+
+```
+python build/build.py            # alles inkl. Bilder und PDF (braucht Chrome oder Edge)
+python build/build.py --no-images  # nur HTML und Sitemap
+```
+
+- Themenseiten: `build/pages/<slug>.html` (JSON-Kopf + HTML-Inhalt, `[[VIDEO-ID|Text]]` wird zum YouTube-Link)
+- Bücher: `build/books.json`
+- Amazon-Partner-Tag: `build/config.json` → `"amazon_tag"`. Ist er gesetzt, werden die Links gekennzeichnet und der Pflichthinweis erscheint.
