@@ -108,3 +108,11 @@ details.faq p{margin:10px 0 0}
 footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
 footer a{color:var(--accent)}
 footer .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px}
+
+/* Handy: Arbeitsheft-Button direkt hinter dem Logo, Verlauf als Wisch-Hinweis */
+@media (max-width:640px){
+  nav.top .wrap>*{order:3}
+  nav.top a.brand{order:0}
+  nav.top a.cta{order:1;margin-left:0}
+  nav.top::after{content:"";position:absolute;top:0;bottom:0;right:0;width:32px;pointer-events:none;background:linear-gradient(to right,transparent,var(--bg))}
+}

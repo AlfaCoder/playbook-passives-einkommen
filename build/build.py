@@ -258,6 +258,28 @@ def pdf(src_html, out_pdf):
                     "--virtual-time-budget=4000", f"--print-to-pdf={out_pdf}", "file:///" + src_html.replace("\\", "/")],
                    check=True, capture_output=True)
 
+# --- 404-Seite ---
+def render_404():
+    cards = "".join(f'<a href="/{p["slug"]}/"><b>{esc(p["h1"])}</b><span>{esc(p["short"])}</span></a>' for p in PAGES[:6])
+    out = head("Seite nicht gefunden", "Diese Seite gibt es nicht (mehr). Hier geht es zurück zum Playbook Passives Einkommen.",
+               DOMAIN + "/404.html", DOMAIN + "/og.png", robots="noindex") + nav("") + f'''
+<main class="read">
+<article class="notfound">
+<p class="crumbs">Fehler 404</p>
+<h1>Diese Seite bringt leider kein Einkommen.</h1>
+<p class="lede">Weder aktiv noch passiv: Unter dieser Adresse gibt es nichts. Vielleicht hat sich ein Tippfehler eingeschlichen, oder die Seite ist umgezogen.</p>
+<p style="display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 8px"><a class="btn" href="/">Zum Playbook</a><a class="btn ghost" href="/themen/">Alle Themen</a><a class="btn ghost" href="/arbeitsheft/">Gratis-Arbeitsheft</a></p>
+<h2>Beliebte Themen</h2>
+<div class="more">{cards}</div>
+<p class="src">Du hast einen kaputten Link auf dieser Website gefunden? Schreib mir gern an <a href="mailto:info@playbook-passives-einkommen.de">info@playbook-passives-einkommen.de</a>.</p>
+</article>
+</main>
+{FOOTER}
+</body>
+</html>
+'''
+    wr(os.path.join(ROOT, "404.html"), out)
+
 def sitemap():
     urls = ["/", "/themen/", "/buecher/", "/arbeitsheft/"] + [f'/{p["slug"]}/' for p in PAGES]
     body = "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls)
@@ -266,7 +288,7 @@ def sitemap():
 if __name__ == "__main__":
     for p in PAGES:
         render_page(p)
-    render_hub(); render_books(); render_workbook_page(); sitemap()
+    render_hub(); render_books(); render_workbook_page(); render_404(); sitemap()
     if "--no-images" not in sys.argv:
         for p in PAGES:
             og_image(os.path.join(ROOT, p["slug"], "og.png"), "Playbook · " + p.get("og_eyebrow", "Realitätscheck"), p["og_title"], p["og_sub"])
