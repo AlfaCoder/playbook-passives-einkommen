@@ -1,0 +1,30 @@
+/* Glossar: Begriffs-Links im Text, Kurzerklärung, Glossar-Seite */
+a.gl{color:inherit;text-decoration:underline dotted;text-decoration-color:var(--accent);text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help}
+a.gl:hover{color:var(--accent)}
+.glpop{position:absolute;z-index:60;background:var(--surface,#fff);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+  font-size:.86rem;line-height:1.5;box-shadow:0 6px 20px rgba(0,0,0,.16);opacity:0;pointer-events:none;transition:opacity .12s;display:grid;gap:4px}
+.glpop.on{opacity:1;pointer-events:auto}
+.glpop b{font-family:var(--f-display);font-size:.95rem;color:var(--accent)}
+.glpop a{font-size:.8rem;color:var(--accent);font-weight:600;text-decoration:none;margin-top:2px}
+.glpop a:hover{text-decoration:underline}
+
+/* Glossar-Seite */
+.gl-tools{display:grid;gap:12px;margin:22px 0 8px}
+.gl-search{width:100%;font:inherit;font-size:1rem;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface,#fff);color:var(--ink)}
+.gl-search:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.gl-az{display:flex;flex-wrap:wrap;gap:4px}
+.gl-az a{min-width:32px;text-align:center;padding:4px 6px;border:1px solid var(--line);border-radius:6px;font-family:var(--f-mono);font-size:.8rem;text-decoration:none;color:var(--ink)}
+.gl-az a:hover{border-color:var(--accent);color:var(--accent)}
+.gl-cats{display:flex;flex-wrap:wrap;gap:6px}
+.gl-cats button{font:inherit;font-size:.82rem;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:none;color:var(--muted);cursor:pointer}
+.gl-cats button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.gl-letter{font-family:var(--f-display);font-size:1.4rem;color:var(--accent);margin:28px 0 4px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+.gl-entry{padding:14px 0;border-bottom:1px solid var(--line);scroll-margin-top:80px}
+.gl-entry:target{background:var(--accent-soft,rgba(14,106,78,.08));margin-inline:-12px;padding-inline:12px;border-radius:8px}
+.gl-entry dfn{font-style:normal;font-weight:700;font-size:1.08rem;color:var(--ink)}
+.gl-entry .kat{font-family:var(--f-mono);font-size:.7rem;color:var(--muted);margin-left:8px;text-transform:uppercase;letter-spacing:.04em}
+.gl-entry p{margin:6px 0 0}
+.gl-entry .gl-links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px;font-size:.85rem}
+.gl-entry .gl-links a{color:var(--accent);font-weight:600;text-decoration:none}
+.gl-entry .gl-links a:hover{text-decoration:underline}
+.gl-empty{color:var(--muted);padding:16px 0}

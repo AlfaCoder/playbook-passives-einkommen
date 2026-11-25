@@ -53,7 +53,11 @@ for fn in sorted(os.listdir(os.path.join(B, "pages"))):
     PAGES.append(meta)
 PAGES.sort(key=lambda p: p.get("order", 99))
 
-NAV = [("/themen/", "Themen"), ("/rechner-kapital-passives-einkommen/", "Rechner"), ("/buecher/", "Bücher")]
+NAV = [("/themen/", "Themen"), ("/rechner-kapital-passives-einkommen/", "Rechner"), ("/buecher/", "Bücher"), ("/glossar/", "Glossar")]
+
+# --- Glossar ---
+GL = json.load(io.open(os.path.join(B, "glossar.json"), encoding="utf-8"))
+GL["begriffe"].sort(key=lambda g: g["term"].lower().replace("ä", "a").replace("ö", "o").replace("ü", "u"))
 
 def nav(current):
     items = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h == current else ""}>{t}</a>' for h, t in NAV)
@@ -71,14 +75,14 @@ def mmenu(current=""):
             '<div class="mmenu" id="mmenu" hidden>'
             + a("/arbeitsheft/", "Gratis-Arbeitsheft (PDF)", "mcta")
             + '<p class="mh">Übersicht</p>' + a("/", "Playbook (Startseite)") + a("/themen/", "Alle Themen")
-            + a("/rechner-kapital-passives-einkommen/", "Rechner: Kapitalbedarf") + a("/buecher/", "Bücher aus den Videos")
+            + a("/rechner-kapital-passives-einkommen/", "Rechner: Kapitalbedarf") + a("/buecher/", "Bücher aus den Videos") + a("/glossar/", "Glossar: Begriffe erklärt")
             + '<p class="mh">Themen</p>' + topics
             + '<p class="mh">Rechtliches</p><div class="mlegal">' + a("/impressum.html", "Impressum") + a("/datenschutz.html", "Datenschutz") + '</div>'
             + '</div>')
 
 FOOTER = ('<footer class="read">Zusammenfassung und Einordnung öffentlich zugänglicher YouTube-Videos. Keine Anlage-, Steuer- oder Rechtsberatung. '
           'Zahlen der Creator sind nicht unabhängig geprüft.'
-          '<div class="links"><a href="/">Playbook</a><a href="/themen/">Alle Themen</a><a href="/buecher/">Bücher</a>'
+          '<div class="links"><a href="/">Playbook</a><a href="/themen/">Alle Themen</a><a href="/buecher/">Bücher</a><a href="/glossar/">Glossar</a>'
           '<a href="/arbeitsheft/">Arbeitsheft</a><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a></div></footer>')
 
 DLBOX = ('<aside class="dl"><div class="cover" aria-hidden="true">90<small>TAGE</small></div><div>'
@@ -125,8 +129,11 @@ def head(title, desc, url, og_img, extra_ld=None, robots=None):
 <link rel="stylesheet" href="/assets/page.css">
 <link rel="stylesheet" href="/assets/toc.css">
 <link rel="stylesheet" href="/assets/charts.css">
+<link rel="stylesheet" href="/assets/glossar.css">
 <script src="/assets/toc.js" defer></script>
 <script src="/assets/charts.js" defer></script>
+<script src="/assets/glossar-data.js" defer></script>
+<script src="/assets/glossar.js" defer></script>
 {ld_html}</head>
 <body>
 '''
@@ -261,6 +268,76 @@ def render_workbook_page():
 '''
     wr(os.path.join(ROOT, "arbeitsheft", "index.html"), out)
 
+def glossar_data():
+    data = [{"id": g["id"], "t": esc(g["term"]), "k": esc(g["kurz"]), "p": g["p"]} for g in GL["begriffe"]]
+    for g in data:
+        if re.search(r"\((?!\?)", g["p"]):
+            sys.exit(f"Glossar-Muster {g['id']}: nur (?:...) verwenden, keine fangenden Gruppen")
+    wr(os.path.join(ROOT, "assets", "glossar-data.js"),
+       "/* erzeugt von build/build.py aus build/glossar.json */\nwindow.GLOSSAR=" + json.dumps(data, ensure_ascii=False) + ";\n")
+
+def render_glossary():
+    url = DOMAIN + "/glossar/"
+    pages = {p["slug"]: p for p in PAGES}
+    letters, body, cur = [], "", None
+    for g in GL["begriffe"]:
+        L = g["term"][0].upper()
+        L = "0–9" if L.isdigit() else {"Ä": "A", "Ö": "O", "Ü": "U"}.get(L, L)
+        if L != cur:
+            cur = L; letters.append(L)
+            body += f'<h2 class="gl-letter" id="buchstabe-{L.lower() if L != "0–9" else "0-9"}">{L}</h2>'
+        links = ""
+        if g.get("seite"):
+            sp = pages[g["seite"]]
+            links += f'<a href="/{g["seite"]}/">Mehr dazu: {esc(sp.get("short_crumb", sp["h1"]))}</a>'
+        if g.get("wiki"):
+            links += f'<a href="{esc(g["wiki"])}" rel="noopener">Wikipedia{" (englisch)" if "en.wikipedia" in g["wiki"] else ""} ↗</a>'
+        body += (f'<div class="gl-entry" id="{g["id"]}" data-kat="{esc(g["kat"])}"><dfn>{esc(g["term"])}</dfn><span class="kat">{esc(g["kat"])}</span>'
+                 f'<p>{esc(g["text"])}</p>' + (f'<div class="gl-links">{links}</div>' if links else '') + '</div>')
+    az = "".join(f'<a href="#buchstabe-{x.lower() if x != "0–9" else "0-9"}">{x}</a>' for x in letters)
+    cats = '<button type="button" aria-pressed="true" data-k="">Alle</button>' + "".join(
+        f'<button type="button" aria-pressed="false" data-k="{esc(k)}">{esc(k)}</button>' for k in GL["kategorien"])
+    ld = [{"@context": "https://schema.org", "@type": "DefinedTermSet", "name": "Glossar Passives Einkommen", "url": url,
+           "hasDefinedTerm": [{"@type": "DefinedTerm", "name": g["term"], "description": g["text"], "url": url + "#" + g["id"],
+                               "inDefinedTermSet": url} for g in GL["begriffe"]]},
+          {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+              {"@type": "ListItem", "position": 1, "name": "Playbook", "item": DOMAIN + "/"},
+              {"@type": "ListItem", "position": 2, "name": "Glossar", "item": url}]}]
+    n = len(GL["begriffe"])
+    out = head(f"Glossar: {n} Begriffe zu passivem Einkommen, ETFs und Steuern einfach erklärt",
+               "Von 4-Prozent-Regel bis Zinseszins: ETF, Vorabpauschale, Teilfreistellung, Kleinunternehmerregelung, KDP, Dropshipping und mehr, kurz und verständlich erklärt.",
+               url, DOMAIN + "/og.png", ld) + nav("/glossar/") + f'''
+<main class="read">
+<p class="crumbs"><a href="/">Playbook</a> / Glossar</p>
+<article>
+<h1>Glossar</h1>
+<p class="lede">{GL["intro"]}</p>
+<div class="gl-tools">
+<input class="gl-search" id="glq" type="search" placeholder="Begriff suchen, z. B. Vorabpauschale" aria-label="Glossar durchsuchen">
+<div class="gl-cats" role="group" aria-label="Kategorie">{cats}</div>
+<nav class="gl-az" aria-label="Alphabet">{az}</nav>
+</div>
+<div id="gllist">{body}</div>
+<p class="gl-empty" id="glnone" hidden>Kein Begriff gefunden.</p>
+<script>
+(()=>{{const q=document.getElementById("glq"),E=[...document.querySelectorAll(".gl-entry")],H=[...document.querySelectorAll(".gl-letter")],B=[...document.querySelectorAll(".gl-cats button")],az=document.querySelector(".gl-az");let k="";
+const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"");
+function f(){{const t=norm(q.value.trim());let any=0;E.forEach(e=>{{const ok=(!k||e.dataset.kat===k)&&(!t||norm(e.textContent).includes(t));e.hidden=!ok;any|=ok}});
+H.forEach(h=>{{let n=h.nextElementSibling,v=false;while(n&&!n.classList.contains("gl-letter")){{if(!n.hidden)v=true;n=n.nextElementSibling}}h.hidden=!v}});
+document.getElementById("glnone").hidden=!!any;az.hidden=!!(t||k)}}
+q.addEventListener("input",f);B.forEach(b=>b.onclick=()=>{{k=b.dataset.k;B.forEach(x=>x.setAttribute("aria-pressed",x===b));f()}});}})();
+</script>
+{DLBOX}
+<h2>Weiterlesen</h2>
+{related("")}
+</article>
+</main>
+{FOOTER}
+</body>
+</html>
+'''
+    wr(os.path.join(ROOT, "glossar", "index.html"), out)
+
 # --- Vorschaubilder ---
 CARD = rd(os.path.join(B, "og-card.html"))
 def og_image(path, eyebrow, title, sub):
@@ -314,14 +391,14 @@ def update_index_topics():
     wr(p, h2)
 
 def sitemap():
-    urls = ["/", "/themen/", "/buecher/", "/arbeitsheft/"] + [f'/{p["slug"]}/' for p in PAGES]
+    urls = ["/", "/themen/", "/buecher/", "/arbeitsheft/", "/glossar/"] + [f'/{p["slug"]}/' for p in PAGES]
     body = "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls)
     wr(os.path.join(ROOT, "sitemap.xml"), f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}</urlset>\n')
 
 if __name__ == "__main__":
     for p in PAGES:
         render_page(p)
-    render_hub(); render_books(); render_workbook_page(); render_404(); update_index_topics(); sitemap()
+    glossar_data(); render_glossary(); render_hub(); render_books(); render_workbook_page(); render_404(); update_index_topics(); sitemap()
     if "--no-images" not in sys.argv:
         for p in PAGES:
             og_image(os.path.join(ROOT, p["slug"], "og.png"), "Playbook · " + p.get("og_eyebrow", "Realitätscheck"), p["og_title"], p["og_sub"])
