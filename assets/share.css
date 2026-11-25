@@ -1,0 +1,12 @@
+/* Teilen-Button (assets/share.js) */
+.share{display:grid;gap:10px;justify-items:start;margin:32px 0;padding:16px 18px;border:1px solid var(--line);border-radius:var(--r,10px);background:var(--surface,#fff)}
+.share p{margin:0;font-size:.92rem;color:var(--muted)}
+.share-btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:600;font-size:.95rem;padding:9px 18px;border-radius:999px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+.share-btn:hover{filter:brightness(1.08)}
+.share-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.share-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.share-alt{display:flex;flex-wrap:wrap;gap:8px}
+.share-alt[hidden]{display:none}
+.share-alt a,.share-alt button{font:inherit;font-size:.86rem;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:none;color:var(--ink);text-decoration:none;cursor:pointer}
+.share-alt a:hover,.share-alt button:hover{border-color:var(--accent);color:var(--accent)}
+@media print{.share{display:none}}

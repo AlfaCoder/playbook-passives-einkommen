@@ -4,7 +4,7 @@
   const G = window.GLOSSAR;
   if (!G || location.pathname.startsWith("/glossar")) return;
   const SKIP = "a,button,h1,h2,h3,h4,h5,h6,summary,script,style,input,select,textarea,label,code,svg,figure,nav,footer," +
-    ".cite,.crumbs,.meta,.k,.mmenu,.goal,.st,.step,.chips,.tag,th,.toc,.more,.dl,.lede,[data-nogl]";
+    ".cite,.crumbs,.meta,.k,.mmenu,.goal,.st,.step,.chips,.tag,th,.toc,.more,.dl,.lede,.share,[data-nogl]";
   const L = "A-Za-zÄÖÜäöüß0-9_";
   let re;
   try { re = new RegExp(`(?<![${L}-])(?:${G.map(g => `(${g.p})`).join("|")})(?![${L}])`, "g"); }

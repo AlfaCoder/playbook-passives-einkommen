@@ -86,6 +86,8 @@ FOOTER = ('<footer class="read">Zusammenfassung und Einordnung öffentlich zugä
           '<div class="links"><a href="/">Playbook</a><a href="/themen/">Alle Themen</a><a href="/buecher/">Bücher</a><a href="/glossar/">Glossar</a>'
           '<a href="/arbeitsheft/">Arbeitsheft</a><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a></div></footer>')
 
+SHARE = '<div class="share"><p>Hilfreich? Teile die Seite mit jemandem, der gerade über passives Einkommen nachdenkt.</p><button type="button" class="share-btn" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Teilen</button><div class="share-alt" hidden><a data-k="wa" href="https://wa.me/" rel="noopener" target="_blank">WhatsApp</a><a data-k="fb" href="https://www.facebook.com/" rel="noopener" target="_blank">Facebook</a><a data-k="mail" href="mailto:">E-Mail</a><button type="button" data-copy>Link kopieren</button></div></div>'
+
 DLBOX = ('<aside class="dl"><div class="cover" aria-hidden="true">90<small>TAGE</small></div><div>'
          '<h3>Kostenloses Arbeitsheft: 90-Tage-Startplan</h3>'
          '<p>Alle Schritte aus dem Playbook zum Ausdrucken: Ausgaben-Check, Freiheitszahl, Ideen-Test, Nachfrage-Test und 13-Wochen-Tracker. Ohne Anmeldung, ohne E-Mail.</p>'
@@ -131,10 +133,12 @@ def head(title, desc, url, og_img, extra_ld=None, robots=None):
 <link rel="stylesheet" href="/assets/toc.css">
 <link rel="stylesheet" href="/assets/charts.css">
 <link rel="stylesheet" href="/assets/glossar.css">
+<link rel="stylesheet" href="/assets/share.css">
 <script src="/assets/toc.js" defer></script>
 <script src="/assets/charts.js" defer></script>
 <script src="/assets/glossar-data.js" defer></script>
 <script src="/assets/glossar.js" defer></script>
+<script src="/assets/share.js" defer></script>
 {ld_html}</head>
 <body>
 '''
@@ -172,6 +176,7 @@ def render_page(p):
 <p class="lede">{p["lede"]}</p>
 <p class="meta">Stand: November 2026 · Ausgewertet aus {p.get("n_sources","mehreren")} YouTube-Videos · keine Anlageberatung · <a href="/impressum.html#gewaehr">Angaben ohne Gewähr</a></p>
 {body}
+{SHARE}
 {DLBOX}
 {faq_html}
 <h2>Weiterlesen</h2>
@@ -197,6 +202,7 @@ def render_hub():
 <h1>Alle Themen</h1>
 <p class="lede">Jede Seite beantwortet eine konkrete Frage zu passivem Einkommen, mit den Zahlen aus 95 ausgewerteten YouTube-Videos und den Links zu den Quellen.</p>
 <div class="more">{cards}<a href="/buecher/"><b>Bücher aus den Videos</b><span>Welche Bücher die Creator empfehlen, nach Thema sortiert.</span></a></div>
+{SHARE}
 {DLBOX}
 </article>
 </main>
@@ -237,6 +243,7 @@ def render_books():
 <p class="lede">{data["intro"]}</p>
 {disc}
 {sections}
+{SHARE}
 {DLBOX}
 <h2>Weiterlesen</h2>
 {related("")}
@@ -329,6 +336,7 @@ H.forEach(h=>{{let n=h.nextElementSibling,v=false;while(n&&!n.classList.contains
 document.getElementById("glnone").hidden=!!any;az.hidden=!!(t||k)}}
 q.addEventListener("input",f);B.forEach(b=>b.onclick=()=>{{k=b.dataset.k;B.forEach(x=>x.setAttribute("aria-pressed",x===b));f()}});}})();
 </script>
+{SHARE}
 {DLBOX}
 <h2>Weiterlesen</h2>
 {related("")}
