@@ -81,7 +81,8 @@ def mmenu(current=""):
             + '</div>')
 
 FOOTER = ('<footer class="read">Zusammenfassung und Einordnung öffentlich zugänglicher YouTube-Videos. Keine Anlage-, Steuer- oder Rechtsberatung. '
-          'Zahlen der Creator sind nicht unabhängig geprüft.'
+          'Zahlen der Creator sind nicht unabhängig geprüft. Alle Angaben ohne Gewähr: Trotz Sorgfalt können Fehler oder veraltete Werte enthalten sein. '
+          'Hinweise auf Fehler gern an <a href="mailto:info@playbook-passives-einkommen.de">info@playbook-passives-einkommen.de</a>.'
           '<div class="links"><a href="/">Playbook</a><a href="/themen/">Alle Themen</a><a href="/buecher/">Bücher</a><a href="/glossar/">Glossar</a>'
           '<a href="/arbeitsheft/">Arbeitsheft</a><a href="/impressum.html">Impressum</a><a href="/datenschutz.html">Datenschutz</a></div></footer>')
 
@@ -161,7 +162,7 @@ def render_page(p):
         {"@type": "ListItem", "position": 3, "name": p["h1"], "item": url}]})
     body = yt_links(p["body"])
     if p.get("quellen"):
-        body += '<h2>Offizielle Quellen</h2><p class="src">Rechtliche Angaben und Grenzwerte haben wir am 23. November 2026 an diesen Stellen geprüft:</p><ul class="src">' + "".join(
+        body += '<h2>Offizielle Quellen</h2><p class="src">Rechtliche Angaben und Grenzwerte haben wir am 23. November 2026 an diesen Stellen geprüft. Sie ändern sich regelmäßig, und Fehler sind trotz Sorgfalt möglich. Maßgeblich sind immer die Originalquellen; für deine persönliche Situation frag eine Steuerberaterin, einen Steuerberater oder die zuständige Stelle.</p><ul class="src">' + "".join(
             f'<li><a href="{esc(u)}" rel="noopener">{esc(t)}</a></li>' for t, u in p["quellen"]) + "</ul>"
     out = head(p["title"], p["description"], url, og, extra) + nav(f'/{p["slug"]}/') + f'''
 <main class="read">
@@ -169,7 +170,7 @@ def render_page(p):
 <article>
 <h1>{esc(p["h1"])}</h1>
 <p class="lede">{p["lede"]}</p>
-<p class="meta">Stand: November 2026 · Ausgewertet aus {p.get("n_sources","mehreren")} YouTube-Videos · keine Anlageberatung</p>
+<p class="meta">Stand: November 2026 · Ausgewertet aus {p.get("n_sources","mehreren")} YouTube-Videos · keine Anlageberatung · <a href="/impressum.html#gewaehr">Angaben ohne Gewähr</a></p>
 {body}
 {DLBOX}
 {faq_html}
@@ -312,6 +313,7 @@ def render_glossary():
 <article>
 <h1>Glossar</h1>
 <p class="lede">{GL["intro"]}</p>
+<p class="src">Die Erklärungen sind bewusst vereinfacht und ohne Gewähr. Gesetze, Grenzwerte und Freibeträge ändern sich, und trotz Sorgfalt können Fehler enthalten sein. Maßgeblich sind die verlinkten Gesetze und Behörden; für deine Situation frag eine Steuerberaterin oder einen Steuerberater. Fehler gefunden? Schreib an <a href="mailto:info@playbook-passives-einkommen.de">info@playbook-passives-einkommen.de</a>.</p>
 <div class="gl-tools">
 <input class="gl-search" id="glq" type="search" placeholder="Begriff suchen, z. B. Vorabpauschale" aria-label="Glossar durchsuchen">
 <div class="gl-cats" role="group" aria-label="Kategorie">{cats}</div>
