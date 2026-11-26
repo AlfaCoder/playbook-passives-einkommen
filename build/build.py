@@ -194,13 +194,13 @@ def render_hub():
     url = DOMAIN + "/themen/"
     cards = "".join(f'<a href="/{p["slug"]}/"><b>{esc(p["h1"])}</b><span>{esc(p["short"])}</span></a>' for p in PAGES)
     out = head("Alle Themen: passives Einkommen im Realitätscheck",
-               "Rechner, Modelle und Selbsttests: zehn Themenseiten zu passivem Einkommen, Nebenjob und Geldanlage, ausgewertet aus 95 YouTube-Videos.",
+               "Rechner, Modelle und Selbsttests: zehn Themenseiten zu passivem Einkommen, Nebenjob und Geldanlage, ausgewertet aus 115 YouTube-Videos.",
                url, DOMAIN + "/og.png") + nav("/themen/") + f'''
 <main class="read">
 <p class="crumbs"><a href="/">Playbook</a> / Themen</p>
 <article>
 <h1>Alle Themen</h1>
-<p class="lede">Jede Seite beantwortet eine konkrete Frage zu passivem Einkommen, mit den Zahlen aus 95 ausgewerteten YouTube-Videos und den Links zu den Quellen.</p>
+<p class="lede">Jede Seite beantwortet eine konkrete Frage zu passivem Einkommen, mit den Zahlen aus 115 ausgewerteten YouTube-Videos und den Links zu den Quellen.</p>
 <div class="more">{cards}<a href="/buecher/"><b>Bücher aus den Videos</b><span>Welche Bücher die Creator empfehlen, nach Thema sortiert.</span></a></div>
 {SHARE}
 {DLBOX}
