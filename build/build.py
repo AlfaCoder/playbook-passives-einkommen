@@ -106,7 +106,7 @@ def head(title, desc, url, og_img, extra_ld=None, robots=None):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{esc(title)} · Playbook Passives Einkommen</title>
+<title>{esc(title)} · Playbook</title>
 <meta name="description" content="{esc(desc)}">
 {f'<meta name="robots" content="{robots}">' if robots else ''}
 <meta name="author" content="Dave Foksa">
@@ -194,7 +194,7 @@ def render_hub():
     url = DOMAIN + "/themen/"
     cards = "".join(f'<a href="/{p["slug"]}/"><b>{esc(p["h1"])}</b><span>{esc(p["short"])}</span></a>' for p in PAGES)
     out = head("Alle Themen: passives Einkommen im Realitätscheck",
-               "Rechner, Modelle und Selbsttests: zehn Themenseiten zu passivem Einkommen, Nebenjob und Geldanlage, ausgewertet aus 115 YouTube-Videos.",
+               f"Rechner, Modelle und Selbsttests: {len(PAGES)} Themenseiten zu passivem Einkommen, Nebenjob und Geldanlage, ausgewertet aus 115 YouTube-Videos.",
                url, DOMAIN + "/og.png") + nav("/themen/") + f'''
 <main class="read">
 <p class="crumbs"><a href="/">Playbook</a> / Themen</p>
@@ -234,7 +234,7 @@ def render_books():
             'Die Auswahl richtet sich danach, was in den Videos genannt wurde, nicht nach Provision.</p>') if tag else \
            '<p class="disclosure">Die Links führen zur Amazon-Suche. Es sind derzeit keine Affiliate-Links.</p>'
     out = head("Bücher aus den Videos: Was die Creator empfehlen",
-               "Welche Bücher in 95 YouTube-Videos über passives Einkommen genannt werden: Geldanlage, Unternehmertum, Angebote und Verkauf, Kreativität – mit Einordnung.",
+               "Welche Bücher YouTube-Creator zu passivem Einkommen empfehlen: Geldanlage, Unternehmertum, Verkauf und Kreativität, jeweils mit Einordnung.",
                url, url + "og.png") + nav("/buecher/") + f'''
 <main class="read">
 <p class="crumbs"><a href="/">Playbook</a> / Bücher</p>
@@ -259,7 +259,7 @@ def render_books():
 def render_workbook_page():
     url = DOMAIN + "/arbeitsheft/"
     body = rd(os.path.join(B, "arbeitsheft-seite.html"))
-    out = head("Kostenloses Arbeitsheft: 90-Tage-Startplan für passives Einkommen",
+    out = head("90-Tage-Startplan für passives Einkommen (Gratis-PDF)",
                "Gratis-PDF zum Ausdrucken: Ausgaben-Check, Freiheitszahl, Ideen-Test, Nachfrage-Test und 13-Wochen-Tracker. Ohne Anmeldung, ohne E-Mail.",
                url, url + "og.png") + nav("/arbeitsheft/") + f'''
 <main class="read">
@@ -312,7 +312,7 @@ def render_glossary():
               {"@type": "ListItem", "position": 1, "name": "Playbook", "item": DOMAIN + "/"},
               {"@type": "ListItem", "position": 2, "name": "Glossar", "item": url}]}]
     n = len(GL["begriffe"])
-    out = head(f"Glossar: {n} Begriffe zu passivem Einkommen, ETFs und Steuern einfach erklärt",
+    out = head(f"Glossar: {n} Begriffe zu Geld und Steuern erklärt",
                "Von 4-Prozent-Regel bis Zinseszins: ETF, Vorabpauschale, Teilfreistellung, Kleinunternehmerregelung, KDP, Dropshipping und mehr, kurz und verständlich erklärt.",
                url, DOMAIN + "/og.png", ld) + nav("/glossar/") + f'''
 <main class="read">
