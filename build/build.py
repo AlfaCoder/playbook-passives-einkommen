@@ -14,7 +14,20 @@ CHROME_CANDIDATES = [
     "google-chrome", "chromium",
 ]
 CFG = json.load(io.open(os.path.join(B, "config.json"), encoding="utf-8"))
-TODAY = CFG.get("stand", "2026-11-23")
+import datetime
+TODAY = datetime.date.today().isoformat()
+
+def changed(*paths):
+    """Letztes Änderungsdatum der Quelldateien: heute, wenn eine davon uncommittete Änderungen hat, sonst das Datum des letzten Commits."""
+    best = ""
+    for path in paths:
+        rel = os.path.relpath(path, ROOT)
+        dirty = subprocess.run(["git", "status", "--porcelain", "--", rel], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+        if dirty:
+            return TODAY
+        d = subprocess.run(["git", "log", "-1", "--format=%cs", "--", rel], cwd=ROOT, capture_output=True, text=True).stdout.strip()
+        best = max(best, d or TODAY)
+    return best or TODAY
 
 def rd(p): return io.open(p, encoding="utf-8").read()
 def wr(p, s):
@@ -49,7 +62,7 @@ for fn in sorted(os.listdir(os.path.join(B, "pages"))):
         continue
     raw = rd(os.path.join(B, "pages", fn))
     m = re.match(r"\s*<!--(.*?)-->\s*(.*)", raw, re.S)
-    meta = json.loads(m.group(1)); meta["body"] = m.group(2); meta["slug"] = fn[:-5]
+    meta = json.loads(m.group(1)); meta["body"] = m.group(2); meta["slug"] = fn[:-5]; meta["src"] = os.path.join(B, "pages", fn)
     PAGES.append(meta)
 PAGES.sort(key=lambda p: p.get("order", 99))
 
@@ -93,9 +106,9 @@ DLBOX = ('<aside class="dl"><div class="cover" aria-hidden="true">90<small>TAGE<
          '<p>Alle Schritte aus dem Playbook zum Ausdrucken: Ausgaben-Check, Freiheitszahl, Ideen-Test, Nachfrage-Test und 13-Wochen-Tracker. Ohne Anmeldung, ohne E-Mail.</p>'
          '<a class="btn" href="/arbeitsheft/">Zum Arbeitsheft</a></div></aside>')
 
-def head(title, desc, url, og_img, extra_ld=None, robots=None):
+def head(title, desc, url, og_img, extra_ld=None, robots=None, modified=None):
     ld = [{"@context": "https://schema.org", "@type": "Article", "headline": title, "description": desc,
-           "url": url, "inLanguage": "de-DE", "image": og_img, "dateModified": TODAY,
+           "url": url, "inLanguage": "de-DE", "image": og_img, "dateModified": modified or TODAY,
            "author": {"@type": "Person", "name": "Dave Foksa"}, "publisher": {"@type": "Person", "name": "Dave Foksa"},
            "isPartOf": {"@type": "WebSite", "name": "Playbook Passives Einkommen", "url": DOMAIN + "/"}}]
     if extra_ld:
@@ -151,6 +164,32 @@ def related(slug, n=3):
     return '<div class="more">' + "".join(
         f'<a href="/{p["slug"]}/"><b>{esc(p["h1"])}</b><span>{esc(p["short"])}</span></a>' for p in ordered[:n]) + "</div>"
 
+def booktips(slug):
+    """Buchtipps aus books.json, deren Feld "seiten" diese Seite nennt."""
+    data = json.load(io.open(os.path.join(B, "books.json"), encoding="utf-8"))
+    tag = (CFG.get("amazon_tag") or "").strip()
+    picks = [bk for cat in data["kategorien"] for bk in cat["buecher"] if slug in bk.get("seiten", [])]
+    if not picks:
+        return ""
+    cards = ""
+    for bk in picks:
+        q = urllib.parse.quote_plus(bk.get("suche", f'{bk["titel"]} {bk["autor"]}'))
+        link = f"https://www.amazon.de/s?k={q}&i=stripbooks" + (f"&tag={urllib.parse.quote(tag)}" if tag else "")
+        rel = 'rel="sponsored noopener"' if tag else 'rel="noopener"'
+        star = " *" if tag else ""
+        cards += (f'<div class="book"><div class="t">{esc(bk["titel"])}</div><div class="a">{esc(bk["autor"])}</div>'
+                  f'<p>{bk["text"]}</p><div class="from">Erwähnt bei: {yt_links(bk["quelle"])}</div>'
+                  f'<a class="btn ghost" href="{link}" {rel}>Bei Amazon ansehen{star}</a></div>')
+    disc = ('<p class="disclosure">* Affiliate-Link: Als Amazon-Partner verdiene ich an qualifizierten Verkäufen, für dich ändert sich am Preis nichts. '
+            'Ausgewählt nach dem, was in den Videos genannt wurde. Mehr auf der Seite <a href="/buecher/">Bücher aus den Videos</a>.</p>') if tag else ""
+    return f'<h2>Buchtipp aus den Videos</h2><div class="books">{cards}</div>{disc}'
+
+def page_mod(p):
+    """Änderungsdatum einer Themenseite: ihre Quelle und, falls sie Buchtipps zeigt, books.json."""
+    data = json.load(io.open(os.path.join(B, "books.json"), encoding="utf-8"))
+    has_books = any(p["slug"] in bk.get("seiten", []) for cat in data["kategorien"] for bk in cat["buecher"])
+    return changed(p["src"], os.path.join(B, "books.json")) if has_books else changed(p["src"])
+
 def render_page(p):
     url = f'{DOMAIN}/{p["slug"]}/'
     og = url + "og.png"
@@ -168,7 +207,7 @@ def render_page(p):
     if p.get("quellen"):
         body += '<h2>Offizielle Quellen</h2><p class="src">Rechtliche Angaben und Grenzwerte haben wir am ' + p.get("geprueft", "23. November 2026") + ' an diesen Stellen geprüft. Sie ändern sich regelmäßig, und Fehler sind trotz Sorgfalt möglich. Maßgeblich sind immer die Originalquellen; für deine persönliche Situation frag eine Steuerberaterin, einen Steuerberater oder die zuständige Stelle.</p><ul class="src">' + "".join(
             f'<li><a href="{esc(u)}" rel="noopener">{esc(t)}</a></li>' for t, u in p["quellen"]) + "</ul>"
-    out = head(p["title"], p["description"], url, og, extra) + nav(f'/{p["slug"]}/') + f'''
+    out = head(p["title"], p["description"], url, og, extra, modified=page_mod(p)) + nav(f'/{p["slug"]}/') + f'''
 <main class="read">
 <p class="crumbs"><a href="/">Playbook</a> / <a href="/themen/">Themen</a> / {esc(p["short_crumb"] if "short_crumb" in p else p["h1"])}</p>
 <article>
@@ -176,6 +215,7 @@ def render_page(p):
 <p class="lede">{p["lede"]}</p>
 <p class="meta">Stand: November 2026 · Ausgewertet aus {p.get("n_sources","mehreren")} YouTube-Videos · keine Anlageberatung · <a href="/impressum.html#gewaehr">Angaben ohne Gewähr</a></p>
 {body}
+{booktips(p["slug"])}
 {SHARE}
 {DLBOX}
 {faq_html}
@@ -195,7 +235,7 @@ def render_hub():
     cards = "".join(f'<a href="/{p["slug"]}/"><b>{esc(p["h1"])}</b><span>{esc(p["short"])}</span></a>' for p in PAGES)
     out = head("Alle Themen: passives Einkommen im Realitätscheck",
                f"Rechner, Modelle und Selbsttests: {len(PAGES)} Themenseiten zu passivem Einkommen, Nebenjob und Geldanlage, ausgewertet aus 115 YouTube-Videos.",
-               url, DOMAIN + "/og.png") + nav("/themen/") + f'''
+               url, DOMAIN + "/og.png", modified=max(page_mod(p) for p in PAGES)) + nav("/themen/") + f'''
 <main class="read">
 <p class="crumbs"><a href="/">Playbook</a> / Themen</p>
 <article>
@@ -235,7 +275,7 @@ def render_books():
            '<p class="disclosure">Die Links führen zur Amazon-Suche. Es sind derzeit keine Affiliate-Links.</p>'
     out = head("Bücher aus den Videos: Was die Creator empfehlen",
                "Welche Bücher YouTube-Creator zu passivem Einkommen empfehlen: Geldanlage, Unternehmertum, Verkauf und Kreativität, jeweils mit Einordnung.",
-               url, url + "og.png") + nav("/buecher/") + f'''
+               url, url + "og.png", modified=changed(os.path.join(B, "books.json"))) + nav("/buecher/") + f'''
 <main class="read">
 <p class="crumbs"><a href="/">Playbook</a> / Bücher</p>
 <article>
@@ -261,7 +301,7 @@ def render_workbook_page():
     body = rd(os.path.join(B, "arbeitsheft-seite.html"))
     out = head("90-Tage-Startplan für passives Einkommen (Gratis-PDF)",
                "Gratis-PDF zum Ausdrucken: Ausgaben-Check, Freiheitszahl, Ideen-Test, Nachfrage-Test und 13-Wochen-Tracker. Ohne Anmeldung, ohne E-Mail.",
-               url, url + "og.png") + nav("/arbeitsheft/") + f'''
+               url, url + "og.png", modified=changed(os.path.join(B, "arbeitsheft-seite.html"), os.path.join(B, "arbeitsheft-pdf.html"))) + nav("/arbeitsheft/") + f'''
 <main class="read">
 <p class="crumbs"><a href="/">Playbook</a> / Arbeitsheft</p>
 <article>
@@ -314,7 +354,7 @@ def render_glossary():
     n = len(GL["begriffe"])
     out = head(f"Glossar: {n} Begriffe zu Geld und Steuern erklärt",
                "Von 4-Prozent-Regel bis Zinseszins: ETF, Vorabpauschale, Teilfreistellung, Kleinunternehmerregelung, KDP, Dropshipping und mehr, kurz und verständlich erklärt.",
-               url, DOMAIN + "/og.png", ld) + nav("/glossar/") + f'''
+               url, DOMAIN + "/og.png", ld, modified=changed(os.path.join(B, "glossar.json"))) + nav("/glossar/") + f'''
 <main class="read">
 <p class="crumbs"><a href="/">Playbook</a> / Glossar</p>
 <article>
@@ -396,13 +436,20 @@ def update_index_topics():
     cards += '<a href="/buecher/"><b>Bücher aus den Videos</b><span>Was die Creator zu Geld, Business und Verkauf empfehlen.</span></a>'
     h2 = re.sub(r"<!--TOPICS-->.*?<!--/TOPICS-->", lambda m: "<!--TOPICS-->" + cards + "<!--/TOPICS-->", h, flags=re.S)
     h2 = re.sub(r"<!--MMENU-->.*?<!--/MMENU-->", lambda m: "<!--MMENU-->" + mmenu("/") + "<!--/MMENU-->", h2, flags=re.S)
+    # Änderungsdatum in den strukturierten Daten: heute, wenn index.html geändert wurde, sonst letzter Commit
+    mod = TODAY if h2 != h else changed(p)
+    h2 = re.sub(r'"dateModified":"[^"]*"', f'"dateModified":"{mod}"', h2)
     if h2 == h and "<!--TOPICS-->" not in h:
         sys.exit("TOPICS-Marker fehlt in index.html")
     wr(p, h2)
 
 def sitemap():
-    urls = ["/", "/themen/", "/buecher/", "/arbeitsheft/", "/glossar/"] + [f'/{p["slug"]}/' for p in PAGES]
-    body = "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{TODAY}</lastmod></url>\n" for u in urls)
+    urls = [("/", changed(os.path.join(ROOT, "index.html"))),
+            ("/themen/", max(page_mod(p) for p in PAGES)),
+            ("/buecher/", changed(os.path.join(B, "books.json"))),
+            ("/arbeitsheft/", changed(os.path.join(B, "arbeitsheft-seite.html"), os.path.join(B, "arbeitsheft-pdf.html"))),
+            ("/glossar/", changed(os.path.join(B, "glossar.json")))] + [(f'/{p["slug"]}/', page_mod(p)) for p in PAGES]
+    body = "".join(f"  <url><loc>{DOMAIN}{u}</loc><lastmod>{d}</lastmod></url>\n" for u, d in urls)
     wr(os.path.join(ROOT, "sitemap.xml"), f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{body}</urlset>\n')
 
 if __name__ == "__main__":

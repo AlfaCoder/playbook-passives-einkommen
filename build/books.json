@@ -10,7 +10,16 @@
           "autor": "Gerd Kommer",
           "text": "Das deutsche Standardwerk zum passiven Investieren mit breiten ETFs. Finanzfluss stützt sich auf Kommers Daten, etwa zur weltweiten Mietrendite von rund 2,4 %. Gut, um die 4-%-Regel und Streuung wirklich zu verstehen.",
           "quelle": "[[73_3icYYnT8|Finanzfluss]]",
-          "suche": "Gerd Kommer Souverän investieren mit Indexfonds und ETFs"
+          "suche": "Gerd Kommer Souverän investieren mit Indexfonds und ETFs",
+          "seiten": [
+            "4-prozent-regel",
+            "rechner-kapital-passives-einkommen",
+            "dividenden-etf-oder-thesaurierend",
+            "frugalismus-rente-mit-40",
+            "altersvorsorgedepot-2027",
+            "teilzeit-rente",
+            "wohnung-vermieten-lohnt-sich"
+          ]
         }
       ]
     },
@@ -23,7 +32,10 @@
           "autor": "MJ DeMarco",
           "text": "Kernidee: Wohlstand entsteht, wenn du viel Wert an wenige oder wenig Wert an viele lieferst, statt Zeit gegen Geld zu tauschen. Der KDP-Creator mit zehn Jahren Erfahrung nennt es seine wichtigste Lektion.",
           "quelle": "[[ToL5iUGr7AU|KDP-Creator, 10 Jahre]]",
-          "suche": "MJ DeMarco Millionaire Fastlane"
+          "suche": "MJ DeMarco Millionaire Fastlane",
+          "seiten": [
+            "geld-verdienen-apps"
+          ]
         },
         {
           "titel": "Die 4-Stunden-Woche",
@@ -38,7 +50,10 @@
           "autor": "Dan Martell",
           "text": "Wie du dir als Selbstständiger Zeit zurückkaufst, indem du Aufgaben abgibst. Achtung: Martell empfiehlt in seinem Video sein eigenes Buch. Nützlich vor allem, wenn ein Nebenprojekt zu wachsen beginnt.",
           "quelle": "[[DhEMFeo_gL8|Dan Martell]] (eigenes Buch)",
-          "suche": "Dan Martell Buy Back Your Time"
+          "suche": "Dan Martell Buy Back Your Time",
+          "seiten": [
+            "nebenjob-steuern-minijob"
+          ]
         }
       ]
     },
@@ -65,14 +80,20 @@
           "autor": "Perry Marshall",
           "text": "Grundlage für die „umgedrehte Verkaufspyramide“, die Gerald Reimertz am Beispiel eines Yogastudios erklärt: viele günstige Einstiegsangebote, wenige teure. Zeigt, warum Bestandskunden der wertvollste Teil eines Geschäfts sind.",
           "quelle": "[[W9lXR8RJFf4|Gerald Reimertz]]",
-          "suche": "Perry Marshall 80/20 Sales and Marketing"
+          "suche": "Perry Marshall 80/20 Sales and Marketing",
+          "seiten": [
+            "affiliate-marketing-erfahrungen"
+          ]
         },
         {
           "titel": "Main Street Millionaire",
           "autor": "Codie Sanchez",
           "text": "Über das Kaufen und Verbessern kleiner, „langweiliger“ Firmen statt neuer Online-Ideen. Passt zu ihrem Selbsttest, in dem die unspektakulären Aufgaben gewannen. Sanchez' eigenes Buch, im Video beworben.",
           "quelle": "[[yO5O_ngyA_8|Codie Sanchez]] (eigenes Buch)",
-          "suche": "Codie Sanchez Main Street Millionaire"
+          "suche": "Codie Sanchez Main Street Millionaire",
+          "seiten": [
+            "dropshipping-erfahrungen"
+          ]
         }
       ]
     },
@@ -86,7 +107,10 @@
           "de": "Original: Steal Like an Artist",
           "text": "Kurzes, sehr zugängliches Buch darüber, wie Kreative von anderen lernen, ohne zu kopieren. Mark Tilbury nennt es beim Thema Content. Passt zum Leitprinzip „Kopieren, was funktioniert“ im Playbook, mit der wichtigen Grenze zum Plagiat.",
           "quelle": "[[5vZjrxE8Wlc|Mark Tilbury]]",
-          "suche": "Austin Kleon Alles nur geklaut"
+          "suche": "Austin Kleon Alles nur geklaut",
+          "seiten": [
+            "print-on-demand-erfahrungen"
+          ]
         }
       ]
     },
@@ -99,14 +123,20 @@
           "autor": "Rachel Richards",
           "text": "Rachel Richards brachten dieses Buch und „Money Honey“ in einem Jahr rund 97.000 $ Tantiemen, bei nur 75 $ Werbung. Ein Ausreißer mit Finanznische und Publikum, aber ein gutes Beispiel für ein Sachbuch zu einem klaren Problem.",
           "quelle": "[[_CyWGSzwTu4|Shane Hummus]]",
-          "suche": "Rachel Richards Passive Income Aggressive Retirement"
+          "suche": "Rachel Richards Passive Income Aggressive Retirement",
+          "seiten": [
+            "amazon-kdp-erfahrungen"
+          ]
         },
         {
           "titel": "Money Honey",
           "autor": "Rachel Richards",
           "text": "Das zweite Buch aus demselben Beispiel: ein Einsteigerbuch zu Finanzen. Interessant vor allem, wenn du selbst über Amazon KDP veröffentlichen willst.",
           "quelle": "[[_CyWGSzwTu4|Shane Hummus]]",
-          "suche": "Rachel Richards Money Honey"
+          "suche": "Rachel Richards Money Honey",
+          "seiten": [
+            "amazon-kdp-erfahrungen"
+          ]
         }
       ]
     }
