@@ -161,22 +161,22 @@
     {"id": "altersvorsorgedepot", "term": "Altersvorsorgedepot", "kat": "Geldanlage", "p": "Altersvorsorge-?[Dd]epots?",
       "kurz": "Staatlich gefördertes Depot für die Rente, startet 2027 und löst Riester für Neuverträge ab.",
       "text": "Ab 2027 gibt es auf Einzahlungen bis 1.800 € im Jahr Zulagen: 50 % auf die ersten 360 €, 25 % auf den Rest, also höchstens 540 €, dazu bis zu 300 € pro Kind. In der Ansparphase fällt keine Abgeltungsteuer an, die Auszahlung ab 65 wird mit dem persönlichen Steuersatz versteuert. Das Geld ist bis zur Rente gebunden; wer vorher kündigt, zahlt die Förderung zurück. Es gibt ein Standarddepot mit Kostendeckel von 1 %, ein selbst verwaltetes Depot und Garantieprodukte.",
-     "seite": "", "wiki": ""},
+     "seite": "altersvorsorgedepot-2027", "wiki": ""},
     {"id": "frugalismus", "term": "Frugalismus", "kat": "Geldanlage", "p": "Frugalismus|Frugalist(?:en|in|innen)?",
       "kurz": "Sehr sparsam leben und den Großteil des Einkommens investieren, um früher finanziell frei zu sein.",
       "text": "Frugalisten sparen oft 50 bis 70 % ihres Einkommens und legen es breit gestreut an. Ziel ist das 25-Fache der Jahresausgaben, um davon zu leben. In der Praxis landen viele in Teilzeit statt im Komplettausstieg; der bekannteste deutsche Frugalist hat die „Rente mit 40“ selbst für tot erklärt und arbeitet reduziert weiter.",
-     "seite": "", "wiki": "https://de.wikipedia.org/wiki/Frugalismus"},
+     "seite": "frugalismus-rente-mit-40", "wiki": "https://de.wikipedia.org/wiki/Frugalismus"},
     {"id": "rentenpunkt", "term": "Rentenpunkt", "kat": "Geldanlage", "p": "Rentenpunkte?n?|Entgeltpunkte?n?",
       "kurz": "Rechengröße der gesetzlichen Rente: ein Punkt pro Jahr mit Durchschnittsverdienst.",
       "text": "Wer ein Jahr lang genau das Durchschnittsentgelt verdient (2025: 50.493 € brutto), bekommt einen Rentenpunkt, bei halbem Gehalt einen halben. Jeder Punkt ist später eine feste Monatsrente wert, 2025 waren es 40,79 €. Über der Beitragsbemessungsgrenze gibt es keine weiteren Punkte. Kindererziehung bringt bis zu drei Punkte pro Kind.",
-     "seite": "", "wiki": "https://de.wikipedia.org/wiki/Entgeltpunkt"},
+     "seite": "teilzeit-rente", "wiki": "https://de.wikipedia.org/wiki/Entgeltpunkt"},
     {"id": "rentenluecke", "term": "Rentenlücke", "kat": "Geldanlage", "p": "Rentenlücken?|Versorgungslücken?",
       "kurz": "Differenz zwischen dem, was du im Alter brauchst, und deiner gesetzlichen Rente.",
       "text": "Brauchst du im Alter 2.500 € im Monat und bekommst 750 € Rente, fehlen 1.750 €, die aus Erspartem kommen müssen. Die Renteninformation rechnet ohne Inflation und vor Steuern; bei 2 % Inflation hat ein Betrag in 30 Jahren nur gut die Hälfte der heutigen Kaufkraft. Deshalb lieber vorsichtig rechnen.",
-     "seite": "rechner-kapital-passives-einkommen", "wiki": ""},
+     "seite": "teilzeit-rente", "wiki": ""},
     {"id": "kaufpreisfaktor", "term": "Kaufpreisfaktor", "kat": "Geldanlage", "p": "Kaufpreisfaktors?|Mietmultiplikators?|Jahres(?:netto|kalt)?mieten",
       "kurz": "Kaufpreis einer Immobilie geteilt durch die Jahreskaltmiete. Je höher, desto teurer.",
       "text": "Eine Wohnung für 300.000 € mit 12.000 € Jahreskaltmiete hat den Faktor 25. Damit sich eine voll finanzierte Wohnung aus der Miete trägt, rechnet Finanzfluss mit höchstens 13 bis 19. In München lag der Durchschnitt zuletzt bei rund 36, in Städten wie Gera oder Zwickau bei 12 bis 17, dort aber mit mehr Leerstand und älteren Häusern.",
-     "seite": "", "wiki": ""}
+     "seite": "wohnung-vermieten-lohnt-sich", "wiki": ""}
   ]
 }

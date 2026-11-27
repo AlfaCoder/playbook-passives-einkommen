@@ -166,7 +166,7 @@ def render_page(p):
         {"@type": "ListItem", "position": 3, "name": p["h1"], "item": url}]})
     body = yt_links(p["body"])
     if p.get("quellen"):
-        body += '<h2>Offizielle Quellen</h2><p class="src">Rechtliche Angaben und Grenzwerte haben wir am 23. November 2026 an diesen Stellen geprüft. Sie ändern sich regelmäßig, und Fehler sind trotz Sorgfalt möglich. Maßgeblich sind immer die Originalquellen; für deine persönliche Situation frag eine Steuerberaterin, einen Steuerberater oder die zuständige Stelle.</p><ul class="src">' + "".join(
+        body += '<h2>Offizielle Quellen</h2><p class="src">Rechtliche Angaben und Grenzwerte haben wir am ' + p.get("geprueft", "23. November 2026") + ' an diesen Stellen geprüft. Sie ändern sich regelmäßig, und Fehler sind trotz Sorgfalt möglich. Maßgeblich sind immer die Originalquellen; für deine persönliche Situation frag eine Steuerberaterin, einen Steuerberater oder die zuständige Stelle.</p><ul class="src">' + "".join(
             f'<li><a href="{esc(u)}" rel="noopener">{esc(t)}</a></li>' for t, u in p["quellen"]) + "</ul>"
     out = head(p["title"], p["description"], url, og, extra) + nav(f'/{p["slug"]}/') + f'''
 <main class="read">
